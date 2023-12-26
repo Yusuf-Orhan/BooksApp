@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -16,8 +17,8 @@ import androidx.compose.ui.modifier.modifierLocalConsumer
 
 @Composable
 fun LoginRoute(
-    navigateToSignup : () -> Unit,
-    navigateToHome : () -> Unit
+    navigateToSignup: () -> Unit,
+    navigateToHome: () -> Unit
 ) {
     LoginScreen(
         navigateToSignup = navigateToSignup,
@@ -28,22 +29,19 @@ fun LoginRoute(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
-    navigateToSignup : () -> Unit,
-    navigateToHome : () -> Unit
+    navigateToSignup: () -> Unit,
+    navigateToHome: () -> Unit
 ) {
     Scaffold(
-        topBar = { TopAppBar(title = { Text(text = "Login")}) }
+        topBar = { TopAppBar(title = { Text(text = "Login") }) }
     ) {
-        Box(modifier = Modifier.padding(it).fillMaxSize(), contentAlignment = Alignment.Center) {
-            Column {
-                ElevatedButton(onClick = { navigateToHome() }) {
-                    Text(text = "Navigate To Home")
-                }
-                ElevatedButton(onClick = { navigateToSignup() }) {
-                    Text(text = "Navigate To SignUp")
-                }
-            }
-
+        Box(
+            modifier = Modifier
+                .padding(it)
+                .fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            //OutlinedTextField(value = , onValueChange = )
         }
     }
 }
