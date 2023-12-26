@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Books App</string>
+    <string name="type_email">Type Email</string>
+    <string name="type_password">Type Password</string>
+
+    <style name="type_email">Type Email</style>
 </resources>
