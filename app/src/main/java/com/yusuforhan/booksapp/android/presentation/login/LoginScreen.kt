@@ -1,5 +1,7 @@
 package com.yusuforhan.booksapp.android.presentation.login
 
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
@@ -29,11 +31,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.yusuforhan.booksapp.android.R
 import com.yusuforhan.booksapp.android.presentation.components.CustomTextField
+import com.yusuforhan.booksapp.android.presentation.components.PasswordOutlinedTextField
+import com.yusuforhan.booksapp.android.presentation.components.PasswordState
+import com.yusuforhan.booksapp.android.presentation.components.rememberPasswordState
 
 @Composable
 fun LoginRoute(
@@ -42,7 +48,8 @@ fun LoginRoute(
 ) {
     LoginScreen(
         navigateToSignup = navigateToSignup,
-        navigateToHome = navigateToHome
+        navigateToHome = navigateToHome,
+        LocalContext.current
     )
 }
 
@@ -50,28 +57,28 @@ fun LoginRoute(
 @Composable
 fun LoginScreen(
     navigateToSignup: () -> Unit,
-    navigateToHome: () -> Unit
+    navigateToHome: () -> Unit,
+    context : Context
 ) {
     Scaffold(
         topBar = { TopAppBar(title = { Text(text = "Login") }) }
     ) {
-        Box(
+        Column (
             modifier = Modifier
                 .padding(it)
                 .fillMaxSize(),
-            contentAlignment = Alignment.Center
         ) {
-            var email by remember { mutableStateOf("") }
+            var passwordState = remember { PasswordState() }
             var password by remember { mutableStateOf("") }
 
+            PasswordOutlinedTextField(state = passwordState)
+
+
+            Button(onClick = {
+                Toast.makeText(context,passwordState.password,Toast.LENGTH_SHORT).show()
+            }) {
+                Text(text = "Login")
+            }
         }
     }
-}
-
-
-
-@Preview
-@Composable
-fun LoginScreenPreview() {
-    LoginScreen(navigateToSignup = { /*TODO*/ }) {}
 }

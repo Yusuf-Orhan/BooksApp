@@ -30,7 +30,7 @@ fun PasswordOutlinedTextField(state: PasswordState) {
     OutlinedTextField(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(bottom = 16.dp),
+            .padding(16.dp),
         value = state.password,
         onValueChange = {
             state.password = it
