@@ -73,16 +73,18 @@ fun SignupScreen(
     var email by remember { mutableStateOf("") }
     var userName by remember { mutableStateOf("") }
     var phoneNumber by remember { mutableStateOf("") }
-    if (state.isSignup == true) {
+
+    if (state.isSuccess == true) {
         navigateToHome()
     } else if (state.emptyParameter == true) {
         Toast.makeText(context, "Please filL in the blanks!", Toast.LENGTH_SHORT).show()
-    } else if (state.isSignup == false) {
+    } else if (state.isSuccess == false) {
         Toast.makeText(context, "An unexpected error!", Toast.LENGTH_SHORT).show()
     }
     Scaffold(
         containerColor = Color.White
     ) {
+
         Column(
             modifier = modifier
                 .padding(it)
@@ -140,7 +142,7 @@ fun SignupScreen(
                 ),
                 onClick = {
                     val signUpModel = SignUpModel(
-                        address = "",
+                        address = "Address",
                         email = email,
                         name = userName,
                         password = password.password,

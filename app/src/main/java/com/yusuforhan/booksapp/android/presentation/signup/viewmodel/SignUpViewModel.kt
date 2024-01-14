@@ -1,5 +1,6 @@
 package com.yusuforhan.booksapp.android.presentation.signup.viewmodel
 
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -20,27 +21,33 @@ class SignUpViewModel @Inject constructor(
     fun onEvent(event: SignUpEvent) {
        when(event) {
            is SignUpEvent.SignUp -> {
+               state.value = state.value.copy(null,null,null,null)
                signUp(event.signUpModel)
            }
        }
     }
     private fun signUp(signUpModel: SignUpModel) = viewModelScope.launch {
-        val response = dataSource.signUp(signUpModel)
-        if (signUpModel.address.isEmpty() || signUpModel.email.isEmpty() || signUpModel.name.isEmpty() || signUpModel.password.isEmpty() || signUpModel.phone.isEmpty()) {
-            state.value = state.value.copy(isSignup = false,emptyParameter = true, message = null)
-        } else {
-            if (response.status == 200 || response.status == 299) {
-                state.value = state.value.copy(isSignup = true, emptyParameter = false, message = response.message,userId = response.userId)
+        try {
+            val response = dataSource.signUp(signUpModel)
+            if (signUpModel.address.isEmpty() || signUpModel.email.isEmpty() || signUpModel.name.isEmpty() || signUpModel.password.isEmpty() || signUpModel.phone.isEmpty()) {
+                state.value = state.value.copy(isSuccess = false,emptyParameter = true, message = null)
             } else {
-                state.value = state.value.copy(isSignup = false, emptyParameter = false, message = null, userId = null)
+                if (response.status == 200 || response.status == 299) {
+                    state.value = state.value.copy(isSuccess = true, emptyParameter = false, message = response.message,userId = response.userId)
+                } else {
+                    state.value = state.value.copy(isSuccess = false, emptyParameter = false, message = null, userId = null)
 
+                }
             }
+        } catch (e : Exception) {
+            state.value = state.value.copy(isSuccess = false)
         }
+
     }
 }
 
 data class SignUpState(
-    val isSignup : Boolean? = null,
+    val isSuccess : Boolean? = null,
     val emptyParameter : Boolean? = null,
     val message : String? = null,
     val userId : String? = null
