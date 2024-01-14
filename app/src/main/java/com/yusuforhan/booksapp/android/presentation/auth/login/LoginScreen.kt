@@ -1,5 +1,6 @@
-package com.yusuforhan.booksapp.android.presentation.login
+package com.yusuforhan.booksapp.android.presentation.auth.login
 
+import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -23,11 +24,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.yusuforhan.booksapp.android.R
+import com.yusuforhan.booksapp.android.presentation.auth.viewmodel.AuthState
+import com.yusuforhan.booksapp.android.presentation.auth.viewmodel.AuthViewModel
 import com.yusuforhan.booksapp.android.presentation.components.CustomTextField
 import com.yusuforhan.booksapp.android.presentation.components.PasswordOutlinedTextField
 import com.yusuforhan.booksapp.android.presentation.components.rememberPasswordState
@@ -37,11 +42,14 @@ import com.yusuforhan.booksapp.android.ui.theme.Purple_1
 @Composable
 fun LoginRoute(
     navigateToSignup: () -> Unit,
-    navigateToHome: () -> Unit
+    navigateToHome: () -> Unit,
+    viewModel: AuthViewModel = hiltViewModel()
 ) {
     LoginScreen(
         navigateToSignup = navigateToSignup,
         navigateToHome = navigateToHome,
+        state = viewModel.state.value,
+        context = LocalContext.current
     )
 }
 
@@ -51,6 +59,8 @@ fun LoginScreen(
     modifier: Modifier = Modifier,
     navigateToSignup: () -> Unit,
     navigateToHome: () -> Unit,
+    state : AuthState,
+    context: Context
 ) {
     Scaffold(
         containerColor = Color.White

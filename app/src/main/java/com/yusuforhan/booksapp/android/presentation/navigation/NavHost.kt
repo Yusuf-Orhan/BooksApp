@@ -5,9 +5,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.yusuforhan.booksapp.android.presentation.home.homeScreen
 import com.yusuforhan.booksapp.android.presentation.home.navigateToHome
-import com.yusuforhan.booksapp.android.presentation.login.loginScreen
-import com.yusuforhan.booksapp.android.presentation.signup.navigateToSignup
-import com.yusuforhan.booksapp.android.presentation.signup.signupScreen
+import com.yusuforhan.booksapp.android.presentation.auth.login.loginScreen
+import com.yusuforhan.booksapp.android.presentation.auth.signup.navigateToSignup
+import com.yusuforhan.booksapp.android.presentation.auth.signup.signupScreen
 
 @Composable
 fun BooksNavHost(

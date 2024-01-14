@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
-import com.yusuforhan.booksapp.android.presentation.login.loginRoute
+import com.yusuforhan.booksapp.android.presentation.auth.login.loginRoute
 import com.yusuforhan.booksapp.android.presentation.navigation.BooksNavHost
 import com.yusuforhan.booksapp.android.ui.theme.BooksAppTheme
 import dagger.hilt.android.AndroidEntryPoint

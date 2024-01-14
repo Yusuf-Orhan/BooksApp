@@ -1,4 +1,4 @@
-package com.yusuforhan.booksapp.android.presentation.login
+package com.yusuforhan.booksapp.android.presentation.auth.login
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController

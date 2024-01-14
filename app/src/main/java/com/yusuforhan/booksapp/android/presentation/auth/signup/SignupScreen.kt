@@ -1,12 +1,10 @@
-package com.yusuforhan.booksapp.android.presentation.signup
+package com.yusuforhan.booksapp.android.presentation.auth.signup
 
 import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,10 +15,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.LocalAbsoluteTonalElevation
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -30,10 +26,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -42,15 +36,14 @@ import com.yusuforhan.booksapp.android.data.model.remote.SignUpModel
 import com.yusuforhan.booksapp.android.presentation.components.CustomTextField
 import com.yusuforhan.booksapp.android.presentation.components.PasswordOutlinedTextField
 import com.yusuforhan.booksapp.android.presentation.components.rememberPasswordState
-import com.yusuforhan.booksapp.android.presentation.signup.viewmodel.SignUpEvent
-import com.yusuforhan.booksapp.android.presentation.signup.viewmodel.SignUpState
-import com.yusuforhan.booksapp.android.presentation.signup.viewmodel.SignUpViewModel
+import com.yusuforhan.booksapp.android.presentation.auth.viewmodel.SignUpEvent
+import com.yusuforhan.booksapp.android.presentation.auth.viewmodel.AuthState
+import com.yusuforhan.booksapp.android.presentation.auth.viewmodel.AuthViewModel
 import com.yusuforhan.booksapp.android.ui.theme.Blue100
-import com.yusuforhan.booksapp.android.ui.theme.Purple_1
 
 @Composable
 fun SignupRoute(
-    navigateToHome: () -> Unit, viewModel: SignUpViewModel = hiltViewModel()
+    navigateToHome: () -> Unit, viewModel: AuthViewModel = hiltViewModel()
 ) {
     SignupScreen(
         navigateToHome = navigateToHome,
@@ -66,7 +59,7 @@ fun SignupScreen(
     modifier: Modifier = Modifier,
     navigateToHome: () -> Unit,
     onEvent: (SignUpEvent) -> Unit,
-    state: SignUpState,
+    state: AuthState,
     context: Context
 ) {
     val password = rememberPasswordState()
