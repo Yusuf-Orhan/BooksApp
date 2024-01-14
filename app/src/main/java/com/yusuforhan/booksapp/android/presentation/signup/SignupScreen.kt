@@ -1,5 +1,7 @@
 package com.yusuforhan.booksapp.android.presentation.signup
 
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -15,8 +17,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.LocalAbsoluteTonalElevation
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -25,36 +29,57 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.yusuforhan.booksapp.android.R
+import com.yusuforhan.booksapp.android.data.model.remote.SignUpModel
 import com.yusuforhan.booksapp.android.presentation.components.CustomTextField
 import com.yusuforhan.booksapp.android.presentation.components.PasswordOutlinedTextField
 import com.yusuforhan.booksapp.android.presentation.components.rememberPasswordState
+import com.yusuforhan.booksapp.android.presentation.signup.viewmodel.SignUpEvent
+import com.yusuforhan.booksapp.android.presentation.signup.viewmodel.SignUpState
+import com.yusuforhan.booksapp.android.presentation.signup.viewmodel.SignUpViewModel
 import com.yusuforhan.booksapp.android.ui.theme.Blue100
 import com.yusuforhan.booksapp.android.ui.theme.Purple_1
 
 @Composable
 fun SignupRoute(
-    navigateToHome : () -> Unit
+    navigateToHome: () -> Unit, viewModel: SignUpViewModel = hiltViewModel()
 ) {
-    SignupScreen(navigateToHome = navigateToHome)
+    SignupScreen(
+        navigateToHome = navigateToHome,
+        state = viewModel.state.value,
+        onEvent = viewModel::onEvent,
+        context = LocalContext.current
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SignupScreen(
-    modifier : Modifier = Modifier,
-    navigateToHome : () -> Unit
+    modifier: Modifier = Modifier,
+    navigateToHome: () -> Unit,
+    onEvent: (SignUpEvent) -> Unit,
+    state: SignUpState,
+    context: Context
 ) {
     val password = rememberPasswordState()
     var email by remember { mutableStateOf("") }
     var userName by remember { mutableStateOf("") }
     var phoneNumber by remember { mutableStateOf("") }
+    if (state.isSignup == true) {
+        navigateToHome()
+    } else if (state.emptyParameter == true) {
+        Toast.makeText(context, "Please filL in the blanks!", Toast.LENGTH_SHORT).show()
+    } else if (state.isSignup == false) {
+        Toast.makeText(context, "An unexpected error!", Toast.LENGTH_SHORT).show()
+    }
     Scaffold(
         containerColor = Color.White
     ) {
@@ -65,7 +90,10 @@ fun SignupScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Image(painter = painterResource(id = R.drawable.ic_books), contentDescription = null)
+            Image(
+                painter = painterResource(id = R.drawable.ic_books),
+                contentDescription = null
+            )
             Text(text = "Create an account", fontSize = 24.sp)
             Spacer(modifier = modifier.size(20.dp))
             CustomTextField(
@@ -99,22 +127,32 @@ fun SignupScreen(
             )
             Spacer(modifier = modifier.size(20.dp))
             PasswordOutlinedTextField(
-                state = password,
-                hint = stringResource(R.string.enter_your_password)
+                state = password, hint = stringResource(R.string.enter_your_password)
             )
             Spacer(modifier = modifier.size(24.dp))
-            Button(
-                modifier = modifier
-                    .fillMaxWidth()
-                    .height(48.dp)
-                    .padding(horizontal = 24.dp),
+            Button(modifier = modifier
+                .fillMaxWidth()
+                .height(48.dp)
+                .padding(horizontal = 24.dp),
                 shape = RoundedCornerShape(5.dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Blue100
                 ),
-                onClick = { /*TODO*/ }
-            ) {
-                Text(text = stringResource(R.string.sign_up) , color = Color.White, fontSize = 16.sp)
+                onClick = {
+                    val signUpModel = SignUpModel(
+                        address = "",
+                        email = email,
+                        name = userName,
+                        password = password.password,
+                        phone = phoneNumber
+                    )
+                    onEvent(SignUpEvent.SignUp(signUpModel))
+                }) {
+                Text(
+                    text = stringResource(R.string.sign_up),
+                    color = Color.White,
+                    fontSize = 16.sp
+                )
             }
         }
     }

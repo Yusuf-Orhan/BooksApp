@@ -1,6 +1,5 @@
 package com.yusuforhan.booksapp.android.data.source.remote
 
-import com.yusuforhan.booksapp.android.data.model.remote.CrudResponse
 import com.yusuforhan.booksapp.android.data.model.remote.SignInModel
 import com.yusuforhan.booksapp.android.data.model.remote.SignUpModel
 import com.yusuforhan.booksapp.android.domain.source.RemoteDataSource

@@ -16,7 +16,9 @@ import androidx.navigation.compose.rememberNavController
 import com.yusuforhan.booksapp.android.presentation.login.loginRoute
 import com.yusuforhan.booksapp.android.presentation.navigation.BooksNavHost
 import com.yusuforhan.booksapp.android.ui.theme.BooksAppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
