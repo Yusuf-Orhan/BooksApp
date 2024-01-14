@@ -1,6 +1,7 @@
 package com.yusuforhan.booksapp.android.presentation.auth.login
 
 import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -31,6 +32,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.yusuforhan.booksapp.android.R
+import com.yusuforhan.booksapp.android.data.model.remote.SignInModel
+import com.yusuforhan.booksapp.android.presentation.auth.viewmodel.AuthEvent
 import com.yusuforhan.booksapp.android.presentation.auth.viewmodel.AuthState
 import com.yusuforhan.booksapp.android.presentation.auth.viewmodel.AuthViewModel
 import com.yusuforhan.booksapp.android.presentation.components.CustomTextField
@@ -49,7 +52,8 @@ fun LoginRoute(
         navigateToSignup = navigateToSignup,
         navigateToHome = navigateToHome,
         state = viewModel.state.value,
-        context = LocalContext.current
+        context = LocalContext.current,
+        onEvent = viewModel::onEvent
     )
 }
 
@@ -60,8 +64,16 @@ fun LoginScreen(
     navigateToSignup: () -> Unit,
     navigateToHome: () -> Unit,
     state : AuthState,
-    context: Context
+    context: Context,
+    onEvent : (AuthEvent) -> Unit
 ) {
+    if (state.emptyParameter == true) {
+        Toast.makeText(context,"Please fill in the blanks!",Toast.LENGTH_SHORT).show()
+    } else if (state.isSuccess == true) {
+        navigateToHome()
+    } else if (state.isSuccess == false){
+        Toast.makeText(context,state.message.orEmpty(),Toast.LENGTH_SHORT).show()
+    }
     Scaffold(
         containerColor = Color.White
     ) {
@@ -104,7 +116,10 @@ fun LoginScreen(
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Blue100
                 ),
-                onClick = { /*TODO*/ }
+                onClick = {
+                    val signInModel = SignInModel(email,password.password)
+                    onEvent(AuthEvent.SignIn(signInModel = signInModel))
+                }
             ) {
                 Text(text = stringResource(R.string.login), color = Color.White, fontSize = 16.sp)
             }

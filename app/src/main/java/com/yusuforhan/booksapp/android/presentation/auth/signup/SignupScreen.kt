@@ -36,7 +36,7 @@ import com.yusuforhan.booksapp.android.data.model.remote.SignUpModel
 import com.yusuforhan.booksapp.android.presentation.components.CustomTextField
 import com.yusuforhan.booksapp.android.presentation.components.PasswordOutlinedTextField
 import com.yusuforhan.booksapp.android.presentation.components.rememberPasswordState
-import com.yusuforhan.booksapp.android.presentation.auth.viewmodel.SignUpEvent
+import com.yusuforhan.booksapp.android.presentation.auth.viewmodel.AuthEvent
 import com.yusuforhan.booksapp.android.presentation.auth.viewmodel.AuthState
 import com.yusuforhan.booksapp.android.presentation.auth.viewmodel.AuthViewModel
 import com.yusuforhan.booksapp.android.ui.theme.Blue100
@@ -58,7 +58,7 @@ fun SignupRoute(
 fun SignupScreen(
     modifier: Modifier = Modifier,
     navigateToHome: () -> Unit,
-    onEvent: (SignUpEvent) -> Unit,
+    onEvent: (AuthEvent) -> Unit,
     state: AuthState,
     context: Context
 ) {
@@ -141,7 +141,7 @@ fun SignupScreen(
                         password = password.password,
                         phone = phoneNumber
                     )
-                    onEvent(SignUpEvent.SignUp(signUpModel))
+                    onEvent(AuthEvent.Auth(signUpModel))
                 }) {
                 Text(
                     text = stringResource(R.string.sign_up),

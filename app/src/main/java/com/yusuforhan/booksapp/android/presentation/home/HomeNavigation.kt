@@ -7,7 +7,9 @@ import androidx.navigation.compose.composable
 
 const val homeRoute = "homeRoute"
 
-fun NavGraphBuilder.homeScreen() {
+fun NavGraphBuilder.homeScreen(
+    navigateUp : () -> Unit
+) {
     composable(
         route = homeRoute
     ){

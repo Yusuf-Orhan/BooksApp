@@ -16,11 +16,15 @@ class AuthViewModel @Inject constructor(
 ) : ViewModel() {
     val state = mutableStateOf(AuthState())
 
-    fun onEvent(event: SignUpEvent) {
+    fun onEvent(event: AuthEvent) {
        when(event) {
-           is SignUpEvent.SignUp -> {
-               state.value = state.value.copy(null,null,null,null)
+           is AuthEvent.Auth -> {
+               state.value = state.value.copy(isSuccess = null, emptyParameter = null, message = null, userId = null)
                signUp(event.signUpModel)
+           }
+           is AuthEvent.SignIn -> {
+               state.value = state.value.copy(isSuccess = null, emptyParameter = null, message = null, userId = null)
+               signIn(event.signInModel)
            }
        }
     }
@@ -33,7 +37,7 @@ class AuthViewModel @Inject constructor(
                 if (response.status == 200 || response.status == 299) {
                     state.value = state.value.copy(isSuccess = true, emptyParameter = false, message = response.message,userId = response.userId)
                 } else {
-                    state.value = state.value.copy(isSuccess = false, emptyParameter = false, message = null, userId = null)
+                    state.value = state.value.copy(isSuccess = false, emptyParameter = false, message = response.message, userId = null)
 
                 }
             }
@@ -50,7 +54,7 @@ class AuthViewModel @Inject constructor(
                 if (response.status == 200 || response.status == 299) {
                     state.value = state.value.copy(isSuccess = true, emptyParameter = false, message = response.message,userId = response.userId)
                 } else {
-                    state.value = state.value.copy(isSuccess = false, emptyParameter = false, message = null, userId = null)
+                    state.value = state.value.copy(isSuccess = false, emptyParameter = false, message = response.message, userId = null)
 
                 }
             }
