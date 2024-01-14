@@ -30,11 +30,13 @@ import com.yusuforhan.booksapp.android.ui.theme.BorderColor
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PasswordOutlinedTextField(state: PasswordState,hint : String,titleText : String,modifier : Modifier = Modifier) {
+fun PasswordOutlinedTextField(state: PasswordState,hint : String,titleText : String="",modifier : Modifier = Modifier) {
     Column(
         modifier = modifier.padding(horizontal = 24.dp)
     ) {
-        Text(text = titleText,modifier = modifier.padding(start = 5.dp, bottom = 10.dp), color = BorderColor)
+        if (titleText.isNotEmpty()) {
+            Text(text = titleText,modifier = modifier.padding(start = 5.dp, bottom = 10.dp), color = BorderColor)
+        }
         OutlinedTextField(
             modifier = Modifier
                 .fillMaxWidth(),

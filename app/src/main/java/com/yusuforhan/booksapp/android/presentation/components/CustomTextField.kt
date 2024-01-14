@@ -30,7 +30,9 @@ fun CustomTextField(
     isError: Boolean = false,
 ) {
     Column {
-        Text(text = titleText,modifier = modifier.padding(start = 5.dp, bottom = 10.dp), color = BorderColor)
+        if (titleText.isNotEmpty()) {
+            Text(text = titleText,modifier = modifier.padding(start = 5.dp, bottom = 10.dp), color = BorderColor)
+        }
         OutlinedTextField(
             modifier = modifier,
             value = value,

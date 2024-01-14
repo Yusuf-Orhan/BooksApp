@@ -2,6 +2,13 @@
     <string name="app_name">Books App</string>
     <string name="type_email">Type Email</string>
     <string name="type_password">Type Password</string>
+    <string name="don_t_have_an_account">Don’t have an account?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="login">Login</string>
+    <string name="enter_your_password">Enter Your Password</string>
+    <string name="password">Password</string>
+    <string name="enter_your_email">Enter Your Email</string>
+    <string name="email">Email</string>
 
     <style name="type_email">Type Email</style>
 </resources>

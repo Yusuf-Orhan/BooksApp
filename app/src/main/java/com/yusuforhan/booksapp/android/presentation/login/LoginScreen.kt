@@ -1,36 +1,38 @@
 package com.yusuforhan.booksapp.android.presentation.login
 
-import android.content.Context
-import android.widget.Toast
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.ElevatedButton
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.runtime.Composable
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.yusuforhan.booksapp.android.R
 import com.yusuforhan.booksapp.android.presentation.components.CustomTextField
 import com.yusuforhan.booksapp.android.presentation.components.PasswordOutlinedTextField
-import com.yusuforhan.booksapp.android.presentation.components.PasswordState
 import com.yusuforhan.booksapp.android.presentation.components.rememberPasswordState
-import com.yusuforhan.booksapp.android.ui.theme.BooksAppTheme
-import com.yusuforhan.booksapp.android.ui.theme.Purple40
+import com.yusuforhan.booksapp.android.ui.theme.Blue100
+import com.yusuforhan.booksapp.android.ui.theme.Purple_1
 
 @Composable
 fun LoginRoute(
@@ -63,25 +65,55 @@ fun LoginScreen(
             val password = rememberPasswordState()
             var email by remember { mutableStateOf("") }
 
+            Image(painter = painterResource(id = R.drawable.ic_books), contentDescription = null)
+            Spacer(modifier = modifier.size(20.dp))
+
             CustomTextField(
                 modifier = modifier
                     .fillMaxWidth()
                     .padding(horizontal = 24.dp),
                 value = email,
                 onValuesChange = { v -> email = v },
-                hint = "Enter Your Email",
-                titleText = "Email",
+                hint = stringResource(R.string.enter_your_email),
+                titleText = stringResource(R.string.email),
                 singleLine = true
             )
             Spacer(modifier = modifier.size(20.dp))
             PasswordOutlinedTextField(
                 state = password,
-                hint = "Enter Your Password",
-                titleText = "Password"
+                hint = stringResource(R.string.enter_your_password),
+                titleText = stringResource(R.string.password)
             )
-            ElevatedButton(onClick = { /*TODO*/ }) {
-                Text(text = "Login")
+            Spacer(modifier = modifier.size(24.dp))
+            Button(
+                modifier = modifier
+                    .fillMaxWidth()
+                    .height(48.dp)
+                    .padding(horizontal = 24.dp),
+                shape = RoundedCornerShape(5.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Blue100
+                ),
+                onClick = { /*TODO*/ }
+            ) {
+                Text(text = stringResource(R.string.login), color = Color.White, fontSize = 16.sp)
+            }
+            Spacer(modifier = modifier.size(34.dp))
+            Row(
+                horizontalArrangement = Arrangement.Center,
+            ) {
+                Text(text = stringResource(R.string.don_t_have_an_account))
+                Text(
+                    text = stringResource(R.string.sign_up),
+                    color = Purple_1,
+                    modifier = modifier
+                        .padding(horizontal = 5.dp)
+                        .clickable {
+                            navigateToSignup()
+                        }
+                )
             }
         }
     }
 }
+
