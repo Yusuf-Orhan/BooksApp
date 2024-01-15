@@ -23,7 +23,9 @@ fun BooksNavHost(
             navigateToHome = { navHostController.navigateToHome() }
         )
         signupScreen(
-            navigateToHome = {navHostController.navigateToHome()}
+            navigateToHome = {
+                navHostController.navigateToHome()
+            }
         )
         homeScreen(
             navigateUp = navHostController::navigateUp

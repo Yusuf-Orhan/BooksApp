@@ -158,7 +158,7 @@ fun SignupScreen(
                         password = password.password,
                         phone = phoneNumber
                     )
-                    onEvent(AuthEvent.Auth(signUpModel))
+                    onEvent(AuthEvent.SignUp(signUpModel))
                 }) {
                 Text(
                     text = stringResource(R.string.sign_up),

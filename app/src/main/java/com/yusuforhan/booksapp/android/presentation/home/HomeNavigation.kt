@@ -4,6 +4,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
+import com.yusuforhan.booksapp.android.presentation.auth.login.loginRoute
 
 const val homeRoute = "home_route"
 
@@ -22,8 +23,8 @@ fun NavHostController.navigateToHome(
 ) {
     navigate(
         route = homeRoute,
-        navOptions = navOptions
-    )
-    clearBackStack(homeRoute)
+    ) {
+        popUpTo(loginRoute) { inclusive = true }
+    }
 }
 
