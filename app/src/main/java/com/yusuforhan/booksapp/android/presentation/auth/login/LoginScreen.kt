@@ -31,6 +31,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.yusuforhan.booksapp.android.R
 import com.yusuforhan.booksapp.android.common.showToast
 import com.yusuforhan.booksapp.android.data.model.remote.SignInModel
@@ -49,10 +50,11 @@ fun LoginRoute(
     navigateToHome: () -> Unit,
     viewModel: AuthViewModel = hiltViewModel()
 ) {
+    val state by viewModel.state.collectAsStateWithLifecycle()
     LoginScreen(
         navigateToSignup = navigateToSignup,
         navigateToHome = navigateToHome,
-        state = viewModel.state.value,
+        state = state,
         context = LocalContext.current,
         onEvent = viewModel::onEvent
     )

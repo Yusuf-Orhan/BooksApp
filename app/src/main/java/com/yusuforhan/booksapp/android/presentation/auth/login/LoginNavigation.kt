@@ -4,8 +4,9 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
+import kotlin.math.log
 
-const val loginRoute = "home_route"
+const val loginRoute = "login_route"
 
 fun NavGraphBuilder.loginScreen(
     navigateToSignup : () -> Unit,

@@ -5,7 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 
-const val homeRoute = "homeRoute"
+const val homeRoute = "home_route"
 
 fun NavGraphBuilder.homeScreen(
     navigateUp : () -> Unit
@@ -24,5 +24,6 @@ fun NavHostController.navigateToHome(
         route = homeRoute,
         navOptions = navOptions
     )
+    clearBackStack(homeRoute)
 }
 

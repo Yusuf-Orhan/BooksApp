@@ -31,6 +31,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.yusuforhan.booksapp.android.R
 import com.yusuforhan.booksapp.android.common.showToast
 import com.yusuforhan.booksapp.android.data.model.remote.SignUpModel
@@ -46,9 +47,11 @@ import com.yusuforhan.booksapp.android.ui.theme.Blue100
 fun SignupRoute(
     navigateToHome: () -> Unit, viewModel: AuthViewModel = hiltViewModel()
 ) {
+    val state by viewModel.state.collectAsStateWithLifecycle()
+
     SignupScreen(
         navigateToHome = navigateToHome,
-        state = viewModel.state.value,
+        state = state,
         onEvent = viewModel::onEvent,
         context = LocalContext.current
     )
