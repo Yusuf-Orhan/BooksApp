@@ -1,4 +1,4 @@
-package com.yusuforhan.booksapp.android.domain
+package com.yusuforhan.booksapp.android.domain.repository
 
 import com.yusuforhan.booksapp.android.data.model.remote.CrudResponse
 import com.yusuforhan.booksapp.android.data.model.remote.SignInModel

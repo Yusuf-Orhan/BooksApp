@@ -6,13 +6,16 @@ import androidx.lifecycle.viewModelScope
 import com.yusuforhan.booksapp.android.data.model.remote.SignInModel
 import com.yusuforhan.booksapp.android.data.model.remote.SignUpModel
 import com.yusuforhan.booksapp.android.domain.source.RemoteDataSource
+import com.yusuforhan.booksapp.android.domain.usecase.SignInUseCase
+import com.yusuforhan.booksapp.android.domain.usecase.SignUpUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
-    private val dataSource: RemoteDataSource
+    private val signInUseCase: SignInUseCase,
+    private val signUpUseCase: SignUpUseCase
 ) : ViewModel() {
     val state = mutableStateOf(AuthState())
 
@@ -30,7 +33,7 @@ class AuthViewModel @Inject constructor(
     }
     private fun signUp(signUpModel: SignUpModel) = viewModelScope.launch {
         try {
-            val response = dataSource.signUp(signUpModel)
+            val response = signUpUseCase(signUpModel)
             if (signUpModel.address.isEmpty() || signUpModel.email.isEmpty() || signUpModel.name.isEmpty() || signUpModel.password.isEmpty() || signUpModel.phone.isEmpty()) {
                 state.value = state.value.copy(isSuccess = false,emptyParameter = true, message = null)
             } else {
@@ -47,7 +50,7 @@ class AuthViewModel @Inject constructor(
     }
     private fun signIn(signInModel: SignInModel) = viewModelScope.launch {
         try {
-            val response = dataSource.signIn(signInModel)
+            val response = signInUseCase(signInModel)
             if (signInModel.email.isEmpty() || signInModel.password.isEmpty()) {
                 state.value = state.value.copy(isSuccess = false,emptyParameter = true, message = null)
             } else {
