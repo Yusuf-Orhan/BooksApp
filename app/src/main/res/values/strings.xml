@@ -15,6 +15,7 @@
     <string name="enter_your_username">Enter Your Username</string>
     <string name="enter_your_phone_number">Enter Your Phone Number</string>
     <string name="enter_your_address">Enter Your Address</string>
+    <string name="user_created_successfully">User Created Successfully🥳</string>
 
     <style name="type_email">Type Email</style>
 </resources>

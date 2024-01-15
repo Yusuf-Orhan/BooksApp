@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.yusuforhan.booksapp.android.R
+import com.yusuforhan.booksapp.android.common.showToast
 import com.yusuforhan.booksapp.android.data.model.remote.SignInModel
 import com.yusuforhan.booksapp.android.presentation.auth.viewmodel.AuthEvent
 import com.yusuforhan.booksapp.android.presentation.auth.viewmodel.AuthState
@@ -68,11 +69,12 @@ fun LoginScreen(
     onEvent : (AuthEvent) -> Unit
 ) {
     if (state.emptyParameter == true) {
-        Toast.makeText(context,"Please fill in the blanks!",Toast.LENGTH_SHORT).show()
+        showToast(context, stringResource(id = R.string.please_fill_in_the_blanks))
     } else if (state.isSuccess == true) {
         navigateToHome()
+        showToast(context, stringResource(R.string.user_created_successfully))
     } else if (state.isSuccess == false){
-        Toast.makeText(context,state.message.orEmpty(),Toast.LENGTH_SHORT).show()
+        showToast(context, state.message.orEmpty())
     }
     Scaffold(
         containerColor = Color.White
