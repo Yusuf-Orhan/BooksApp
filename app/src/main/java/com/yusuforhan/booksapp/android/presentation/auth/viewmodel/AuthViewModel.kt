@@ -20,7 +20,7 @@ class AuthViewModel @Inject constructor(
     private val signUpUseCase: SignUpUseCase
 ) : ViewModel() {
     private val _state = MutableStateFlow(AuthState())
-    val state : StateFlow<AuthState> get() = _state
+    val state : StateFlow<AuthState>  = _state
 
     fun onEvent(event: AuthEvent) {
        when(event) {
