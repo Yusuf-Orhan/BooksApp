@@ -72,7 +72,7 @@ fun LoginScreen(
         showToast(context, stringResource(id = R.string.please_fill_in_the_blanks))
     } else if (state.isSuccess == true) {
         navigateToHome()
-        showToast(context, stringResource(R.string.user_created_successfully))
+        showToast(context, stringResource(R.string.logged_in_successfully))
     } else if (state.isSuccess == false){
         showToast(context, state.message.orEmpty())
     }

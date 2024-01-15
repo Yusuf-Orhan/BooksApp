@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.yusuforhan.booksapp.android.R
+import com.yusuforhan.booksapp.android.common.showToast
 import com.yusuforhan.booksapp.android.data.model.remote.SignUpModel
 import com.yusuforhan.booksapp.android.presentation.components.CustomTextField
 import com.yusuforhan.booksapp.android.presentation.components.PasswordOutlinedTextField
@@ -70,6 +71,7 @@ fun SignupScreen(
 
     if (state.isSuccess == true) {
         navigateToHome()
+        showToast(context, stringResource(R.string.user_created_successfully))
     } else if (state.emptyParameter == true) {
         Toast.makeText(context, stringResource(R.string.please_fill_in_the_blanks), Toast.LENGTH_SHORT).show()
     } else if (state.isSuccess == false) {
