@@ -66,13 +66,14 @@ fun SignupScreen(
     var email by remember { mutableStateOf("") }
     var userName by remember { mutableStateOf("") }
     var phoneNumber by remember { mutableStateOf("") }
+    var address by remember { mutableStateOf("") }
 
     if (state.isSuccess == true) {
         navigateToHome()
     } else if (state.emptyParameter == true) {
-        Toast.makeText(context, "Please filL in the blanks!", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, stringResource(R.string.please_fill_in_the_blanks), Toast.LENGTH_SHORT).show()
     } else if (state.isSuccess == false) {
-        Toast.makeText(context, "An unexpected error!", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, stringResource(R.string.an_unexpected_error), Toast.LENGTH_SHORT).show()
     }
     Scaffold(
         containerColor = Color.White
@@ -89,7 +90,7 @@ fun SignupScreen(
                 painter = painterResource(id = R.drawable.ic_books),
                 contentDescription = null
             )
-            Text(text = "Create an account", fontSize = 24.sp)
+            Text(text = stringResource(R.string.create_an_account), fontSize = 24.sp)
             Spacer(modifier = modifier.size(20.dp))
             CustomTextField(
                 modifier = modifier
@@ -97,7 +98,7 @@ fun SignupScreen(
                     .padding(horizontal = 24.dp),
                 value = userName,
                 onValuesChange = { v -> userName = v },
-                hint = "Enter Your Username",
+                hint = stringResource(R.string.enter_your_username),
                 singleLine = true
             )
             Spacer(modifier = modifier.size(20.dp))
@@ -117,10 +118,21 @@ fun SignupScreen(
                     .padding(horizontal = 24.dp),
                 value = phoneNumber,
                 onValuesChange = { v -> phoneNumber = v },
-                hint = "Enter Your Phone Number",
+                hint = stringResource(R.string.enter_your_phone_number),
                 singleLine = true
             )
             Spacer(modifier = modifier.size(20.dp))
+            CustomTextField(
+                modifier = modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 24.dp),
+                value = address,
+                onValuesChange = { v -> address = v },
+                hint = stringResource(R.string.enter_your_address),
+                singleLine = true
+            )
+            Spacer(modifier = modifier.size(20.dp))
+
             PasswordOutlinedTextField(
                 state = password, hint = stringResource(R.string.enter_your_password)
             )
@@ -135,7 +147,7 @@ fun SignupScreen(
                 ),
                 onClick = {
                     val signUpModel = SignUpModel(
-                        address = "Address",
+                        address = address,
                         email = email,
                         name = userName,
                         password = password.password,

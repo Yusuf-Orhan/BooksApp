@@ -9,6 +9,12 @@
     <string name="password">Password</string>
     <string name="enter_your_email">Enter Your Email</string>
     <string name="email">Email</string>
+    <string name="please_fill_in_the_blanks">Please filL in the blanks!</string>
+    <string name="an_unexpected_error">An unexpected error!</string>
+    <string name="create_an_account">Create an account</string>
+    <string name="enter_your_username">Enter Your Username</string>
+    <string name="enter_your_phone_number">Enter Your Phone Number</string>
+    <string name="enter_your_address">Enter Your Address</string>
 
     <style name="type_email">Type Email</style>
 </resources>
