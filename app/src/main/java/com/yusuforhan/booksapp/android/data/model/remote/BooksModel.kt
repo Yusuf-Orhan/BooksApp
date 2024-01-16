@@ -1,6 +1,6 @@
 package com.yusuforhan.booksapp.android.data.model.remote
 
-data class Product(
+data class BooksModel(
     val category: String,
     val count: Int,
     val description: String,
