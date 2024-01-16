@@ -15,4 +15,6 @@ interface AuthService {
 
     @POST(SIGN_IN)
     suspend fun signIn(@Body signInModel: SignInModel) : CrudResponse
+
+
 }
