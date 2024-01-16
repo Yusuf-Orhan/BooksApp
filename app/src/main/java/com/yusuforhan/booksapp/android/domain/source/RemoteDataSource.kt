@@ -10,7 +10,7 @@ interface RemoteDataSource {
 
     suspend fun signIn(signInModel: SignInModel) : CrudResponse
     suspend fun signUp(signUpModel: SignUpModel) : CrudResponse
-    suspend fun getAllBooks() : Flow<List<BooksModel>>
+    suspend fun getAllBooks() : List<BooksModel>
     suspend fun searchBooks(query : String) : List<BooksModel>
     suspend fun getSaleBooksList() : Flow<List<BooksModel>>
 }

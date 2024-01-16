@@ -15,6 +15,7 @@ import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface AuthService {
 
@@ -26,8 +27,8 @@ interface AuthService {
 
     @GET(GET_BOOKS)
     suspend fun getAllBooks(
-        @Field("store") store: String = STORE_NAME
-    ): Flow<List<BooksModel>>
+        @Query("store") store: String = STORE_NAME
+    ): List<BooksModel>
 
     @GET(SEARCH_BOOKS)
     suspend fun searchBooks(

@@ -1,7 +1,9 @@
 package com.yusuforhan.booksapp.android.di
 
 import com.yusuforhan.booksapp.android.data.repository.AuthRepositoryImpl
+import com.yusuforhan.booksapp.android.data.repository.BooksRepositoryImpl
 import com.yusuforhan.booksapp.android.domain.repository.AuthRepository
+import com.yusuforhan.booksapp.android.domain.repository.BooksRepository
 import com.yusuforhan.booksapp.android.domain.source.RemoteDataSource
 import dagger.Module
 import dagger.Provides
@@ -15,4 +17,9 @@ object RepositoryModule {
     @Provides
     @Singleton
     fun provideAuthRepository(dataSource: RemoteDataSource) : AuthRepository = AuthRepositoryImpl(dataSource)
+
+
+    @Provides
+    @Singleton
+    fun provideBooksRepository(dataSource: RemoteDataSource) : BooksRepository = BooksRepositoryImpl(dataSource)
 }
