@@ -5,9 +5,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface BooksRepository {
 
-    suspend fun getAllBooks() : List<BooksModel>
+    suspend fun getAllBooks() : BooksModel
 
-    suspend fun getSaleBooks() : Flow<List<BooksModel>>
+    suspend fun getSaleBooks() : BooksModel
 
-    suspend fun searchBooks(query: String) : List<BooksModel>
+    suspend fun searchBooks(query: String) : BooksModel
 }

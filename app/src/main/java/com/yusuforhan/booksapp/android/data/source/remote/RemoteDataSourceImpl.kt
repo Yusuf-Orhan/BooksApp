@@ -14,13 +14,9 @@ class RemoteDataSourceImpl @Inject constructor(
     override suspend fun signIn(signInModel: SignInModel) = authService.signIn(signInModel)
 
     override suspend fun signUp(signUpModel: SignUpModel) = authService.signUp(signUpModel)
-    override suspend fun getAllBooks(): List<BooksModel> = authService.getAllBooks()
+    override suspend fun getAllBooks(): BooksModel = authService.getAllBooks()
 
-    override suspend fun searchBooks(query: String): List<BooksModel> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun searchBooks(query: String): BooksModel = authService.searchBooks(query)
 
-    override suspend fun getSaleBooksList(): Flow<List<BooksModel>> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getSaleBooksList(): BooksModel = authService.getSaleBooksList()
 }

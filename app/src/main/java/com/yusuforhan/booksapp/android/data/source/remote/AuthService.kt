@@ -28,16 +28,16 @@ interface AuthService {
     @GET(GET_BOOKS)
     suspend fun getAllBooks(
         @Query("store") store: String = STORE_NAME
-    ): List<BooksModel>
+    ): BooksModel
 
     @GET(SEARCH_BOOKS)
     suspend fun searchBooks(
         @Field("store") query: String
-    ): List<BooksModel>
+    ): BooksModel
 
     @GET(GET_SALE_BOOKS)
     suspend fun getSaleBooksList(
         @Field("store") store: String = STORE_NAME
-    ) : Flow<List<BooksModel>>
+    ) : BooksModel
 
 }

@@ -9,8 +9,8 @@ import javax.inject.Inject
 class BooksRepositoryImpl @Inject constructor(
     private val dataSource: RemoteDataSource
 ) : BooksRepository {
-    override suspend fun getAllBooks(): List<BooksModel> = dataSource.getAllBooks()
+    override suspend fun getAllBooks(): BooksModel = dataSource.getAllBooks()
 
-    override suspend fun getSaleBooks(): Flow<List<BooksModel>> = dataSource.getSaleBooksList()
-    override suspend fun searchBooks(query: String): List<BooksModel> = dataSource.searchBooks(query)
+    override suspend fun getSaleBooks(): BooksModel = dataSource.getSaleBooksList()
+    override suspend fun searchBooks(query: String): BooksModel = dataSource.searchBooks(query)
 }

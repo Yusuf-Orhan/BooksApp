@@ -1,16 +1,10 @@
 package com.yusuforhan.booksapp.android.data.model.remote
 
+import com.google.gson.annotations.SerializedName
+
 data class BooksModel(
-    val category: String,
-    val count: Int,
-    val description: String,
-    val id: Int,
-    val imageOne: String,
-    val imageThree: String,
-    val imageTwo: String,
-    val price: Int,
-    val rate: Int,
-    val salePrice: Int,
-    val saleState: Boolean,
-    val title: String
+    val message: String,
+    @SerializedName("products")
+    val books : List<Books>,
+    val status: Int
 )
