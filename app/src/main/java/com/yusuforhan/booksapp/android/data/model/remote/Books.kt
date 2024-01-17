@@ -8,9 +8,9 @@ data class Books(
     val imageOne: String,
     val imageThree: String,
     val imageTwo: String,
-    val price: Int,
-    val rate: Int,
-    val salePrice: Int,
+    val price: Double,
+    val rate: Double,
+    val salePrice: Double,
     val saleState: Boolean,
     val title: String
 )

@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.Flow
 import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Query
 
@@ -27,7 +28,7 @@ interface AuthService {
 
     @GET(GET_BOOKS)
     suspend fun getAllBooks(
-        @Query("store") store: String = STORE_NAME
+        @Header("store") store: String = STORE_NAME
     ): BooksModel
 
     @GET(SEARCH_BOOKS)
