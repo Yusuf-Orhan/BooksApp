@@ -13,10 +13,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
+import com.yusuforhan.booksapp.android.common.DataStoreManager
 import com.yusuforhan.booksapp.android.presentation.auth.login.loginRoute
 import com.yusuforhan.booksapp.android.presentation.navigation.BooksNavHost
 import com.yusuforhan.booksapp.android.ui.theme.BooksAppTheme
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -29,6 +33,8 @@ class MainActivity : ComponentActivity() {
                     color = Color.White
                 ) {
                     val navHostController = rememberNavController()
+                    val manager = DataStoreManager(this)
+                    
                     BooksNavHost(navHostController = navHostController, startDestination = loginRoute)
                 }
             }

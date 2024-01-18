@@ -91,4 +91,7 @@ dependencies {
     implementation ("com.squareup.retrofit2:converter-gson:$retrofitVersion")
     //Coil
     implementation("io.coil-kt:coil-compose:2.5.0")
+    //Data Store
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+
 }

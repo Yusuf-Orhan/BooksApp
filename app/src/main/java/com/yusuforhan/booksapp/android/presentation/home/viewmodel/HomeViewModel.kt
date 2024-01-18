@@ -1,10 +1,8 @@
 package com.yusuforhan.booksapp.android.presentation.home.viewmodel
 
-import androidx.lifecycle.SAVED_STATE_REGISTRY_OWNER_KEY
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yusuforhan.booksapp.android.common.Resource
-import com.yusuforhan.booksapp.android.data.model.remote.BooksModel
 import com.yusuforhan.booksapp.android.domain.usecase.GetAllBooksUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,19 +21,21 @@ class HomeViewModel @Inject constructor(
     val state: StateFlow<HomeUiState> = _state
 
     init {
-        viewModelScope.launch {
-            getAllBooks()
-        }
+        getAllBooks()
     }
 
     private fun getAllBooks() {
         getAllBooksUseCase().onEach { result ->
-            when(result) {
+            when (result) {
                 Resource.Loading -> _state.value = _state.value.copy(loading = true)
-                is Resource.Success -> _state.value = _state.value.copy(loading = false,books = result.data.books)
-                is  Resource.Error -> _state.value = _state.value.copy(loading = false,error = result.throwable.localizedMessage.orEmpty())
+                is Resource.Success -> _state.value =
+                    _state.value.copy(loading = false, books = result.data.books)
+
+                is Resource.Error -> _state.value = _state.value.copy(
+                    loading = false,
+                    error = result.throwable.localizedMessage.orEmpty()
+                )
             }
         }.launchIn(viewModelScope)
     }
-
 }
