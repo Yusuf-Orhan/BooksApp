@@ -45,11 +45,13 @@ class AuthViewModel @Inject constructor(
                     saveLoginStateUseCase(true)
                 } else {
                     _state.value = state.value.copy(isSuccess = false, emptyParameter = false, message = response.message, userId = null)
-
+                    println("Signup Message :" + response.message)
                 }
             }
         } catch (e : Exception) {
             _state.value = state.value.copy(isSuccess = false)
+            println("Signup Exception Message:" + e.message)
+
         }
     }
     private fun signIn(signInModel: SignInModel) = viewModelScope.launch {
@@ -63,11 +65,13 @@ class AuthViewModel @Inject constructor(
                     saveLoginStateUseCase(true)
                 } else {
                     _state.value = state.value.copy(isSuccess = false, emptyParameter = false, message = response.message, userId = null)
-
+                    println("SignIn Message :" + response.message)
                 }
             }
         } catch (e : Exception) {
             _state.value = state.value.copy(isSuccess = false)
+            println("SignIn Exception Message:" + e.message)
+
         }
     }
 }

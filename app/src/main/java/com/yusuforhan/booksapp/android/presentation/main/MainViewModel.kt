@@ -20,7 +20,7 @@ class MainViewModel @Inject constructor(
     init {
         getLoginState()
     }
-    private fun getLoginState() = viewModelScope.launch {
+    fun getLoginState() = viewModelScope.launch {
         getLoginStateUseCase().collect {
             loginState.value = it ?: true
             Log.e("MainViewModel",it.toString() ?: "Null")
