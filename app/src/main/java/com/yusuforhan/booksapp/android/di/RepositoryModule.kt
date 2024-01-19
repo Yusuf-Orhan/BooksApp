@@ -4,7 +4,7 @@ import com.yusuforhan.booksapp.android.data.repository.AuthRepositoryImpl
 import com.yusuforhan.booksapp.android.data.repository.BooksRepositoryImpl
 import com.yusuforhan.booksapp.android.domain.repository.AuthRepository
 import com.yusuforhan.booksapp.android.domain.repository.BooksRepository
-import com.yusuforhan.booksapp.android.domain.source.RemoteDataSource
+import com.yusuforhan.booksapp.android.domain.source.remote.RemoteDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

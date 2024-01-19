@@ -1,4 +1,4 @@
-package com.yusuforhan.booksapp.android.domain.source
+package com.yusuforhan.booksapp.android.domain.source.remote
 
 import com.yusuforhan.booksapp.android.data.model.remote.BooksModel
 import com.yusuforhan.booksapp.android.data.model.remote.CrudResponse

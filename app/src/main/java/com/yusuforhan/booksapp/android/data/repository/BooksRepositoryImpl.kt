@@ -2,8 +2,7 @@ package com.yusuforhan.booksapp.android.data.repository
 
 import com.yusuforhan.booksapp.android.data.model.remote.BooksModel
 import com.yusuforhan.booksapp.android.domain.repository.BooksRepository
-import com.yusuforhan.booksapp.android.domain.source.RemoteDataSource
-import kotlinx.coroutines.flow.Flow
+import com.yusuforhan.booksapp.android.domain.source.remote.RemoteDataSource
 import javax.inject.Inject
 
 class BooksRepositoryImpl @Inject constructor(

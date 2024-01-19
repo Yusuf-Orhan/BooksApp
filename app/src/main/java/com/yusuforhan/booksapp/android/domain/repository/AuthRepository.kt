@@ -7,4 +7,6 @@ import com.yusuforhan.booksapp.android.data.model.remote.SignUpModel
 interface AuthRepository {
     suspend fun signIn(signInModel : SignInModel) : CrudResponse
     suspend fun signUp(signUpModel: SignUpModel) : CrudResponse
+    suspend fun saveIsLogin(isLogin : Boolean)
+    suspend fun getIsLogin() : Boolean?
 }

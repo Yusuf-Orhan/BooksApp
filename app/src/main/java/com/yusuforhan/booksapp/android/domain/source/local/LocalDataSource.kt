@@ -1,4 +1,4 @@
-package com.yusuforhan.booksapp.android.domain.source
+package com.yusuforhan.booksapp.android.domain.source.local
 
 interface LocalDataSource {
 
