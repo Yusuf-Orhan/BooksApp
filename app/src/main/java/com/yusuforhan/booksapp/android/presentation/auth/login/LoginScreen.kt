@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.yusuforhan.booksapp.android.R
+import com.yusuforhan.booksapp.android.common.DataStoreHelper
 import com.yusuforhan.booksapp.android.common.showToast
 import com.yusuforhan.booksapp.android.data.model.remote.SignInModel
 import com.yusuforhan.booksapp.android.presentation.auth.viewmodel.AuthEvent
@@ -50,13 +51,16 @@ fun LoginRoute(
     navigateToHome: () -> Unit,
     viewModel: AuthViewModel = hiltViewModel()
 ) {
+
     val state by viewModel.state.collectAsStateWithLifecycle()
+    val manager = DataStoreHelper(LocalContext.current)
     LoginScreen(
         navigateToSignup = navigateToSignup,
         navigateToHome = navigateToHome,
         state = state,
         context = LocalContext.current,
-        onEvent = viewModel::onEvent
+        onEvent = viewModel::onEvent,
+        manager = manager
     )
 }
 
@@ -68,12 +72,14 @@ fun LoginScreen(
     navigateToHome: () -> Unit,
     state : AuthState,
     context: Context,
-    onEvent : (AuthEvent) -> Unit
+    onEvent : (AuthEvent) -> Unit,
+    manager : DataStoreHelper
 ) {
     if (state.emptyParameter == true) {
         showToast(context, stringResource(id = R.string.please_fill_in_the_blanks))
     } else if (state.isSuccess == true) {
         navigateToHome()
+        manager.setData(true)
         showToast(context, stringResource(R.string.logged_in_successfully))
     } else if (state.isSuccess == false){
         showToast(context, state.message.orEmpty())
