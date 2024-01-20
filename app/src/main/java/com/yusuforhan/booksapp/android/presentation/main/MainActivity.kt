@@ -25,14 +25,10 @@ import kotlin.math.log
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    private val viewModel : MainViewModel by viewModels()
+    private val viewModel: MainViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.getLoginState()
-        val isLogin = viewModel.loginState.asLiveData()
-
-
-        Log.e("MainActivity", isLogin.toString())
         setContent {
             BooksAppTheme {
                 Surface(
@@ -40,15 +36,17 @@ class MainActivity : ComponentActivity() {
                     color = Color.White
                 ) {
                     val navHostController = rememberNavController()
-                    var startDestination = remember { loginRoute}
-                    isLogin.observe(this) {
-                        startDestination = if (it) {
-                            homeRoute
-                        }else {
-                            loginRoute
-                        }
+                    val isLogin = viewModel.loginState.collectAsState()
+                    var startDestination = remember { loginRoute }
+                    startDestination = if (isLogin.value) {
+                        homeRoute
+                    } else {
+                        loginRoute
                     }
-                    BooksNavHost(navHostController = navHostController, startDestination = startDestination)
+                    BooksNavHost(
+                        navHostController = navHostController,
+                        startDestination = startDestination
+                    )
                 }
             }
         }
