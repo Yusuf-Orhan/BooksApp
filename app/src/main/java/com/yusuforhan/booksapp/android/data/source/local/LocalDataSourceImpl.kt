@@ -12,6 +12,6 @@ class LocalDataSourceImpl @Inject constructor(
 
 
     override suspend fun getIsLogin(): Flow<Boolean?> {
-        return dataStore.getLoginState()
+        return dataStore.isLogin
     }
 }

@@ -26,11 +26,7 @@ class DataStoreHelperImpl @Inject constructor(
         }
 
     }
-
-    override suspend fun getLoginState(): Flow<Boolean?> {
-        val isLogin: Flow<Boolean> = dataStore.data.map {
+     override var isLogin: Flow<Boolean> = dataStore.data.map {
             it[IS_LOGIN] ?: false
-        }
-        return isLogin
-    }
+     }
 }
