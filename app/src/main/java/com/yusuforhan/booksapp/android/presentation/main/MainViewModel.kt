@@ -17,9 +17,6 @@ class MainViewModel @Inject constructor(
 
     val loginState = MutableStateFlow(false)
 
-    init {
-        getLoginState()
-    }
     fun getLoginState() = viewModelScope.launch {
         getLoginStateUseCase().collect {
             loginState.value = it ?: true

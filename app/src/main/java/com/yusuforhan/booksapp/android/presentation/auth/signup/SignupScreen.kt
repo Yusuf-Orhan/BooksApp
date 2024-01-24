@@ -41,7 +41,7 @@ import com.yusuforhan.booksapp.android.presentation.components.rememberPasswordS
 import com.yusuforhan.booksapp.android.presentation.auth.viewmodel.AuthEvent
 import com.yusuforhan.booksapp.android.presentation.auth.viewmodel.AuthState
 import com.yusuforhan.booksapp.android.presentation.auth.viewmodel.AuthViewModel
-import com.yusuforhan.booksapp.android.ui.theme.Blue100
+import com.yusuforhan.booksapp.android.presentation.theme.Blue100
 
 @Composable
 fun SignupRoute(

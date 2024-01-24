@@ -1,4 +1,4 @@
-package com.yusuforhan.booksapp.android.ui.theme
+package com.yusuforhan.booksapp.android.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 

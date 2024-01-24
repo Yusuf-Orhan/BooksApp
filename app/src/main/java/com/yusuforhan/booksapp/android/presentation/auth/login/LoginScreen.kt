@@ -42,8 +42,8 @@ import com.yusuforhan.booksapp.android.presentation.auth.viewmodel.AuthViewModel
 import com.yusuforhan.booksapp.android.presentation.components.CustomTextField
 import com.yusuforhan.booksapp.android.presentation.components.PasswordOutlinedTextField
 import com.yusuforhan.booksapp.android.presentation.components.rememberPasswordState
-import com.yusuforhan.booksapp.android.ui.theme.Blue100
-import com.yusuforhan.booksapp.android.ui.theme.Purple_1
+import com.yusuforhan.booksapp.android.presentation.theme.Blue100
+import com.yusuforhan.booksapp.android.presentation.theme.Purple_1
 
 @Composable
 fun LoginRoute(

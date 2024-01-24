@@ -16,7 +16,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.yusuforhan.booksapp.android.R
-import com.yusuforhan.booksapp.android.ui.theme.BorderColor
+import com.yusuforhan.booksapp.android.presentation.theme.BorderColor
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
