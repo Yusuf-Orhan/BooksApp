@@ -18,7 +18,7 @@ class DataStoreHelperImpl @Inject constructor(
 ) : DataStoreHelper {
 
     private val dataStore = context.dataStore
-    val IS_LOGIN = booleanPreferencesKey("isLogin")
+    private val IS_LOGIN = booleanPreferencesKey("isLogin")
 
     override suspend fun saveLoginState(state: Boolean) {
         dataStore.edit { preferences ->
@@ -26,7 +26,10 @@ class DataStoreHelperImpl @Inject constructor(
         }
 
     }
-     override var isLogin: Flow<Boolean> = dataStore.data.map {
+
+    override suspend fun getLoginState(): Flow<Boolean> {
+        return dataStore.data.map {
             it[IS_LOGIN] ?: false
-     }
+        }
+    }
 }
