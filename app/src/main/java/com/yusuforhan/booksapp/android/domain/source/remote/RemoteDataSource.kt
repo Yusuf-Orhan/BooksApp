@@ -17,10 +17,10 @@ interface RemoteDataSource {
     suspend fun getSaleBooksList() : BooksModel
     suspend fun getBooksByCategory(category : String) : BooksModel
     suspend fun getCartBooks(userId : String) : BooksModel
+    suspend fun getBookDetail(id : Int) : BooksModel
     suspend fun addToCart(cartModel: CartModel) : CrudResponse
     suspend fun deleteFromCart(cartModel: CartModel) : CrudResponse
     suspend fun clearCart() : CrudResponse
     suspend fun getCategories() : CategoriesModel
-    suspend fun getBookDetail(id : Int) : BooksModel
 
 }
