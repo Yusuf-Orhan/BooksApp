@@ -6,6 +6,7 @@ object Constants {
     const val SIGN_UP = "sign_up"
     const val GET_BOOKS = "get_products"
     const val GET_SALE_BOOKS = "get_sale_products"
+    const val GET_BOOKS_BY_CATEGORY = "get_products_by_category"
     const val SEARCH_BOOKS = "search_products"
     const val STORE_NAME = "canerture"
 
