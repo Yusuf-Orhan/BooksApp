@@ -74,7 +74,6 @@ interface AuthService {
     @POST(CLEAR_CART)
     suspend fun clearCart(
         @Header("store") store: String = STORE_NAME,
-        @Body cartModel: CartModel
     ) : CrudResponse
 
 
@@ -85,7 +84,8 @@ interface AuthService {
 
     @GET(GET_BOOKS_DETAIL)
     suspend fun getBookDetail(
-        @Header("store") store: String = STORE_NAME
-    ) : CategoriesModel
+        @Header("store") store: String = STORE_NAME,
+        @Query("id") id : Int
+    ) : BooksModel
 
 }

@@ -1,6 +1,9 @@
 package com.yusuforhan.booksapp.android.data.source.remote
 
 import com.yusuforhan.booksapp.android.data.model.remote.BooksModel
+import com.yusuforhan.booksapp.android.data.model.remote.CartModel
+import com.yusuforhan.booksapp.android.data.model.remote.CategoriesModel
+import com.yusuforhan.booksapp.android.data.model.remote.CrudResponse
 import com.yusuforhan.booksapp.android.data.model.remote.SignInModel
 import com.yusuforhan.booksapp.android.data.model.remote.SignUpModel
 import com.yusuforhan.booksapp.android.domain.source.remote.RemoteDataSource
@@ -18,4 +21,19 @@ class RemoteDataSourceImpl @Inject constructor(
     override suspend fun searchBooks(query: String): BooksModel = authService.searchBooks(query)
 
     override suspend fun getSaleBooksList(): BooksModel = authService.getSaleBooksList()
+    override suspend fun getBooksByCategory(category: String) =
+        authService.getBooksByCategory(category = category)
+
+    override suspend fun getCartBooks(userId: String) = authService.getCartBooks(userId = userId)
+
+    override suspend fun addToCart(cartModel: CartModel) =
+        authService.addToCart(cartModel = cartModel)
+
+    override suspend fun deleteFromCart(cartModel: CartModel) =
+        authService.deleteFromCart(cartModel = cartModel)
+
+    override suspend fun clearCart() = authService.clearCart()
+    override suspend fun getCategories() = authService.getCategories()
+
+    override suspend fun getBookDetail(id : Int) = authService.getBookDetail(id = id)
 }
