@@ -9,13 +9,14 @@ import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
-class SearchBooksUseCase @Inject constructor(
+class GetSaleBookList @Inject constructor(
     private val booksRepository: BooksRepository
 ) {
-    operator fun invoke(query : String): Flow<Resource<BooksModel>> = flow {
+
+    operator fun invoke(): Flow<Resource<BooksModel>> = flow {
         emit(Resource.Loading)
         try {
-            emit(Resource.Success(booksRepository.searchBooks(query)))
+            emit(Resource.Success(booksRepository.getSaleBooks()))
         } catch (e: HttpException) {
             emit(Resource.Error(e))
         } catch (e: IOException) {
