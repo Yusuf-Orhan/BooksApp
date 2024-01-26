@@ -2,8 +2,10 @@ package com.yusuforhan.booksapp.android.di
 
 import com.yusuforhan.booksapp.android.data.repository.AuthRepositoryImpl
 import com.yusuforhan.booksapp.android.data.repository.BooksRepositoryImpl
+import com.yusuforhan.booksapp.android.data.repository.CartRepositoryImpl
 import com.yusuforhan.booksapp.android.domain.repository.AuthRepository
 import com.yusuforhan.booksapp.android.domain.repository.BooksRepository
+import com.yusuforhan.booksapp.android.domain.repository.CartRepository
 import com.yusuforhan.booksapp.android.domain.source.local.LocalDataSource
 import com.yusuforhan.booksapp.android.domain.source.remote.RemoteDataSource
 import dagger.Module
@@ -23,4 +25,7 @@ object RepositoryModule {
     @Provides
     @Singleton
     fun provideBooksRepository(dataSource: RemoteDataSource) : BooksRepository = BooksRepositoryImpl(dataSource)
+    @Provides
+    @Singleton
+    fun provideCartRepository(dataSource: RemoteDataSource) : CartRepository = CartRepositoryImpl(dataSource)
 }
