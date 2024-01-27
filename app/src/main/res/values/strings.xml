@@ -17,6 +17,8 @@
     <string name="enter_your_address">Enter Your Address</string>
     <string name="user_created_successfully">User Created Successfully🥳</string>
     <string name="logged_in_successfully">Logged in successfully!</string>
+    <string name="home">Home</string>
+    <string name="detail">Detail</string>
 
     <style name="type_email">Type Email</style>
 </resources>

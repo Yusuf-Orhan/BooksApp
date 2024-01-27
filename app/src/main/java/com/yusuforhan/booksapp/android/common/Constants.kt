@@ -14,7 +14,7 @@ object Constants {
     const val GET_CATEGORIES = "get_categories"
     const val GET_BOOKS_DETAIL = "get_product_detail"
     const val SEARCH_BOOKS = "search_products"
-    const val STORE_NAME = "canerture"
+    const val STORE_NAME = "yusuforhan"
 
 
 }
