@@ -1,2 +1,2 @@
 # BooksApp
-Books app with mvvm and clean architecture.
+This app is currently under development.
