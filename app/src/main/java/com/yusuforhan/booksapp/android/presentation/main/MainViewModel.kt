@@ -3,16 +3,14 @@ package com.yusuforhan.booksapp.android.presentation.main
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.yusuforhan.booksapp.android.domain.usecase.GetLoginStateUseCase
+import com.yusuforhan.booksapp.android.domain.usecase.auth.GetLoginStateUseCase
 import com.yusuforhan.booksapp.android.presentation.auth.login.loginRoute
 import com.yusuforhan.booksapp.android.presentation.home.homeRoute
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.math.log
 
 @HiltViewModel
 class MainViewModel @Inject constructor(

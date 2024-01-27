@@ -1,4 +1,4 @@
-package com.yusuforhan.booksapp.android.domain.usecase
+package com.yusuforhan.booksapp.android.domain.usecase.books
 
 import com.yusuforhan.booksapp.android.common.Resource
 import com.yusuforhan.booksapp.android.data.model.remote.BooksModel
@@ -9,14 +9,14 @@ import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
-class GetSaleBookList @Inject constructor(
+class GetAllBooksUseCase @Inject constructor(
     private val booksRepository: BooksRepository
 ) {
 
     operator fun invoke(): Flow<Resource<BooksModel>> = flow {
         emit(Resource.Loading)
         try {
-            emit(Resource.Success(booksRepository.getSaleBooks()))
+            emit(Resource.Success(booksRepository.getAllBooks()))
         } catch (e: HttpException) {
             emit(Resource.Error(e))
         } catch (e: IOException) {

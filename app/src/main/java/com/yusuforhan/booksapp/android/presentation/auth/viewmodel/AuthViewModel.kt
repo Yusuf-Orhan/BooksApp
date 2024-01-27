@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yusuforhan.booksapp.android.data.model.remote.SignInModel
 import com.yusuforhan.booksapp.android.data.model.remote.SignUpModel
-import com.yusuforhan.booksapp.android.domain.usecase.SaveLoginStateUseCase
-import com.yusuforhan.booksapp.android.domain.usecase.SignInUseCase
-import com.yusuforhan.booksapp.android.domain.usecase.SignUpUseCase
+import com.yusuforhan.booksapp.android.domain.usecase.auth.SaveLoginStateUseCase
+import com.yusuforhan.booksapp.android.domain.usecase.auth.SignInUseCase
+import com.yusuforhan.booksapp.android.domain.usecase.auth.SignUpUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

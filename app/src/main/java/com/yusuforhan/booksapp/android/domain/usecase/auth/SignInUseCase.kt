@@ -1,4 +1,4 @@
-package com.yusuforhan.booksapp.android.domain.usecase
+package com.yusuforhan.booksapp.android.domain.usecase.auth
 
 import com.yusuforhan.booksapp.android.data.model.remote.CrudResponse
 import com.yusuforhan.booksapp.android.data.model.remote.SignInModel
