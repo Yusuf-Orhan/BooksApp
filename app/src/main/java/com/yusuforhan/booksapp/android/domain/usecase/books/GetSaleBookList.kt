@@ -18,9 +18,9 @@ class GetSaleBookList @Inject constructor(
         try {
             emit(Resource.Success(booksRepository.getSaleBooks()))
         } catch (e: HttpException) {
-            emit(Resource.Error(e))
+            emit(Resource.Error(e.message.orEmpty()))
         } catch (e: IOException) {
-            emit(Resource.Error(e))
+            emit(Resource.Error(e.message.orEmpty()))
         }
     }
 }

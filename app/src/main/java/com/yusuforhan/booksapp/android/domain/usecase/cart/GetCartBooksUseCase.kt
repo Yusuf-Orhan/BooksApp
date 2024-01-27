@@ -18,9 +18,9 @@ class GetCartBooksUseCase @Inject constructor(
         try {
             emit(Resource.Success(cartRepository.getCartBooks(userId)))
         } catch (e: HttpException) {
-            emit(Resource.Error(e))
+            emit(Resource.Error(e.message.orEmpty()))
         } catch (e: IOException) {
-            emit(Resource.Error(e))
+            emit(Resource.Error(e.message.orEmpty()))
         }
     }
 }

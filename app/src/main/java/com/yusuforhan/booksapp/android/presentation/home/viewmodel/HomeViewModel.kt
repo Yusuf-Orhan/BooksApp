@@ -28,11 +28,11 @@ class HomeViewModel @Inject constructor(
             when (result) {
                 Resource.Loading -> _state.value = _state.value.copy(loading = true)
                 is Resource.Success -> _state.value =
-                    _state.value.copy(loading = false, books = result.data.books)
+                    _state.value.copy(loading = false, books = result.data)
 
                 is Resource.Error -> _state.value = _state.value.copy(
                     loading = false,
-                    error = result.throwable.localizedMessage.orEmpty()
+                    error = result.message
                 )
             }
         }.launchIn(viewModelScope)

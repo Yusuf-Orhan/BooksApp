@@ -17,9 +17,9 @@ class GetBookDetailUseCase @Inject constructor(
         try {
             emit(Resource.Success(booksRepository.getBookDetail(id)))
         } catch (e: HttpException) {
-            emit(Resource.Error(e))
+            emit(Resource.Error(e.message.orEmpty()))
         } catch (e: IOException) {
-            emit(Resource.Error(e))
+            emit(Resource.Error(e.message.orEmpty()))
         }
     }
 }
