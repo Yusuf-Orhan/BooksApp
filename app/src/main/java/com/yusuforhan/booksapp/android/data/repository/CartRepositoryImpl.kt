@@ -1,5 +1,6 @@
 package com.yusuforhan.booksapp.android.data.repository
 
+import com.yusuforhan.booksapp.android.data.model.remote.BooksModel
 import com.yusuforhan.booksapp.android.data.model.remote.CartModel
 import com.yusuforhan.booksapp.android.domain.repository.CartRepository
 import com.yusuforhan.booksapp.android.domain.source.remote.RemoteDataSource
@@ -12,6 +13,8 @@ class CartRepositoryImpl @Inject constructor(
 
     override suspend fun deleteFromCart(cartModel: CartModel) =
         remoteDataSource.deleteFromCart(cartModel)
+
+    override suspend fun getCartBooks(userId: String): BooksModel = remoteDataSource.getCartBooks(userId)
 
     override suspend fun clearCart() = remoteDataSource.clearCart()
 }
