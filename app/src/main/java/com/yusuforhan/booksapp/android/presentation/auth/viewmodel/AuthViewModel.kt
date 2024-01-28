@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yusuforhan.booksapp.android.data.model.remote.SignInModel
 import com.yusuforhan.booksapp.android.data.model.remote.SignUpModel
-import com.yusuforhan.booksapp.android.domain.usecase.auth.SaveIsUseCase
+import com.yusuforhan.booksapp.android.domain.usecase.auth.SaveUserIdUseCase
 import com.yusuforhan.booksapp.android.domain.usecase.auth.SignInUseCase
 import com.yusuforhan.booksapp.android.domain.usecase.auth.SignUpUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +17,7 @@ import javax.inject.Inject
 class AuthViewModel @Inject constructor(
     private val signInUseCase: SignInUseCase,
     private val signUpUseCase: SignUpUseCase,
-    private val saveIsLoginUseCase: SaveIsUseCase
+    private val saveIsLoginUseCase: SaveUserIdUseCase
 ) : ViewModel() {
     private val _state = MutableStateFlow(AuthState())
     val state : StateFlow<AuthState>  = _state
@@ -42,7 +42,7 @@ class AuthViewModel @Inject constructor(
             } else {
                 if (response.status == 200 || response.status == 299) {
                     _state.value = state.value.copy(isSuccess = true, emptyParameter = false, message = response.message,userId = response.userId)
-                    saveIsLoginUseCase(true)
+                    saveIsLoginUseCase(response.userId ?: "")
                 } else {
                     _state.value = state.value.copy(isSuccess = false, emptyParameter = false, message = response.message, userId = null)
                     println("Signup Message :" + response.message)
@@ -62,7 +62,7 @@ class AuthViewModel @Inject constructor(
             } else {
                 if (response.status == 200 || response.status == 299) {
                     _state.value = state.value.copy(isSuccess = true, emptyParameter = false, message = response.message,userId = response.userId)
-                    saveIsLoginUseCase(true)
+                    saveIsLoginUseCase(response.userId ?: "")
                 } else {
                     _state.value = state.value.copy(isSuccess = false, emptyParameter = false, message = response.message, userId = null)
                     println("SignIn Message :" + response.message)

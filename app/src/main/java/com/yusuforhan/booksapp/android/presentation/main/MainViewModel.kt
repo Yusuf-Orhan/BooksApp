@@ -6,11 +6,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.yusuforhan.booksapp.android.domain.usecase.auth.ReadIsLoginUseCase
+import com.yusuforhan.booksapp.android.domain.usecase.auth.ReadUserIdUseCase
 import com.yusuforhan.booksapp.android.presentation.navigation.Screen
-import com.yusuforhan.booksapp.android.presentation.navigation.Screen.Companion.homeRoute
-import com.yusuforhan.booksapp.android.presentation.navigation.Screen.Companion.loginRoute
-import com.yusuforhan.booksapp.android.presentation.navigation.Screen.Companion.navigatorRoute
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -18,22 +15,22 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val readIsLoginUseCase: ReadIsLoginUseCase,
+    private val readUserIdUseCase: ReadUserIdUseCase,
 ) : ViewModel() {
 
-    var startDestination by mutableStateOf(Screen.BooksNavigation.route)
+    var startDestination by mutableStateOf(Screen.LoginNavigation.route)
         private set
     init {
       getLoginState()
     }
     private fun getLoginState() {
-        readIsLoginUseCase().onEach {isLogin ->
-            startDestination = if (isLogin) {
+        readUserIdUseCase().onEach { userId ->
+            startDestination = if (userId != null) {
                 Screen.BooksNavigation.route
             }else {
                 Screen.LoginNavigation.route
             }
-            Log.e("MainViewModel",isLogin.toString())
+            Log.e("MainViewModel",userId.toString())
         }.launchIn(viewModelScope)
     }
 }

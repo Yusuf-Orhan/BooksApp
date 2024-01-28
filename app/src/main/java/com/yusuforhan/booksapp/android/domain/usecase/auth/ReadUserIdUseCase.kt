@@ -1,12 +1,14 @@
 package com.yusuforhan.booksapp.android.domain.usecase.auth
 
 import com.yusuforhan.booksapp.android.domain.repository.AuthRepository
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class SaveIsUseCase @Inject constructor(
+class ReadUserIdUseCase @Inject constructor(
     private val authRepository: AuthRepository
-) {
-    suspend operator fun invoke(isLogin : Boolean) {
-        authRepository.saveIsLogin(isLogin)
+){
+
+    operator fun invoke() : Flow<String?> {
+        return authRepository.getIsLogin()
     }
 }

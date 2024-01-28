@@ -16,11 +16,11 @@ class AuthRepositoryImpl @Inject constructor(
 
 
     override suspend fun signUp(signUpModel: SignUpModel) = remoteDataSource.signUp(signUpModel)
-    override suspend fun saveIsLogin(isLogin : Boolean) {
-        localDataSource.saveLoginState(isLogin)
+    override suspend fun saveIsLogin(userId : String) {
+        localDataSource.saveUserId(userId)
     }
 
-    override  fun getIsLogin(): Flow<Boolean> {
-        return localDataSource.readLoginState()
+    override  fun getIsLogin(): Flow<String?> {
+        return localDataSource.readUserId()
     }
 }

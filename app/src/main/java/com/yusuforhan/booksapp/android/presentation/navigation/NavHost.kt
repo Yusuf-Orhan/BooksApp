@@ -32,17 +32,13 @@ fun BooksNavHost(
             route = Screen.LoginNavigation.route,
             startDestination = Screen.LoginScreen.route
         ) {
-            composable(route = Screen.LoginScreen.route) {
-                LoginRoute(
-                    navigateToSignup = navHostController::navigateToSignup,
-                    navigateToHome = navHostController::navigateToHome
-                )
-            }
-            composable(route = Screen.SignUpScreen.route) {
-                SignupRoute(
-                    navigateToHome = navHostController::navigateToHome
-                )
-            }
+            loginScreen(
+                navigateToSignup = { navHostController.navigateToSignup() },
+                navigateToHome = { navHostController.navigateToHome() }
+            )
+            signupScreen(
+                navigateToHome = { navHostController.navigateToHome() }
+            )
         }
         navigation(
             route = Screen.BooksNavigation.route,

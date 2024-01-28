@@ -4,6 +4,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface DataStoreHelper {
 
-    suspend fun saveLoginState(isLogin : Boolean)
-    fun readLoginState() : Flow<Boolean>
+    suspend fun saveUserId(userId : String)
+    fun readUserId() : Flow<String?>
 }
