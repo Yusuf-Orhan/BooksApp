@@ -18,9 +18,9 @@ class DataStoreHelperImpl @Inject constructor(
     private val context: Context
 ) : DataStoreHelper {
 
-    override suspend fun saveLoginState() {
+    override suspend fun saveLoginState(isLogin : Boolean) {
         context.dataStore.edit { preferences ->
-            preferences[PreferencesKeys.IS_LOGIN] = true
+            preferences[PreferencesKeys.IS_LOGIN] = isLogin
         }
 
     }

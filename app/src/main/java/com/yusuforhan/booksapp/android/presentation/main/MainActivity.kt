@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
                     val navHostController = rememberNavController()
                     BooksNavHost(
                         navHostController = navHostController,
-                        startDestination = Screen.LoginNavigation.route
+                        startDestination = startDestination
                     )
                 }
             }

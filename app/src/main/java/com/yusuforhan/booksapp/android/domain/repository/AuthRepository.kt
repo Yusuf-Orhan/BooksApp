@@ -8,6 +8,6 @@ import kotlinx.coroutines.flow.Flow
 interface AuthRepository {
     suspend fun signIn(signInModel : SignInModel) : CrudResponse
     suspend fun signUp(signUpModel: SignUpModel) : CrudResponse
-    suspend fun saveIsLogin()
+    suspend fun saveIsLogin(isLogin : Boolean)
     fun getIsLogin() : Flow<Boolean>
 }

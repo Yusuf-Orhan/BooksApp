@@ -32,8 +32,6 @@ class AuthViewModel @Inject constructor(
                _state.value = state.value.copy(isSuccess = null, emptyParameter = null, message = null, userId = null)
                signIn(event.signInModel)
            }
-
-           else -> {}
        }
     }
     private fun signUp(signUpModel: SignUpModel) = viewModelScope.launch {
@@ -44,7 +42,7 @@ class AuthViewModel @Inject constructor(
             } else {
                 if (response.status == 200 || response.status == 299) {
                     _state.value = state.value.copy(isSuccess = true, emptyParameter = false, message = response.message,userId = response.userId)
-                    saveIsLoginUseCase()
+                    saveIsLoginUseCase(true)
                 } else {
                     _state.value = state.value.copy(isSuccess = false, emptyParameter = false, message = response.message, userId = null)
                     println("Signup Message :" + response.message)
@@ -64,7 +62,7 @@ class AuthViewModel @Inject constructor(
             } else {
                 if (response.status == 200 || response.status == 299) {
                     _state.value = state.value.copy(isSuccess = true, emptyParameter = false, message = response.message,userId = response.userId)
-                    saveIsLoginUseCase()
+                    saveIsLoginUseCase(true)
                 } else {
                     _state.value = state.value.copy(isSuccess = false, emptyParameter = false, message = response.message, userId = null)
                     println("SignIn Message :" + response.message)

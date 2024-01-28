@@ -21,7 +21,7 @@ class MainViewModel @Inject constructor(
     private val readIsLoginUseCase: ReadIsLoginUseCase,
 ) : ViewModel() {
 
-    var startDestination by mutableStateOf(loginRoute)
+    var startDestination by mutableStateOf(Screen.BooksNavigation.route)
         private set
     init {
       getLoginState()
@@ -33,7 +33,7 @@ class MainViewModel @Inject constructor(
             }else {
                 Screen.LoginNavigation.route
             }
-            Log.e("MainViewModel",isLogin.toString() ?: "Null")
+            Log.e("MainViewModel",isLogin.toString())
         }.launchIn(viewModelScope)
     }
 }

@@ -6,7 +6,7 @@ import javax.inject.Inject
 class SaveIsUseCase @Inject constructor(
     private val authRepository: AuthRepository
 ) {
-    suspend operator fun invoke() {
-        authRepository.saveIsLogin()
+    suspend operator fun invoke(isLogin : Boolean) {
+        authRepository.saveIsLogin(isLogin)
     }
 }
