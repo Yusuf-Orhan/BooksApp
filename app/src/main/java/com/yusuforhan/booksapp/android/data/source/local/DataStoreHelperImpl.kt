@@ -6,6 +6,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.preferencesDataStore
+import com.yusuforhan.booksapp.android.common.Constants
 import com.yusuforhan.booksapp.android.domain.source.local.DataStoreHelper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -17,19 +18,19 @@ class DataStoreHelperImpl @Inject constructor(
     private val context: Context
 ) : DataStoreHelper {
 
-    private val dataStore = context.dataStore
-    private val IS_LOGIN = booleanPreferencesKey("isLogin")
-
-    override suspend fun saveLoginState(state: Boolean) {
-        dataStore.edit { preferences ->
-            preferences[IS_LOGIN] = state
+    override suspend fun saveLoginState() {
+        context.dataStore.edit { preferences ->
+            preferences[PreferencesKeys.IS_LOGIN] = true
         }
 
     }
 
-    override suspend fun getLoginState(): Flow<Boolean> {
-        return dataStore.data.map {
-            it[IS_LOGIN] ?: false
+    override fun readLoginState(): Flow<Boolean> {
+        return context.dataStore.data.map {
+            it[PreferencesKeys.IS_LOGIN] ?: false
         }
     }
+}
+private object PreferencesKeys {
+    val IS_LOGIN = booleanPreferencesKey(name = Constants.IS_LOGIN)
 }

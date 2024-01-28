@@ -7,13 +7,9 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
-import com.yusuforhan.booksapp.android.presentation.auth.login.loginRoute
-import com.yusuforhan.booksapp.android.presentation.home.homeRoute
 import com.yusuforhan.booksapp.android.presentation.navigation.BooksNavHost
 import com.yusuforhan.booksapp.android.presentation.theme.BooksAppTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,12 +26,12 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = Color.White
                 ) {
-                    val startDestination = viewModel.startDestination.collectAsStateWithLifecycle()
+                    val startDestination = viewModel.startDestination
                     Log.e("MainActivity", "Start Destination : $startDestination")
                     val navHostController = rememberNavController()
                     BooksNavHost(
                         navHostController = navHostController,
-                        startDestination = startDestination.value ?: loginRoute
+                        startDestination = startDestination
                     )
                 }
             }

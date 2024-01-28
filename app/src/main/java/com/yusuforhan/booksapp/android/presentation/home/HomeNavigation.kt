@@ -4,9 +4,9 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import com.yusuforhan.booksapp.android.presentation.auth.login.loginRoute
+import com.yusuforhan.booksapp.android.presentation.navigation.Screen.Companion.homeRoute
+import com.yusuforhan.booksapp.android.presentation.navigation.Screen.Companion.loginRoute
 
-const val homeRoute = "home_route"
 
 fun NavGraphBuilder.homeScreen(
     navigateUp : () -> Unit

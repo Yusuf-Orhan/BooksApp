@@ -3,6 +3,9 @@ package com.yusuforhan.booksapp.android.presentation.navigation
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.navigation
+import com.yusuforhan.booksapp.android.presentation.auth.login.LoginRoute
 import com.yusuforhan.booksapp.android.presentation.auth.login.loginScreen
 import com.yusuforhan.booksapp.android.presentation.auth.signup.navigateToSignup
 import com.yusuforhan.booksapp.android.presentation.auth.signup.signupScreen
@@ -18,17 +21,27 @@ fun BooksNavHost(
         navController = navHostController,
         startDestination = startDestination
     ) {
-        loginScreen(
-            navigateToSignup = { navHostController.navigateToSignup() },
-            navigateToHome = { navHostController.navigateToHome() }
-        )
-        signupScreen(
-            navigateToHome = {
-                navHostController.navigateToHome()
+        navigation(
+            route = Screen.LoginNavigation.route,
+            startDestination = Screen.loginRoute
+        ) {
+            loginScreen(
+                navigateToSignup = { navHostController.navigateToSignup() },
+                navigateToHome = { navHostController.navigateToHome() }
+            )
+            signupScreen(
+                navigateToHome = {
+                    navHostController.navigateToHome()
+                }
+            )
+        }
+        navigation(
+            route = Screen.BooksNavigation.route,
+            startDestination = Screen.NavigatorScreen.route
+        ) {
+            composable(route = Screen.navigatorRoute) {
+                BooksNavigator()
             }
-        )
-        homeScreen(
-            navigateUp = navHostController::navigateUp
-        )
+        }
     }
 }

@@ -4,9 +4,9 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
+import com.yusuforhan.booksapp.android.presentation.navigation.Screen.Companion.loginRoute
 import kotlin.math.log
 
-const val loginRoute = "login_route"
 
 fun NavGraphBuilder.loginScreen(
     navigateToSignup : () -> Unit,

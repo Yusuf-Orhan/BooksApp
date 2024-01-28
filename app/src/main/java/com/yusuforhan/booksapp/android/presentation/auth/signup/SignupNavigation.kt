@@ -4,8 +4,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
+import com.yusuforhan.booksapp.android.presentation.navigation.Screen.Companion.signupRoute
 
-const val signupRoute = "signup_route"
 
 fun NavGraphBuilder.signupScreen(
     navigateToHome: () -> Unit

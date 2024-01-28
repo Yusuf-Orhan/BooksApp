@@ -8,10 +8,10 @@ import javax.inject.Inject
 class LocalDataSourceImpl @Inject constructor(
     private val dataStore : DataStoreHelper
 ): LocalDataSource  {
-    override suspend fun saveIsLogin(isLogin: Boolean) = dataStore.saveLoginState(isLogin)
+    override suspend fun saveIsLogin() = dataStore.saveLoginState()
 
 
-    override suspend fun getIsLogin(): Flow<Boolean?> {
-        return dataStore.getLoginState()
+    override  fun getIsLogin(): Flow<Boolean> {
+        return dataStore.readLoginState()
     }
 }

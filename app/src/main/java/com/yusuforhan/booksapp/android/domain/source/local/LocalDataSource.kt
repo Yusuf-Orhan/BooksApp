@@ -4,6 +4,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface LocalDataSource {
 
-    suspend fun saveIsLogin(isLogin : Boolean)
-    suspend fun getIsLogin() : Flow<Boolean?>
+    suspend fun saveIsLogin()
+    fun getIsLogin() : Flow<Boolean>
 }
