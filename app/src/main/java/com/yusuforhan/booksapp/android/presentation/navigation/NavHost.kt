@@ -18,7 +18,6 @@ fun BooksNavHost(
         navController = navHostController,
         startDestination = startDestination
     ) {
-
         loginScreen(
             navigateToSignup = { navHostController.navigateToSignup() },
             navigateToHome = { navHostController.navigateToHome() }
