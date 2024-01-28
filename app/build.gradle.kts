@@ -56,6 +56,8 @@ val roomVersion = "2.6.1"
 val lifecycleVersion = "2.6.2"
 val retrofitVersion = "2.9.0"
 val coilVersion = "2.5.0"
+val navVersion = "2.7.6"
+
 dependencies {
 
     implementation("androidx.core:core-ktx:1.9.0")
@@ -87,15 +89,16 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-compose:$lifecycleVersion")
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
     //Retrofit
-    implementation ("com.squareup.retrofit2:retrofit:$retrofitVersion")
-    implementation ("com.squareup.retrofit2:converter-gson:$retrofitVersion")
+    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
     //Coil
     implementation("io.coil-kt:coil-compose:2.5.0")
     //Data Store
     implementation("androidx.datastore:datastore-preferences:1.0.0")
 
     //Navigation
-    val nav_version = "2.7.6"
+    implementation("androidx.navigation:navigation-compose:$navVersion")
 
-    implementation("androidx.navigation:navigation-compose:$nav_version")
+    //Splash-Api
+    implementation("androidx.core:core-splashscreen:1.0.1")
 }

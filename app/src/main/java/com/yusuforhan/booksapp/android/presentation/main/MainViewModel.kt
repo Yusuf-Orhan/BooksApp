@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.yusuforhan.booksapp.android.domain.usecase.auth.ReadUserIdUseCase
 import com.yusuforhan.booksapp.android.presentation.navigation.Screen
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
@@ -20,6 +21,10 @@ class MainViewModel @Inject constructor(
 
     var startDestination by mutableStateOf(Screen.LoginNavigation.route)
         private set
+
+    var splashCondition by mutableStateOf(true)
+        private set
+
     init {
       getLoginState()
     }
@@ -30,6 +35,8 @@ class MainViewModel @Inject constructor(
             }else {
                 Screen.LoginNavigation.route
             }
+            delay(300)
+            splashCondition = false
             Log.e("MainViewModel",userId.toString())
         }.launchIn(viewModelScope)
     }

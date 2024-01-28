@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
 import com.yusuforhan.booksapp.android.presentation.navigation.BooksNavHost
 import com.yusuforhan.booksapp.android.presentation.navigation.Screen
@@ -18,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel by viewModels<MainViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -27,9 +28,14 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = Color.White
                 ) {
+                    installSplashScreen().apply {
+                        setKeepOnScreenCondition {
+                            viewModel.splashCondition
+                        }
+                    }
+                    val navHostController = rememberNavController()
                     val startDestination = viewModel.startDestination
                     Log.e("MainActivity", "Start Destination : $startDestination")
-                    val navHostController = rememberNavController()
                     BooksNavHost(
                         navHostController = navHostController,
                         startDestination = startDestination
