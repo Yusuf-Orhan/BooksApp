@@ -39,7 +39,7 @@ fun BooksNavHost(
             route = Screen.BooksNavigation.route,
             startDestination = Screen.NavigatorScreen.route
         ) {
-            composable(route = Screen.navigatorRoute) {
+            composable(route = Screen.NavigatorScreen.route) {
                 BooksNavigator()
             }
         }

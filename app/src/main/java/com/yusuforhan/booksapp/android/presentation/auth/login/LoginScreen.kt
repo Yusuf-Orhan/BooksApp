@@ -53,14 +53,12 @@ fun LoginRoute(
 ) {
 
     val state by viewModel.state.collectAsStateWithLifecycle()
-    val manager = DataStoreHelper(LocalContext.current)
     LoginScreen(
         navigateToSignup = navigateToSignup,
         navigateToHome = navigateToHome,
         state = state,
         context = LocalContext.current,
         onEvent = viewModel::onEvent,
-        manager = manager
     )
 }
 
@@ -73,13 +71,11 @@ fun LoginScreen(
     state : AuthState,
     context: Context,
     onEvent : (AuthEvent) -> Unit,
-    manager : DataStoreHelper
 ) {
     if (state.emptyParameter == true) {
         showToast(context, stringResource(id = R.string.please_fill_in_the_blanks))
     } else if (state.isSuccess == true) {
         navigateToHome()
-        manager.setData(true)
         showToast(context, stringResource(R.string.logged_in_successfully))
     } else if (state.isSuccess == false){
         showToast(context, state.message.orEmpty())

@@ -7,6 +7,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yusuforhan.booksapp.android.domain.usecase.auth.ReadIsLoginUseCase
+import com.yusuforhan.booksapp.android.presentation.navigation.Screen
 import com.yusuforhan.booksapp.android.presentation.navigation.Screen.Companion.homeRoute
 import com.yusuforhan.booksapp.android.presentation.navigation.Screen.Companion.loginRoute
 import com.yusuforhan.booksapp.android.presentation.navigation.Screen.Companion.navigatorRoute
@@ -28,9 +29,9 @@ class MainViewModel @Inject constructor(
     private fun getLoginState() {
         readIsLoginUseCase().onEach {isLogin ->
             startDestination = if (isLogin) {
-                navigatorRoute
+                Screen.BooksNavigation.route
             }else {
-                loginRoute
+                Screen.LoginNavigation.route
             }
             Log.e("MainViewModel",isLogin.toString() ?: "Null")
         }.launchIn(viewModelScope)

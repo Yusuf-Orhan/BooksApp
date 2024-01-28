@@ -53,28 +53,30 @@ fun BooksNavigator() {
     Scaffold (
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
-            BooksBottomNav(
-                items = bottomNavigationItems,
-                selected = selectedItem,
-                onItemClick = {index ->
-                    when(index) {
-                        0 -> navigateToTap(
-                            navController = navController,
-                            route = Screen.homeRoute
-                        )
-                        1 -> navigateToTap(
-                            navController = navController,
-                            route = Screen.profileRoute
-                        )
+            if (isBottomBarVisible) {
+                BooksBottomNav(
+                    items = bottomNavigationItems,
+                    selected = selectedItem,
+                    onItemClick = {index ->
+                        when(index) {
+                            0 -> navigateToTap(
+                                navController = navController,
+                                route = Screen.homeRoute
+                            )
+                            1 -> navigateToTap(
+                                navController = navController,
+                                route = Screen.profileRoute
+                            )
+                        }
                     }
-                }
-            )
+                )
+            }
         }
     ){innerPadding ->
         Column(modifier = Modifier.padding(innerPadding)) {
             NavHost(
                 navController = navController,
-                startDestination = Screen.homeRoute
+                startDestination = Screen.HomeScreen.route
             ) {
                 homeScreen(
                     navigateUp = navController::navigateUp

@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.rememberNavController
 import com.yusuforhan.booksapp.android.presentation.navigation.BooksNavHost
+import com.yusuforhan.booksapp.android.presentation.navigation.Screen
 import com.yusuforhan.booksapp.android.presentation.theme.BooksAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,7 +32,7 @@ class MainActivity : ComponentActivity() {
                     val navHostController = rememberNavController()
                     BooksNavHost(
                         navHostController = navHostController,
-                        startDestination = startDestination
+                        startDestination = Screen.LoginNavigation.route
                     )
                 }
             }
