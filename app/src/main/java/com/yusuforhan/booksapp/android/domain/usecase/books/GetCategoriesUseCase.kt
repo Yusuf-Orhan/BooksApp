@@ -17,11 +17,13 @@ class GetCategoriesUseCase @Inject constructor(
 
     operator fun invoke(): Flow<Resource<List<String>>> = flow {
         emit(Resource.Loading)
-        val response = booksRepository.getCategories()
-        if (response.status == 200) {
-            emit(Resource.Success(response.categories))
-        } else {
-            emit(Resource.Error(response.message))
+        runCatching {
+            booksRepository.getCategories()
+        }.onSuccess {
+            emit(Resource.Success(it.categories))
+
+        }.onFailure {
+            emit(Resource.Error(it.message ?: "Exception!"))
         }
     }
 }

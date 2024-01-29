@@ -47,7 +47,7 @@ fun HomeScreen(
                 }
             }
             if (state.loading) {
-                Text(text = "Loading")
+                CircularProgressIndicator()
             } else if (state.error.isNotBlank()) {
                 Text(text = state.error)
             }

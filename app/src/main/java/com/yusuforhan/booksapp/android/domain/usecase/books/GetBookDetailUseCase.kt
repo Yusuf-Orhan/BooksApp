@@ -1,6 +1,7 @@
 package com.yusuforhan.booksapp.android.domain.usecase.books
 
 import com.yusuforhan.booksapp.android.common.Resource
+import com.yusuforhan.booksapp.android.data.model.remote.Books
 import com.yusuforhan.booksapp.android.data.model.remote.BooksModel
 import com.yusuforhan.booksapp.android.domain.repository.BooksRepository
 import kotlinx.coroutines.flow.Flow
@@ -12,14 +13,15 @@ import javax.inject.Inject
 class GetBookDetailUseCase @Inject constructor(
     private val booksRepository: BooksRepository
 ) {
-    operator fun invoke(id : Int): Flow<Resource<BooksModel>> = flow {
+    operator fun invoke(id : Int): Flow<Resource<Books>> = flow {
         emit(Resource.Loading)
-        try {
-            emit(Resource.Success(booksRepository.getBookDetail(id)))
-        } catch (e: HttpException) {
-            emit(Resource.Error(e.message.orEmpty()))
-        } catch (e: IOException) {
-            emit(Resource.Error(e.message.orEmpty()))
+        runCatching {
+            booksRepository.getBookDetail(id)
+        }.onSuccess {
+            emit(Resource.Success(it))
+
+        }.onFailure {
+            emit(Resource.Error(it.message ?: "Exception!"))
         }
     }
 }

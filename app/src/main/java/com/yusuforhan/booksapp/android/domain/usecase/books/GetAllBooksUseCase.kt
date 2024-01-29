@@ -13,11 +13,13 @@ class GetAllBooksUseCase @Inject constructor(
 
     operator fun invoke(): Flow<Resource<List<Books>>> = flow {
         emit(Resource.Loading)
-        val response = booksRepository.getAllBooks()
-        if(response.status == 200) {
-            emit(Resource.Success(response.books))
-        }else {
-            emit(Resource.Error(response.message))
+        runCatching {
+            booksRepository.getAllBooks()
+        }.onSuccess {
+            emit(Resource.Success(it.books))
+
+        }.onFailure {
+            emit(Resource.Error(it.message ?: "Exception!"))
         }
     }
 }
