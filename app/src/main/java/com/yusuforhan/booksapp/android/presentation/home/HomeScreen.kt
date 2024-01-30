@@ -6,8 +6,10 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
@@ -25,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.modifier.modifierLocalConsumer
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -33,6 +36,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
+import com.yusuforhan.booksapp.android.R
 import com.yusuforhan.booksapp.android.data.model.remote.Books
 import com.yusuforhan.booksapp.android.presentation.home.viewmodel.HomeUiState
 import com.yusuforhan.booksapp.android.presentation.home.viewmodel.HomeViewModel
@@ -52,12 +56,10 @@ fun HomeScreen(
     state: HomeUiState
 ) {
     Scaffold(
-        topBar = { TopAppBar(title = { Text(text = "Anasayfa") }) }
+        topBar = { TopAppBar(title = { Text(text = stringResource(id = R.string.home)) }) }
     ) {
         Column(
             modifier = Modifier.padding(it),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
@@ -82,7 +84,9 @@ fun BooksItem(
     book: Books
 ) {
     Card(
-        modifier = modifier.fillMaxWidth().padding(10.dp),
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(10.dp),
         shape = RoundedCornerShape(16.dp)
     ) {
         AsyncImage(
@@ -95,14 +99,16 @@ fun BooksItem(
                 .clipToBounds()
         )
         Text(
-            modifier = modifier.padding(5.dp).height(30.dp),
+            modifier = modifier
+                .padding(5.dp)
+                .height(30.dp),
             text = book.title,
             overflow = TextOverflow.Ellipsis,
             maxLines = 2,
             fontSize = 18.sp,
             fontWeight = FontWeight.Black,
 
-        )
+            )
         Text(
             modifier = modifier.padding(5.dp),
             text = "$${book.price}",
