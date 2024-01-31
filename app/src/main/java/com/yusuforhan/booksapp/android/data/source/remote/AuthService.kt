@@ -13,7 +13,7 @@ import com.yusuforhan.booksapp.android.common.Constants.SEARCH_BOOKS
 import com.yusuforhan.booksapp.android.common.Constants.SIGN_IN
 import com.yusuforhan.booksapp.android.common.Constants.SIGN_UP
 import com.yusuforhan.booksapp.android.common.Constants.STORE_NAME
-import com.yusuforhan.booksapp.android.data.model.remote.Books
+import com.yusuforhan.booksapp.android.data.model.remote.BookDetail
 import com.yusuforhan.booksapp.android.data.model.remote.BooksModel
 import com.yusuforhan.booksapp.android.data.model.remote.CartModel
 import com.yusuforhan.booksapp.android.data.model.remote.CategoriesModel
@@ -86,6 +86,6 @@ interface AuthService {
     suspend fun getBookDetail(
         @Header("store") store: String = STORE_NAME,
         @Query("id") id : Int
-    ) : Books
+    ) : BookDetail
 
 }

@@ -1,14 +1,11 @@
 package com.yusuforhan.booksapp.android.domain.usecase.books
 
-import android.util.Log
 import com.yusuforhan.booksapp.android.common.Resource
+import com.yusuforhan.booksapp.android.data.model.remote.BookDetail
 import com.yusuforhan.booksapp.android.data.model.remote.Books
-import com.yusuforhan.booksapp.android.data.model.remote.BooksModel
 import com.yusuforhan.booksapp.android.domain.repository.BooksRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import retrofit2.HttpException
-import java.io.IOException
 import javax.inject.Inject
 
 class GetBookDetailUseCase @Inject constructor(
@@ -19,10 +16,9 @@ class GetBookDetailUseCase @Inject constructor(
         runCatching {
             booksRepository.getBookDetail(id)
         }.onSuccess {
-            emit(Resource.Success(it))
-            Log.e("DetailUseCase",it.title)
+            emit(Resource.Success(it.product))
         }.onFailure {
-            emit(Resource.Error(it.message ?: "Exception!"))
+            emit(Resource.Error(it.message.orEmpty()))
         }
     }
 }
