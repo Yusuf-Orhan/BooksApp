@@ -19,6 +19,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.yusuforhan.booksapp.android.presentation.detail.detailScreen
+import com.yusuforhan.booksapp.android.presentation.detail.navigateToDetail
 import com.yusuforhan.booksapp.android.presentation.home.homeScreen
 import com.yusuforhan.booksapp.android.presentation.navigation.components.BooksBottomNav
 import com.yusuforhan.booksapp.android.presentation.navigation.components.BottomNavigationItem
@@ -79,9 +81,11 @@ fun BooksNavigator() {
                 startDestination = Screen.HomeScreen.route
             ) {
                 homeScreen(
-                    navigateUp = navController::navigateUp
+                    navigateUp = navController::navigateUp,
+                    navigateToDetail = navController::navigateToDetail
                 )
                 profileScreen()
+                detailScreen()
             }
         }
     }

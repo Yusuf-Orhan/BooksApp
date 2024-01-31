@@ -40,7 +40,7 @@ fun HomeRoute(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     HomeScreen(state = state) {
-
+        navigateToDetail(it)
     }
 }
 
