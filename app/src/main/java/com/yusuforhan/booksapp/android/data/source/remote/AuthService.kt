@@ -1,6 +1,5 @@
 package com.yusuforhan.booksapp.android.data.source.remote
 
-import com.yusuforhan.booksapp.android.common.Constants
 import com.yusuforhan.booksapp.android.common.Constants.ADD_TO_CART
 import com.yusuforhan.booksapp.android.common.Constants.CLEAR_CART
 import com.yusuforhan.booksapp.android.common.Constants.DELETE_FROM_CART

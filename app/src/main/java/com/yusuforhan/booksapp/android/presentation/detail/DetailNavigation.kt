@@ -18,7 +18,7 @@ fun NavGraphBuilder.detailScreen() {
             navArgument(bookIdKey, builder = {type = NavType.IntType})
         )
     ) {
-        DetailRoute(it.arguments?.getInt(bookIdKey))
+        DetailRoute()
     }
 }
 

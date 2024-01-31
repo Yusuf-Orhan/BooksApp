@@ -1,5 +1,6 @@
 package com.yusuforhan.booksapp.android.presentation.detail.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -7,6 +8,8 @@ import com.yusuforhan.booksapp.android.common.Resource
 import com.yusuforhan.booksapp.android.domain.usecase.books.GetBookDetailUseCase
 import com.yusuforhan.booksapp.android.presentation.navigation.Screen.Companion.bookIdKey
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
@@ -17,15 +20,22 @@ class DetailViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
+    private val _state = MutableStateFlow(DetailState())
+    val state : StateFlow<DetailState> = _state
 
-    private fun getBookDetail(id : Int) {
-        getBookDetailUseCase(checkNotNull(savedStateHandle[bookIdKey])).onEach { result ->
+    private val id = savedStateHandle.get<Int>(bookIdKey) ?: 0
+    init {
+        getBookDetail()
+    }
+    private fun getBookDetail() {
+        getBookDetailUseCase(id).onEach { result ->
             when(result) {
-                is Resource.Loading -> {}
-                is Resource.Success -> {}
-                is Resource.Error -> {}
+                is Resource.Loading -> _state.value = state.value.copy(isLoading = true)
+                is Resource.Success -> {
+                    _state.value = state.value.copy(isLoading = false, book = result.data)
+                }
+                is Resource.Error -> _state.value = state.value.copy(isLoading = false, isError = result.message)
             }
         }.launchIn(viewModelScope)
     }
-
 }

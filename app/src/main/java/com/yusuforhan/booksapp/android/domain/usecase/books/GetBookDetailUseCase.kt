@@ -1,5 +1,6 @@
 package com.yusuforhan.booksapp.android.domain.usecase.books
 
+import android.util.Log
 import com.yusuforhan.booksapp.android.common.Resource
 import com.yusuforhan.booksapp.android.data.model.remote.Books
 import com.yusuforhan.booksapp.android.data.model.remote.BooksModel
@@ -19,7 +20,7 @@ class GetBookDetailUseCase @Inject constructor(
             booksRepository.getBookDetail(id)
         }.onSuccess {
             emit(Resource.Success(it))
-
+            Log.e("DetailUseCase",it.title)
         }.onFailure {
             emit(Resource.Error(it.message ?: "Exception!"))
         }
