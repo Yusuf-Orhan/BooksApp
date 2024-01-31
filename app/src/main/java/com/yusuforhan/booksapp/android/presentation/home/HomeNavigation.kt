@@ -10,12 +10,13 @@ import com.yusuforhan.booksapp.android.presentation.navigation.Screen.Companion.
 
 
 fun NavGraphBuilder.homeScreen(
-    navigateUp : () -> Unit
+    navigateUp : () -> Unit,
+    navigateToDetail : (Int) -> Unit
 ) {
     composable(
         route = homeRoute
     ){
-        HomeRoute()
+        HomeRoute(navigateToDetail = navigateToDetail)
     }
 }
 
