@@ -14,6 +14,10 @@ sealed class Screen(
     data object HomeScreen : Screen(route = homeRoute)
     data object ProfileScreen : Screen(route = profileRoute)
     data object DetailScreen : Screen(route = detailRoute)
+    data object CartScreen : Screen(route = cartRoute)
+    data object FavoriteScreen : Screen(route = favoriteRoute)
+
+
 
 
     companion object {
@@ -24,5 +28,8 @@ sealed class Screen(
         const val signupRoute = "signup_route"
         const val profileRoute = "profile_route"
         const val detailRoute = "detail_route"
+        const val cartRoute = "cart_route"
+        const val favoriteRoute = "favorite_route"
+
     }
 }
