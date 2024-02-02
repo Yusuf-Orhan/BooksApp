@@ -6,10 +6,14 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -51,7 +55,9 @@ fun DetailScreen(
         topBar = { TopAppBar(title = { Text(text = "Book Detail") }) }
     ) {
         Column(
-            modifier = modifier.padding(it),
+            modifier = modifier
+                .padding(it)
+                .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             if (state.isLoading == true) {
@@ -67,12 +73,23 @@ fun DetailScreen(
 
 @Composable
 fun BookDetailContent(
-    book: Books
+    book: Books,
+    modifier: Modifier = Modifier
 ) {
-    AsyncImage(model = book.imageOne, contentDescription = null)
-    Text(text = book.title)
-    RatingView(rate = book.rate)
-    Text(text = book.description)
+        AsyncImage(model = book.imageOne, contentDescription = null)
+        Text(text = book.title)
+        RatingView(rate = book.rate)
+        Text(text = book.description)
+        Column(
+            modifier = modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.Bottom,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(text = book.price.toString())
+            Button(onClick = { TODO("Add Cart Function") }) {
+                Text(text = "Add Cart")
+            }
+        }
 }
 
 @Composable
