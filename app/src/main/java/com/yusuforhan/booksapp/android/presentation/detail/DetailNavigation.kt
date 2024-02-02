@@ -11,14 +11,16 @@ import com.yusuforhan.booksapp.android.presentation.navigation.Screen.Companion.
 import com.yusuforhan.booksapp.android.presentation.navigation.Screen.Companion.detailRoute
 
 
-fun NavGraphBuilder.detailScreen() {
+fun NavGraphBuilder.detailScreen(
+    navigateUp : () -> Unit,
+) {
     composable(
         route = detailRoute.plus("/{${bookIdKey}}"),
         arguments = listOf(
             navArgument(bookIdKey, builder = {type = NavType.IntType})
         )
     ) {
-        DetailRoute()
+        DetailRoute(navigateUp)
     }
 }
 

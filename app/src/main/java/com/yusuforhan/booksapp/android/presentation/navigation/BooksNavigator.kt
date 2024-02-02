@@ -85,7 +85,7 @@ fun BooksNavigator() {
                     navigateToDetail = navController::navigateToDetail
                 )
                 profileScreen()
-                detailScreen()
+                detailScreen(navController::navigateUp)
             }
         }
     }
