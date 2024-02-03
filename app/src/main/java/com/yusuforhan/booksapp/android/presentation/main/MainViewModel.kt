@@ -35,7 +35,7 @@ class MainViewModel @Inject constructor(
             }else {
                 Screen.LoginNavigation.route
             }
-            delay(300)
+            delay(400)
             splashCondition = false
             Log.e("MainViewModel",userId.toString())
         }.launchIn(viewModelScope)

@@ -14,6 +14,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -69,6 +70,16 @@ fun DetailScreen(
                         },
                         imageVector = Icons.Default.ArrowBack,
                         contentDescription = null
+                    )
+                },
+                actions = {
+                    Icon(
+                        modifier = modifier.clickable {
+                          TODO("ADD FAVORİTE FUNCTION")
+                        },
+                        imageVector = Icons.Default.FavoriteBorder,
+                        contentDescription = null,
+                        tint = if (state.isFavorite == true) Color.Red else Color.Black
                     )
                 }
             )

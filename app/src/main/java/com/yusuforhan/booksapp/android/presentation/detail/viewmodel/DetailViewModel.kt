@@ -4,7 +4,9 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yusuforhan.booksapp.android.common.Resource
+import com.yusuforhan.booksapp.android.data.model.remote.CartModel
 import com.yusuforhan.booksapp.android.domain.usecase.books.GetBookDetailUseCase
+import com.yusuforhan.booksapp.android.domain.usecase.cart.AddToCartUseCase
 import com.yusuforhan.booksapp.android.presentation.navigation.Screen.Companion.bookIdKey
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,6 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailViewModel @Inject constructor(
     private val getBookDetailUseCase: GetBookDetailUseCase,
+    private val addToCartUseCase: AddToCartUseCase,
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -34,6 +37,15 @@ class DetailViewModel @Inject constructor(
                     _state.value = state.value.copy(isLoading = false, book = result.data)
                 }
                 is Resource.Error -> _state.value = state.value.copy(isLoading = false, isError = result.message)
+            }
+        }.launchIn(viewModelScope)
+    }
+    private fun addCart(cartModel: CartModel) {
+        addToCartUseCase(cartModel).onEach {
+            if (it) {
+
+            }else {
+
             }
         }.launchIn(viewModelScope)
     }
