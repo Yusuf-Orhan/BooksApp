@@ -1,5 +1,6 @@
 package com.yusuforhan.booksapp.android.presentation.detail
 
+import android.app.usage.UsageEvents.Event
 import android.graphics.fonts.FontStyle
 import android.widget.ImageView
 import androidx.compose.foundation.background
@@ -40,6 +41,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.yusuforhan.booksapp.android.R
 import com.yusuforhan.booksapp.android.data.model.remote.Books
+import com.yusuforhan.booksapp.android.data.model.remote.CartModel
+import com.yusuforhan.booksapp.android.presentation.detail.viewmodel.DetailEvent
 import com.yusuforhan.booksapp.android.presentation.detail.viewmodel.DetailState
 import com.yusuforhan.booksapp.android.presentation.detail.viewmodel.DetailViewModel
 
@@ -49,7 +52,7 @@ fun DetailRoute(
     viewModel: DetailViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    DetailScreen(state, navigateUp)
+    DetailScreen(state, navigateUp,viewModel::handleEvent)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -57,6 +60,7 @@ fun DetailRoute(
 fun DetailScreen(
     state: DetailState,
     navigateUp: () -> Unit,
+    handleEvent: (DetailEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
@@ -95,8 +99,10 @@ fun DetailScreen(
                 CircularProgressIndicator()
             } else if (state.isError != null) {
                 Text(text = state.isError)
+            } else if(state.addToCart) {
+                TODO("Navigate To Cart Screen")
             } else {
-                state.book?.let { book -> BookDetailContent(book = book) }
+                state.book?.let { book -> BookDetailContent(book = book,handleEvent) }
             }
         }
     }
@@ -105,6 +111,7 @@ fun DetailScreen(
 @Composable
 fun BookDetailContent(
     book: Books,
+    handleEvent: (DetailEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
     AsyncImage(model = book.imageOne, contentDescription = null)
@@ -117,7 +124,7 @@ fun BookDetailContent(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(text = book.price.toString())
-        Button(onClick = { TODO("Add Cart Function") }) {
+        Button(onClick = { /*handleEvent(DetailEvent.AddCart()) */}) {
             Text(text = "Add Cart")
         }
     }

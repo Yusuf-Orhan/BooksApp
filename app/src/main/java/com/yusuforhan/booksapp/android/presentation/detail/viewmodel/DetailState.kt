@@ -7,5 +7,6 @@ data class DetailState(
     val isLoading : Boolean? = null,
     val isError : String? = null,
     val isFavorite : Boolean? = null,
-    val book : Books? = null
+    val book : Books? = null,
+    val addToCart : Boolean = false
 )

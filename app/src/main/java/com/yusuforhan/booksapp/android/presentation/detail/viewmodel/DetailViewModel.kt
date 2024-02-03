@@ -29,6 +29,11 @@ class DetailViewModel @Inject constructor(
     init {
         getBookDetail()
     }
+    fun handleEvent(event: DetailEvent) {
+        when(event) {
+            is DetailEvent.AddCart -> addCart(event.cartModel)
+        }
+    }
     private fun getBookDetail() {
         getBookDetailUseCase(id).onEach { result ->
             when(result) {
@@ -43,9 +48,7 @@ class DetailViewModel @Inject constructor(
     private fun addCart(cartModel: CartModel) {
         addToCartUseCase(cartModel).onEach {
             if (it) {
-
-            }else {
-
+                _state.value = state.value.copy(addToCart = true)
             }
         }.launchIn(viewModelScope)
     }
