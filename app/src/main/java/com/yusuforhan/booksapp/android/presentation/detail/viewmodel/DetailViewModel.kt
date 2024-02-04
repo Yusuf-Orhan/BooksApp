@@ -53,8 +53,10 @@ class DetailViewModel @Inject constructor(
     }
     private fun addCart(cartModel: CartModel) {
         addToCartUseCase(cartModel).onEach {
-            if (it) {
-                _state.value = state.value.copy(addToCart = true)
+            when(it) {
+                is Resource.Success -> _state.value = state.value.copy(addToCart = true)
+                is Resource.Error ->  _state.value = state.value.copy(addToCart = false)
+                else -> {}
             }
         }.launchIn(viewModelScope)
     }

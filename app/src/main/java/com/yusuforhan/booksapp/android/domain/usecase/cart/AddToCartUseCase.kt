@@ -15,13 +15,13 @@ import javax.inject.Inject
 class AddToCartUseCase @Inject constructor(
     private val cartRepository: CartRepository
 ) {
-    operator fun invoke(cartModel : CartModel): Flow<Boolean> = flow {
+    operator fun invoke(cartModel : CartModel): Flow<Resource<Boolean>> = flow {
         val response = cartRepository.addToCart(cartModel)
-        println(response.message)
+
         if (response.status == 200) {
-            emit(true)
+            emit(Resource.Success(true))
         }else{
-            emit(false)
+            emit(Resource.Error(response.message))
         }
     }
 }
