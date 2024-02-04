@@ -1,8 +1,10 @@
 package com.yusuforhan.booksapp.android.presentation.detail
 
 import android.app.usage.UsageEvents.Event
+import android.content.Context
 import android.graphics.fonts.FontStyle
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -32,6 +34,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.modifier.modifierLocalConsumer
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -52,13 +55,14 @@ fun DetailRoute(
     viewModel: DetailViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    DetailScreen(state, navigateUp,viewModel::handleEvent)
+    DetailScreen(state, LocalContext.current,navigateUp,viewModel::handleEvent)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreen(
     state: DetailState,
+    context : Context,
     navigateUp: () -> Unit,
     handleEvent: (DetailEvent) -> Unit,
     modifier: Modifier = Modifier,
@@ -100,9 +104,10 @@ fun DetailScreen(
             } else if (state.isError != null) {
                 Text(text = state.isError)
             } else if(state.addToCart) {
-                TODO("Navigate To Cart Screen")
+                navigateUp()
+                Toast.makeText(context,"Book Added Cart",Toast.LENGTH_SHORT).show()
             } else {
-                state.book?.let { book -> BookDetailContent(book = book,handleEvent) }
+                state.book?.let { book -> BookDetailContent(book = book,handleEvent,state.userId!!) }
             }
         }
     }
@@ -112,6 +117,7 @@ fun DetailScreen(
 fun BookDetailContent(
     book: Books,
     handleEvent: (DetailEvent) -> Unit,
+    userId : String,
     modifier: Modifier = Modifier
 ) {
     AsyncImage(model = book.imageOne, contentDescription = null)
@@ -124,7 +130,10 @@ fun BookDetailContent(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(text = book.price.toString())
-        Button(onClick = { /*handleEvent(DetailEvent.AddCart()) */}) {
+        Button(onClick = {
+            handleEvent(DetailEvent.AddCart(CartModel(book.id,userId)))
+            println("Book Id : ${book.id} User Id : $userId")
+        }) {
             Text(text = "Add Cart")
         }
     }

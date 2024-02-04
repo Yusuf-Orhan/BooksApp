@@ -17,6 +17,7 @@ class AddToCartUseCase @Inject constructor(
 ) {
     operator fun invoke(cartModel : CartModel): Flow<Boolean> = flow {
         val response = cartRepository.addToCart(cartModel)
+        println(response.message)
         if (response.status == 200) {
             emit(true)
         }else{

@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yusuforhan.booksapp.android.common.Resource
 import com.yusuforhan.booksapp.android.data.model.remote.CartModel
+import com.yusuforhan.booksapp.android.domain.usecase.auth.ReadUserIdUseCase
 import com.yusuforhan.booksapp.android.domain.usecase.books.GetBookDetailUseCase
 import com.yusuforhan.booksapp.android.domain.usecase.cart.AddToCartUseCase
 import com.yusuforhan.booksapp.android.presentation.navigation.Screen.Companion.bookIdKey
@@ -19,6 +20,7 @@ import javax.inject.Inject
 class DetailViewModel @Inject constructor(
     private val getBookDetailUseCase: GetBookDetailUseCase,
     private val addToCartUseCase: AddToCartUseCase,
+    private val readUserIdUseCase: ReadUserIdUseCase,
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -28,6 +30,10 @@ class DetailViewModel @Inject constructor(
     private val id = savedStateHandle.get<Int>(bookIdKey) ?: 0
     init {
         getBookDetail()
+        readUserIdUseCase().onEach {
+            _state.value = state.value.copy(userId = it)
+            println("User Id : $it")
+        }.launchIn(viewModelScope)
     }
     fun handleEvent(event: DetailEvent) {
         when(event) {
