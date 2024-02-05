@@ -85,14 +85,14 @@ fun HomeScreen(
 fun BooksItem(
     modifier: Modifier = Modifier,
     book: Books,
-    navigateToDetail : (Int) -> Unit
+    navigateToDetail: (Int) -> Unit
 ) {
     Card(
         modifier = modifier
             .fillMaxWidth()
             .padding(10.dp),
         shape = RoundedCornerShape(16.dp),
-        onClick = {navigateToDetail(book.id)}
+        onClick = { navigateToDetail(book.id) }
     ) {
         AsyncImage(
             model = book.imageOne,
@@ -125,6 +125,8 @@ fun BooksItem(
         )
     }
 }
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProductItem(
     modifier: Modifier = Modifier,
@@ -133,11 +135,11 @@ fun ProductItem(
 ) {
     Card(
         modifier = modifier
-            .clickable {
-                onProductClick(product.id)
-            }
             .fillMaxWidth()
             .padding(16.dp),
+        onClick = {
+            onProductClick(product.id)
+        },
         colors = CardDefaults.cardColors(
             containerColor = White
         ),
@@ -162,7 +164,8 @@ fun ProductItem(
 
             Text(
                 modifier = Modifier
-                    .padding(start = 8.dp, end = 8.dp).height(40.dp),
+                    .padding(start = 8.dp, end = 8.dp)
+                    .height(40.dp),
                 text = product.title,
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 2
