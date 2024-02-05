@@ -9,5 +9,5 @@ data class DetailState(
     val isFavorite : Boolean? = null,
     val book : Books? = null,
     val userId : String? = null,
-    val addToCart : Boolean = false
+    val addToCart : Boolean? = null
 )

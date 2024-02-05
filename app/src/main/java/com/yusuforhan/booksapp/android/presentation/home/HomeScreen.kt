@@ -1,6 +1,5 @@
 package com.yusuforhan.booksapp.android.presentation.home
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -35,7 +34,6 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
-import coil.compose.rememberImagePainter
 import com.yusuforhan.booksapp.android.R
 import com.yusuforhan.booksapp.android.data.model.remote.Books
 import com.yusuforhan.booksapp.android.presentation.home.viewmodel.HomeUiState

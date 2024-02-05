@@ -14,8 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val getAllBooksUseCase: GetAllBooksUseCase,
-    private val getSaleBookListUseCase: GetSaleBookListUseCase
+    private val getAllBooksUseCase: GetAllBooksUseCase
 ) : ViewModel() {
 
     private var _state = MutableStateFlow(HomeUiState())
@@ -23,21 +22,8 @@ class HomeViewModel @Inject constructor(
 
     init {
         getAllBooks()
-        getSaleBooks()
     }
 
-    private fun getSaleBooks()  {
-        getSaleBookListUseCase().onEach { result ->
-            when (result) {
-                is Resource.Loading -> _state.value = _state.value.copy(loading = true)
-                is Resource.Success -> _state.value =
-                    _state.value.copy(loading = false, saleBooks = result.data)
-
-                is Resource.Error -> _state.value =
-                    _state.value.copy(loading = false, error = result.message)
-            }
-        }.launchIn(viewModelScope)
-    }
     private fun getAllBooks() {
         getAllBooksUseCase().onEach { result ->
             when (result) {

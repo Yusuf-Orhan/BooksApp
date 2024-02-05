@@ -103,10 +103,14 @@ fun DetailScreen(
                 CircularProgressIndicator()
             } else if (state.isError != null) {
                 Text(text = state.isError)
-            } else if(state.addToCart) {
+            } else if(state.addToCart == true) {
                 navigateUp()
                 Toast.makeText(context,"Book Added Cart",Toast.LENGTH_SHORT).show()
-            } else {
+            } else if(state.addToCart == false) {
+                navigateUp()
+                Toast.makeText(context,"This book has already been added to the cart.",Toast.LENGTH_SHORT).show()
+            }
+            else {
                 state.book?.let { book -> BookDetailContent(book = book,handleEvent,state.userId!!) }
             }
         }
@@ -132,7 +136,6 @@ fun BookDetailContent(
         Text(text = book.price.toString())
         Button(onClick = {
             handleEvent(DetailEvent.AddCart(CartModel(book.id,userId)))
-            println("Book Id : ${book.id} User Id : $userId")
         }) {
             Text(text = "Add Cart")
         }
