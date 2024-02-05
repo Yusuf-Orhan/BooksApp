@@ -64,13 +64,14 @@ fun CartScreen(
                         modifier = modifier.fillMaxSize()
                     ) {
                         LazyColumn(
+                            modifier = Modifier.weight(1f)
                         ) {
                             items(state.books) {
                                 CartItem(book = it, handleEvent)
                             }
                         }
                         Box(
-                            modifier = modifier.fillMaxSize(),
+                            modifier = modifier.fillMaxWidth(),
                             contentAlignment = Alignment.BottomEnd
                         ) {
                             Column {
@@ -85,8 +86,6 @@ fun CartScreen(
                                     Text(text = "Goto Pay")
                                 }
                             }
-
-
                         }
 
                     }
