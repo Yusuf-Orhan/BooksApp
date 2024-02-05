@@ -1,10 +1,12 @@
 package com.yusuforhan.booksapp.android.domain.source.remote
 
+import androidx.room.Delete
 import com.yusuforhan.booksapp.android.data.model.remote.BookDetail
 import com.yusuforhan.booksapp.android.data.model.remote.BooksModel
 import com.yusuforhan.booksapp.android.data.model.remote.CartModel
 import com.yusuforhan.booksapp.android.data.model.remote.CategoriesModel
 import com.yusuforhan.booksapp.android.data.model.remote.CrudResponse
+import com.yusuforhan.booksapp.android.data.model.remote.DeleteCartModel
 import com.yusuforhan.booksapp.android.data.model.remote.SignInModel
 import com.yusuforhan.booksapp.android.data.model.remote.SignUpModel
 
@@ -19,7 +21,7 @@ interface RemoteDataSource {
     suspend fun getCartBooks(userId : String) : BooksModel
     suspend fun getBookDetail(id : Int) : BookDetail
     suspend fun addToCart(cartModel: CartModel) : CrudResponse
-    suspend fun deleteFromCart(cartModel: CartModel) : CrudResponse
+    suspend fun deleteFromCart(cartModel: DeleteCartModel) : CrudResponse
     suspend fun clearCart() : CrudResponse
     suspend fun getCategories() : CategoriesModel
 

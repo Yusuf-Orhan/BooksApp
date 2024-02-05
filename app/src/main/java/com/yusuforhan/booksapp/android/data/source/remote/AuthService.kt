@@ -18,6 +18,7 @@ import com.yusuforhan.booksapp.android.data.model.remote.BooksModel
 import com.yusuforhan.booksapp.android.data.model.remote.CartModel
 import com.yusuforhan.booksapp.android.data.model.remote.CategoriesModel
 import com.yusuforhan.booksapp.android.data.model.remote.CrudResponse
+import com.yusuforhan.booksapp.android.data.model.remote.DeleteCartModel
 import com.yusuforhan.booksapp.android.data.model.remote.SignInModel
 import com.yusuforhan.booksapp.android.data.model.remote.SignUpModel
 import retrofit2.http.Body
@@ -69,7 +70,7 @@ interface AuthService {
     @POST(DELETE_FROM_CART)
     suspend fun deleteFromCart(
         @Header("store") store: String = STORE_NAME,
-        @Body cartModel: CartModel
+        @Body cartModel: DeleteCartModel
     ) : CrudResponse
     @POST(CLEAR_CART)
     suspend fun clearCart(

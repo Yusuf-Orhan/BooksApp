@@ -3,7 +3,11 @@ package com.yusuforhan.booksapp.android.presentation.cart.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yusuforhan.booksapp.android.common.Resource
+import com.yusuforhan.booksapp.android.data.model.remote.CartModel
+import com.yusuforhan.booksapp.android.data.model.remote.DeleteCartModel
 import com.yusuforhan.booksapp.android.domain.usecase.auth.ReadUserIdUseCase
+import com.yusuforhan.booksapp.android.domain.usecase.cart.AddToCartUseCase
+import com.yusuforhan.booksapp.android.domain.usecase.cart.DeleteFromCartUseCase
 import com.yusuforhan.booksapp.android.domain.usecase.cart.GetCartBooksUseCase
 import com.yusuforhan.booksapp.android.presentation.home.viewmodel.HomeUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,14 +20,22 @@ import javax.inject.Inject
 @HiltViewModel
 class CartViewModel @Inject constructor(
     private val getCartBooksUseCase: GetCartBooksUseCase,
+    private val deleteCartUseCase: DeleteFromCartUseCase,
     private val readUserIdUseCase: ReadUserIdUseCase
 ) : ViewModel() {
 
     private var _state = MutableStateFlow(HomeUiState())
     val state: StateFlow<HomeUiState> = _state
 
+    private var userId : String? = null
+    fun handleEvent(event: CartUiEvent) {
+        when(event) {
+            is CartUiEvent.DeleteCart -> {deleteCart(event.id)}
+        }
+    }
     init {
         readUserIdUseCase().onEach {userId ->
+            this.userId = userId
             getCartBooks(userId.orEmpty())
         }.launchIn(viewModelScope)
     }
@@ -41,5 +53,13 @@ class CartViewModel @Inject constructor(
                 }
             }
         }.launchIn(viewModelScope)
+    }
+
+    private fun deleteCart(id : Int) {
+        deleteCartUseCase(DeleteCartModel(id,userId!!)).onEach {
+            if (it) {
+                getCartBooks(userId!!)
+            }
+        }
     }
 }

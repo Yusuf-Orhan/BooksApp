@@ -4,6 +4,7 @@ import com.yusuforhan.booksapp.android.data.model.remote.BooksModel
 import com.yusuforhan.booksapp.android.data.model.remote.CartModel
 import com.yusuforhan.booksapp.android.data.model.remote.CategoriesModel
 import com.yusuforhan.booksapp.android.data.model.remote.CrudResponse
+import com.yusuforhan.booksapp.android.data.model.remote.DeleteCartModel
 import com.yusuforhan.booksapp.android.data.model.remote.SignInModel
 import com.yusuforhan.booksapp.android.data.model.remote.SignUpModel
 import com.yusuforhan.booksapp.android.domain.source.remote.RemoteDataSource
@@ -29,7 +30,7 @@ class RemoteDataSourceImpl @Inject constructor(
     override suspend fun addToCart(cartModel: CartModel) =
         authService.addToCart(cartModel = cartModel)
 
-    override suspend fun deleteFromCart(cartModel: CartModel) =
+    override suspend fun deleteFromCart(cartModel: DeleteCartModel) =
         authService.deleteFromCart(cartModel = cartModel)
 
     override suspend fun clearCart() = authService.clearCart()
