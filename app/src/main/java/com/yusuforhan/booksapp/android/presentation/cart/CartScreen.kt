@@ -82,7 +82,10 @@ fun CartScreen(
                                     Text(text = "Total Amount :")
                                     Text(text = "$500")
                                 }
-                                ElevatedButton(onClick = { /*TODO*/ }) {
+                                ElevatedButton(
+                                    modifier = Modifier.fillMaxWidth().padding(20.dp),
+                                    onClick = { /*TODO*/ }
+                                ) {
                                     Text(text = "Goto Pay")
                                 }
                             }
