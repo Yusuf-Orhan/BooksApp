@@ -1,6 +1,7 @@
 package com.yusuforhan.booksapp.android.presentation.cart.viewmodel
 
 import android.util.Log
+import androidx.lifecycle.VIEW_MODEL_STORE_OWNER_KEY
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yusuforhan.booksapp.android.common.Resource
@@ -25,8 +26,8 @@ class CartViewModel @Inject constructor(
     private val readUserIdUseCase: ReadUserIdUseCase
 ) : ViewModel() {
 
-    private var _state = MutableStateFlow(HomeUiState())
-    val state: StateFlow<HomeUiState> = _state
+    private var _state = MutableStateFlow(CartUiState())
+    val state: StateFlow<CartUiState> = _state
 
     private var userId : String? = null
     fun handleEvent(event: CartUiEvent) {
@@ -37,10 +38,11 @@ class CartViewModel @Inject constructor(
     init {
         readUserIdUseCase().onEach {userId ->
             this.userId = userId
+            _state.value = _state.value.copy(userId = userId)
             getCartBooks(userId.orEmpty())
         }.launchIn(viewModelScope)
     }
-    private fun getCartBooks(userId : String) {
+    fun getCartBooks(userId : String) {
         getCartBooksUseCase(userId).onEach {
             when(it) {
                 is Resource.Success -> {
@@ -62,7 +64,9 @@ class CartViewModel @Inject constructor(
         deleteCartUseCase(DeleteCartModel(userId!!,id)).onEach{result ->
            when(result) {
                is Resource.Success -> {
-
+                   //getCartBooks(userId!!)
+                   Log.e("CartViewModel","Book deleted successfully")
+                   _state.value = state.value.copy(isDeleted = true)
                }
                is Resource.Error -> {
                    Log.e("CartViewModel",result.message)

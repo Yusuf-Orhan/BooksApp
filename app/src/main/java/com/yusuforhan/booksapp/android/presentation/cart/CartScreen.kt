@@ -24,6 +24,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -33,10 +34,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.yusuforhan.booksapp.android.data.model.remote.Books
 import com.yusuforhan.booksapp.android.data.model.remote.CartModel
 import com.yusuforhan.booksapp.android.presentation.cart.viewmodel.CartUiEvent
+import com.yusuforhan.booksapp.android.presentation.cart.viewmodel.CartUiState
 import com.yusuforhan.booksapp.android.presentation.cart.viewmodel.CartViewModel
 import com.yusuforhan.booksapp.android.presentation.home.viewmodel.HomeUiState
 
@@ -45,20 +48,22 @@ fun CartRoute(
     viewModel: CartViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
+    LaunchedEffect(key1 = true) {
+        viewModel.getCartBooks(state.userId.orEmpty())
+    }
     CartScreen(state, viewModel::handleEvent)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CartScreen(
-    state: HomeUiState,
+    state: CartUiState,
     handleEvent: (CartUiEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
 
     val cartList = state.books.toMutableList()
     Scaffold { innerPadding ->
-
         Box(modifier = modifier.padding(innerPadding), contentAlignment = Alignment.BottomEnd) {
             Column {
                 if (state.loading) {
