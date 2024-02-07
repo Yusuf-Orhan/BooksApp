@@ -3,6 +3,7 @@ package com.yusuforhan.booksapp.android.domain.usecase.cart
 import com.yusuforhan.booksapp.android.common.Resource
 import com.yusuforhan.booksapp.android.data.model.remote.BooksModel
 import com.yusuforhan.booksapp.android.data.model.remote.CartModel
+import com.yusuforhan.booksapp.android.data.model.remote.CrudResponse
 import com.yusuforhan.booksapp.android.data.model.remote.DeleteCartModel
 import com.yusuforhan.booksapp.android.domain.repository.BooksRepository
 import com.yusuforhan.booksapp.android.domain.repository.CartRepository
@@ -15,12 +16,12 @@ import javax.inject.Inject
 class DeleteFromCartUseCase @Inject constructor(
     private val cartRepository: CartRepository
 ) {
-    operator fun invoke(cartModel: DeleteCartModel): Flow<Boolean> = flow {
+    operator fun invoke(cartModel: DeleteCartModel): Flow<Resource<Boolean>> = flow {
         val response = cartRepository.deleteFromCart(cartModel)
         if (response.status == 200) {
-            emit(true)
+            emit(Resource.Success(true))
         } else {
-            emit(false)
+            emit(Resource.Error(response.message))
         }
     }
 }

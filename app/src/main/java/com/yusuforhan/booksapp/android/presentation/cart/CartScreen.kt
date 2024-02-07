@@ -24,6 +24,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -54,20 +55,23 @@ fun CartScreen(
     handleEvent: (CartUiEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
+
+    val cartList = state.books.toMutableList()
     Scaffold { innerPadding ->
+
         Box(modifier = modifier.padding(innerPadding), contentAlignment = Alignment.BottomEnd) {
             Column {
                 if (state.loading) {
                     CircularProgressIndicator()
-                } else if (state.books.isNotEmpty()) {
+                } else if (cartList.isNotEmpty()) {
                     Column(
                         modifier = modifier.fillMaxSize()
                     ) {
                         LazyColumn(
                             modifier = Modifier.weight(1f)
                         ) {
-                            items(state.books) {
-                                CartItem(book = it, handleEvent)
+                            items(cartList) {
+                                CartItem(book = it,handleEvent)
                             }
                         }
                         Box(
@@ -83,7 +87,9 @@ fun CartScreen(
                                     Text(text = "$500")
                                 }
                                 ElevatedButton(
-                                    modifier = Modifier.fillMaxWidth().padding(20.dp),
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(20.dp),
                                     onClick = { /*TODO*/ }
                                 ) {
                                     Text(text = "Goto Pay")

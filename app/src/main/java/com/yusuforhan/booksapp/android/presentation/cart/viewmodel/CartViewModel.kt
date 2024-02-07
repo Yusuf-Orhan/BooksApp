@@ -1,5 +1,6 @@
 package com.yusuforhan.booksapp.android.presentation.cart.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yusuforhan.booksapp.android.common.Resource
@@ -56,10 +57,18 @@ class CartViewModel @Inject constructor(
     }
 
     private fun deleteCart(id : Int) {
-        deleteCartUseCase(DeleteCartModel(id,userId!!)).onEach {
-            if (it) {
-                getCartBooks(userId!!)
-            }
-        }
+        println("User Id : $userId")
+        println("Book id : $id")
+        deleteCartUseCase(DeleteCartModel(userId!!,id)).onEach{result ->
+           when(result) {
+               is Resource.Success -> {
+
+               }
+               is Resource.Error -> {
+                   Log.e("CartViewModel",result.message)
+               }
+               else -> {}
+           }
+        }.launchIn(viewModelScope)
     }
 }
