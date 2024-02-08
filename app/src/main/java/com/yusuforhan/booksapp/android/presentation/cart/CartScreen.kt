@@ -48,7 +48,7 @@ fun CartRoute(
     viewModel: CartViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
-    LaunchedEffect(key1 = true) {
+    LaunchedEffect(Unit) {
         viewModel.getCartBooks(state.userId.orEmpty())
     }
     CartScreen(state, viewModel::handleEvent)

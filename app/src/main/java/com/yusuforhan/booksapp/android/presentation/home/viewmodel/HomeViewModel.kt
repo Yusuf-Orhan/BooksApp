@@ -24,7 +24,7 @@ class HomeViewModel @Inject constructor(
         getAllBooks()
     }
 
-    private fun getAllBooks() {
+    fun getAllBooks() {
         getAllBooksUseCase().onEach { result ->
             when (result) {
                 is Resource.Loading -> _state.value = _state.value.copy(loading = true)

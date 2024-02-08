@@ -64,12 +64,10 @@ class CartViewModel @Inject constructor(
         deleteCartUseCase(DeleteCartModel(userId!!,id)).onEach{result ->
            when(result) {
                is Resource.Success -> {
-                   //getCartBooks(userId!!)
-                   Log.e("CartViewModel","Book deleted successfully")
-                   _state.value = state.value.copy(isDeleted = true)
+                   //State Update
                }
                is Resource.Error -> {
-                   Log.e("CartViewModel",result.message)
+                  //Send error message
                }
                else -> {}
            }
