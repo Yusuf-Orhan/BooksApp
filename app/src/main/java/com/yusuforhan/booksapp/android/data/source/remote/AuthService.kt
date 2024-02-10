@@ -21,6 +21,7 @@ import com.yusuforhan.booksapp.android.data.model.remote.CrudResponse
 import com.yusuforhan.booksapp.android.data.model.remote.DeleteCartModel
 import com.yusuforhan.booksapp.android.data.model.remote.SignInModel
 import com.yusuforhan.booksapp.android.data.model.remote.SignUpModel
+import com.yusuforhan.booksapp.android.data.model.remote.UserModel
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -88,5 +89,11 @@ interface AuthService {
         @Header("store") store: String = STORE_NAME,
         @Query("id") id : Int
     ) : BookDetail
+    @GET("get_user")
+    suspend fun getUserById(
+        @Header("store") store: String = STORE_NAME,
+        @Query("userId") userId : String
+    ) : UserModel
+
 
 }

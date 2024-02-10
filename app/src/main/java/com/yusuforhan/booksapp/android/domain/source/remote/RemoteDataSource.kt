@@ -9,6 +9,7 @@ import com.yusuforhan.booksapp.android.data.model.remote.CrudResponse
 import com.yusuforhan.booksapp.android.data.model.remote.DeleteCartModel
 import com.yusuforhan.booksapp.android.data.model.remote.SignInModel
 import com.yusuforhan.booksapp.android.data.model.remote.SignUpModel
+import com.yusuforhan.booksapp.android.data.model.remote.UserModel
 
 interface RemoteDataSource {
 
@@ -24,5 +25,6 @@ interface RemoteDataSource {
     suspend fun deleteFromCart(cartModel: DeleteCartModel) : CrudResponse
     suspend fun clearCart() : CrudResponse
     suspend fun getCategories() : CategoriesModel
+    suspend fun getUserById(userId : String) : UserModel
 
 }
