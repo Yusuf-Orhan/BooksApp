@@ -15,6 +15,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,7 +32,7 @@ import com.yusuforhan.booksapp.android.presentation.profile.viewmodel.ProfileVie
 fun ProfileRoute(
     viewModel: ProfileViewModel = hiltViewModel()
 ) {
-    val state by viewModel.state.collectAsStateWithLifecycle()
+    val state by viewModel.state.collectAsState()
     ProfileScreen(state)
 }
 
@@ -67,17 +69,17 @@ fun ProfileScreen(
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         Text(
-                            text = "Username : ${state.userModel?.name}"
+                            text = "Username : ${state.userModel?.user?.name}"
                         )
                         Icon(imageVector = Icons.Default.Edit, contentDescription = null)
                     }
                     Text(
                         modifier = Modifier.padding(5.dp),
-                        text = "Email : ${state.userModel?.email}"
+                        text = "Email : ${state.userModel?.user?.email}"
                     )
                     Text(
                         modifier = Modifier.padding(5.dp),
-                        text = "Phone : ${state.userModel?.phone}",
+                        text = "Phone : ${state.userModel?.user?.phone}",
                     )
                 }
             }

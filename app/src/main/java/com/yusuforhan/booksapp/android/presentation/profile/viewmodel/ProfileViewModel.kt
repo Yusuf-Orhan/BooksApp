@@ -25,12 +25,10 @@ class ProfileViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
     private fun getUserById(userId : String) {
-        println("Get User Fun Started")
         getUserUseCase(userId).onEach {
-            println("Get User Fun Resume")
             when(val response = it) {
                 is Resource.Success -> {
-                    println(response.data.name)
+                    println(response.data.user.name)
                     state.value = state.value.copy(isLoading = false, userModel = response.data)
                 }
                 is Resource.Error -> {
