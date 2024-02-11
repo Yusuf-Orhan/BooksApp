@@ -46,6 +46,7 @@ import com.yusuforhan.booksapp.android.R
 import com.yusuforhan.booksapp.android.data.model.remote.Books
 import com.yusuforhan.booksapp.android.presentation.components.ECProgressBar
 import com.yusuforhan.booksapp.android.presentation.components.ECSearchBar
+import com.yusuforhan.booksapp.android.presentation.home.viewmodel.HomeUiEvent
 import com.yusuforhan.booksapp.android.presentation.home.viewmodel.HomeUiState
 import com.yusuforhan.booksapp.android.presentation.home.viewmodel.HomeViewModel
 
@@ -55,7 +56,7 @@ fun HomeRoute(
     navigateToDetail: (Int) -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    HomeScreen(state = state) {
+    HomeScreen(state = state,viewModel::handleEvent) {
         navigateToDetail(it)
     }
 }
@@ -65,6 +66,7 @@ fun HomeRoute(
 @Composable
 fun HomeScreen(
     state: HomeUiState,
+    handleEvent : (HomeUiEvent) -> Unit,
     navigateToDetail: (Int) -> Unit
 ) {
     var searchQuery by remember {
@@ -84,7 +86,10 @@ fun HomeScreen(
             ECSearchBar(
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
                 value = searchQuery,
-                onValueChanged = { s -> searchQuery = s}
+                onValueChanged = { s ->
+                    searchQuery = s
+                    handleEvent(HomeUiEvent.SearchBooks(searchQuery))
+                }
             )
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),

@@ -43,7 +43,8 @@ interface AuthService {
 
     @GET(SEARCH_BOOKS)
     suspend fun searchBooks(
-        @Header("store") query: String
+        @Header("store") store : String = STORE_NAME,
+        @Query("query") query : String
     ): BooksModel
 
     @GET(GET_SALE_BOOKS)

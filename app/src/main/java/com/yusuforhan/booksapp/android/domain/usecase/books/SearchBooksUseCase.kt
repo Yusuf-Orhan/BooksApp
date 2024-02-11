@@ -18,6 +18,7 @@ class SearchBooksUseCase @Inject constructor(
         runCatching {
             booksRepository.searchBooks(query)
         }.onSuccess {
+            println("List size : ${it.books.size}")
             emit(Resource.Success(it.books))
 
         }.onFailure {

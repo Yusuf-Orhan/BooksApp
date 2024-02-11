@@ -17,7 +17,7 @@ class RemoteDataSourceImpl @Inject constructor(
     override suspend fun signUp(signUpModel: SignUpModel) = authService.signUp(signUpModel)
     override suspend fun getAllBooks(): BooksModel = authService.getAllBooks()
 
-    override suspend fun searchBooks(query: String): BooksModel = authService.searchBooks(query)
+    override suspend fun searchBooks(query: String): BooksModel = authService.searchBooks(query = query)
 
     override suspend fun getSaleBooksList(): BooksModel = authService.getSaleBooksList()
     override suspend fun getBooksByCategory(category: String) =
