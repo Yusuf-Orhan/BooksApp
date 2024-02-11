@@ -25,7 +25,8 @@ import androidx.compose.ui.unit.dp
 fun ECSearchBar(
     modifier: Modifier = Modifier,
     value: String,
-    onValueChanged: (String) -> Unit = {}
+    onValueChanged: (String) -> Unit = {},
+    onSearch : (String) -> Unit
 ) {
     val focusManager = LocalFocusManager.current
 
@@ -56,7 +57,10 @@ fun ECSearchBar(
                 imeAction = ImeAction.Search
             ),
             keyboardActions = KeyboardActions(
-                onSearch = { focusManager.clearFocus() }
+                onSearch = {
+                    onSearch(value)
+                    focusManager.clearFocus()
+                }
             )
         )
     }

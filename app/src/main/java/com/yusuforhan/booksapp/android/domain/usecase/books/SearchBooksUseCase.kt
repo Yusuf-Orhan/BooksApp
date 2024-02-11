@@ -2,12 +2,9 @@ package com.yusuforhan.booksapp.android.domain.usecase.books
 
 import com.yusuforhan.booksapp.android.common.Resource
 import com.yusuforhan.booksapp.android.data.model.remote.Books
-import com.yusuforhan.booksapp.android.data.model.remote.BooksModel
 import com.yusuforhan.booksapp.android.domain.repository.BooksRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import retrofit2.HttpException
-import java.io.IOException
 import javax.inject.Inject
 
 class SearchBooksUseCase @Inject constructor(
@@ -18,11 +15,9 @@ class SearchBooksUseCase @Inject constructor(
         runCatching {
             booksRepository.searchBooks(query)
         }.onSuccess {
-            println("List size : ${it.books.size}")
             emit(Resource.Success(it.books))
 
         }.onFailure {
-            println("Error : ${it.localizedMessage}")
             emit(Resource.Error(it.message ?: "Exception!"))
         }
     }

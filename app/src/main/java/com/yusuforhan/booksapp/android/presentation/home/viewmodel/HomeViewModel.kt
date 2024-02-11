@@ -49,7 +49,6 @@ class HomeViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
     private fun searchBooks(q : String) {
-        println("Handle Event")
         searchBooksUseCase(q).onEach {result ->
             when (result) {
                 is Resource.Loading -> _state.value = _state.value.copy(loading = true)

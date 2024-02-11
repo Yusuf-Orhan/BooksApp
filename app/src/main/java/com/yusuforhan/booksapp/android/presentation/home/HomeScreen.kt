@@ -86,10 +86,8 @@ fun HomeScreen(
             ECSearchBar(
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
                 value = searchQuery,
-                onValueChanged = { s ->
-                    searchQuery = s
-                    handleEvent(HomeUiEvent.SearchBooks(searchQuery))
-                }
+                onValueChanged = { s -> searchQuery = s },
+                onSearch = {handleEvent(HomeUiEvent.SearchBooks(searchQuery))}
             )
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
