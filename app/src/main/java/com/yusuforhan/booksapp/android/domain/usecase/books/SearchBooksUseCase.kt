@@ -22,6 +22,7 @@ class SearchBooksUseCase @Inject constructor(
             emit(Resource.Success(it.books))
 
         }.onFailure {
+            println("Error : ${it.localizedMessage}")
             emit(Resource.Error(it.message ?: "Exception!"))
         }
     }
