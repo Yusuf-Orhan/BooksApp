@@ -20,6 +20,7 @@
     <string name="home">Home</string>
     <string name="detail">Detail</string>
     <string name="book_detail">Book Detail</string>
+    <string name="favorite">Favorite</string>
 
     <style name="type_email">Type Email</style>
 </resources>

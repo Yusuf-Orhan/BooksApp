@@ -7,6 +7,7 @@ import com.yusuforhan.booksapp.android.data.model.remote.CartModel
 import com.yusuforhan.booksapp.android.data.model.remote.CategoriesModel
 import com.yusuforhan.booksapp.android.data.model.remote.CrudResponse
 import com.yusuforhan.booksapp.android.data.model.remote.DeleteCartModel
+import com.yusuforhan.booksapp.android.data.model.remote.FavoriteModel
 import com.yusuforhan.booksapp.android.data.model.remote.SignInModel
 import com.yusuforhan.booksapp.android.data.model.remote.SignUpModel
 import com.yusuforhan.booksapp.android.data.model.remote.UserModel
@@ -26,5 +27,8 @@ interface RemoteDataSource {
     suspend fun clearCart() : CrudResponse
     suspend fun getCategories() : CategoriesModel
     suspend fun getUserById(userId : String) : UserModel
-
+    suspend fun addToFavorite(favoriteModel : FavoriteModel) : CrudResponse
+    suspend fun getFavorites() : BooksModel
+    suspend fun deleteFavorite(favoriteModel: FavoriteModel) : CrudResponse
+    suspend fun clearFavorites(userId : String) : CrudResponse
 }

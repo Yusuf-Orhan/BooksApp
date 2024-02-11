@@ -83,7 +83,8 @@ fun DetailScreen(
                 actions = {
                     Icon(
                         modifier = modifier.clickable {
-                          TODO("ADD FAVORİTE FUNCTION")
+                            state.book?.id?.let { DetailEvent.AddToFavorite(it) }
+                                ?.let { handleEvent(it) }
                         },
                         imageVector = Icons.Default.FavoriteBorder,
                         contentDescription = null,

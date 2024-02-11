@@ -15,6 +15,11 @@ object Constants {
     const val GET_CATEGORIES = "get_categories"
     const val GET_BOOKS_DETAIL = "get_product_detail"
     const val SEARCH_BOOKS = "search_product"
+    const val GET_USER = "get_user"
+    const val ADD_TO_FAVORITES = "add_to_favorites"
+    const val GET_FAVORITES = "get_favorites"
+    const val DELETE_FROM_FAVORITES = "delete_from_favorites"
+    const val CLEAR_FAVORITES = "clear_favorites"
     const val STORE_NAME = "yusuforhan"
 
 }
