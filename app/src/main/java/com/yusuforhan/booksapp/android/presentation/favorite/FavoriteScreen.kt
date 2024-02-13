@@ -10,10 +10,13 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.yusuforhan.booksapp.android.R
+import com.yusuforhan.booksapp.android.presentation.favorite.viewmodel.FavoriteViewModel
 
 @Composable
 fun FavoriteRoute() {
+    val viewModel : FavoriteViewModel = hiltViewModel()
     FavoriteScreen()
 }
 
