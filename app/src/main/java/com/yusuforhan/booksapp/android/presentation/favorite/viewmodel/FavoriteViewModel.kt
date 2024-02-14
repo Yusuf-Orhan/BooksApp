@@ -6,6 +6,7 @@ import com.yusuforhan.booksapp.android.domain.usecase.favorite.GetFavoriteUseCas
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -18,12 +19,12 @@ class FavoriteViewModel @Inject constructor(
         getFavorite()
     }
 
-    private fun getFavorite() {
-        getFavoriteUseCase().onEach { result ->
-            result.forEach {
-                println(it.title)
+    private fun getFavorite() = viewModelScope.launch {
+        getFavoriteUseCase().collect {
+            it.forEach { e ->
+                println(e.title)
             }
-        }.launchIn(viewModelScope)
+        }
     }
 
 }
