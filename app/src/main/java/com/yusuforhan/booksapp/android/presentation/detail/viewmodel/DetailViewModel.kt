@@ -4,6 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yusuforhan.booksapp.android.common.Resource
+import com.yusuforhan.booksapp.android.data.model.local.FavoriteEntity
 import com.yusuforhan.booksapp.android.data.model.remote.CartModel
 import com.yusuforhan.booksapp.android.data.model.remote.FavoriteModel
 import com.yusuforhan.booksapp.android.domain.usecase.auth.ReadUserIdUseCase
@@ -42,7 +43,7 @@ class DetailViewModel @Inject constructor(
     fun handleEvent(event: DetailEvent) {
         when(event) {
             is DetailEvent.AddCart -> addCart(event.cartModel)
-            is DetailEvent.AddToFavorite -> addToFavorite(FavoriteModel(userId,event.productId))
+            is DetailEvent.AddToFavorite -> addToFavorite(event.favoriteEntity)
         }
     }
     private fun getBookDetail() {
@@ -65,19 +66,7 @@ class DetailViewModel @Inject constructor(
             }
         }.launchIn(viewModelScope)
     }
-    private fun addToFavorite(favoriteModel : FavoriteModel) {
-        addToFavoriteUseCase(favoriteModel).onEach {
-            when(it) {
-                is Resource.Success -> {
-                    println("Success")
-                }
-                is Resource.Error -> {
-                    println("Error")
-                }
-                is Resource.Loading -> {
-                    println("Loading")
-                }
-            }
-        }.launchIn(viewModelScope)
+    private fun addToFavorite(favoriteEntity: FavoriteEntity) {
+        addToFavoriteUseCase(favoriteEntity).launchIn(viewModelScope)
     }
 }

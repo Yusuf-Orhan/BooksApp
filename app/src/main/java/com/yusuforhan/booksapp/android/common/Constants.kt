@@ -20,6 +20,7 @@ object Constants {
     const val GET_FAVORITES = "get_favorites"
     const val DELETE_FROM_FAVORITES = "delete_from_favorites"
     const val CLEAR_FAVORITES = "clear_favorites"
+    const val DATABASE_NAME = "books_app"
     const val STORE_NAME = "yusuforhan"
 
 }

@@ -1,19 +1,18 @@
 package com.yusuforhan.booksapp.android.data.repository
 
-import com.yusuforhan.booksapp.android.data.model.remote.FavoriteModel
-import com.yusuforhan.booksapp.android.data.model.remote.User
+import com.yusuforhan.booksapp.android.data.model.local.FavoriteEntity
+import com.yusuforhan.booksapp.android.data.source.local.FavoriteDao
 import com.yusuforhan.booksapp.android.domain.repository.FavoriteRepository
-import com.yusuforhan.booksapp.android.domain.source.remote.RemoteDataSource
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class FavoriteRepositoryImpl @Inject constructor(
-    private val remoteDataSource: RemoteDataSource
+    private val dao : FavoriteDao
 ) : FavoriteRepository {
-    override suspend fun addToFavorites(favoriteModel: FavoriteModel) = remoteDataSource.addToFavorite(favoriteModel = favoriteModel)
+    override suspend fun addToFavorites(favoriteEntity: FavoriteEntity) = dao.addToFavorite(favoriteEntity)
 
-    override suspend fun getFavorites(userId : String) = remoteDataSource.getFavorites(userId = userId)
+    override suspend fun getFavorites(): Flow<List<FavoriteEntity>> = dao.getFavorites()
 
-    override suspend fun deleteFavorite(favoriteModel: FavoriteModel) = remoteDataSource.deleteFavorite(favoriteModel = favoriteModel)
-
+    override suspend fun deleteFavorite(favoriteEntity: FavoriteEntity) = dao.deleteFromFavorite(favoriteEntity)
 
 }

@@ -43,6 +43,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.yusuforhan.booksapp.android.R
+import com.yusuforhan.booksapp.android.data.model.local.FavoriteEntity
 import com.yusuforhan.booksapp.android.data.model.remote.Books
 import com.yusuforhan.booksapp.android.data.model.remote.CartModel
 import com.yusuforhan.booksapp.android.presentation.detail.viewmodel.DetailEvent
@@ -83,8 +84,24 @@ fun DetailScreen(
                 actions = {
                     Icon(
                         modifier = modifier.clickable {
-                            state.book?.id?.let { DetailEvent.AddToFavorite(it) }
-                                ?.let { handleEvent(it) }
+                            state.book?.let {
+                                handleEvent(DetailEvent.AddToFavorite(
+                                    FavoriteEntity(
+                                        it.category,
+                                        it.count,
+                                        it.description,
+                                        it.id,
+                                        it.imageOne,
+                                        it.imageThree,
+                                        it.imageTwo,
+                                        it.price,
+                                        it.rate,
+                                        it.salePrice,
+                                        it.saleState,
+                                        it.title
+                                    )
+                                ))
+                            }
                         },
                         imageVector = Icons.Default.FavoriteBorder,
                         contentDescription = null,

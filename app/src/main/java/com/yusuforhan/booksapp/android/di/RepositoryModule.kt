@@ -4,6 +4,7 @@ import com.yusuforhan.booksapp.android.data.repository.AuthRepositoryImpl
 import com.yusuforhan.booksapp.android.data.repository.BooksRepositoryImpl
 import com.yusuforhan.booksapp.android.data.repository.CartRepositoryImpl
 import com.yusuforhan.booksapp.android.data.repository.FavoriteRepositoryImpl
+import com.yusuforhan.booksapp.android.data.source.local.FavoriteDao
 import com.yusuforhan.booksapp.android.domain.repository.AuthRepository
 import com.yusuforhan.booksapp.android.domain.repository.BooksRepository
 import com.yusuforhan.booksapp.android.domain.repository.CartRepository
@@ -32,5 +33,5 @@ object RepositoryModule {
     fun provideCartRepository(dataSource: RemoteDataSource) : CartRepository = CartRepositoryImpl(dataSource)
     @Provides
     @Singleton
-    fun provideFavoriteRepository(dataSource: RemoteDataSource) : FavoriteRepository = FavoriteRepositoryImpl(dataSource)
+    fun provideFavoriteRepository(dao : FavoriteDao) : FavoriteRepository = FavoriteRepositoryImpl(dao)
 }

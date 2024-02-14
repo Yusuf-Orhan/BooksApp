@@ -1,12 +1,11 @@
 package com.yusuforhan.booksapp.android.domain.repository
 
-import com.yusuforhan.booksapp.android.data.model.remote.BooksModel
-import com.yusuforhan.booksapp.android.data.model.remote.CrudResponse
-import com.yusuforhan.booksapp.android.data.model.remote.FavoriteModel
+import com.yusuforhan.booksapp.android.data.model.local.FavoriteEntity
+import kotlinx.coroutines.flow.Flow
 
 interface FavoriteRepository {
 
-    suspend fun addToFavorites(favoriteModel: FavoriteModel) : CrudResponse
-    suspend fun getFavorites(userId : String) : BooksModel
-    suspend fun deleteFavorite(favoriteModel: FavoriteModel) : CrudResponse
+    suspend fun addToFavorites(favoriteEntity: FavoriteEntity)
+    suspend fun getFavorites() : Flow<List<FavoriteEntity>>
+    suspend fun deleteFavorite(favoriteEntity: FavoriteEntity)
 }
