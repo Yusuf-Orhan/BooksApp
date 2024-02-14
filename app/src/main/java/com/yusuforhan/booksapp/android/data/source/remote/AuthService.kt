@@ -29,6 +29,7 @@ import com.yusuforhan.booksapp.android.data.model.remote.SignInModel
 import com.yusuforhan.booksapp.android.data.model.remote.SignUpModel
 import com.yusuforhan.booksapp.android.data.model.remote.UserModel
 import retrofit2.http.Body
+import retrofit2.http.Field
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
@@ -114,6 +115,7 @@ interface AuthService {
     @GET(GET_FAVORITES)
     suspend fun getFavorites(
         @Header("store") store: String = STORE_NAME,
+        @Query("userId") userId: String
     ) : BooksModel
 
     @POST(DELETE_FROM_FAVORITES)

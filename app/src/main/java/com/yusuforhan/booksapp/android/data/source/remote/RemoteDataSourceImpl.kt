@@ -37,7 +37,7 @@ class RemoteDataSourceImpl @Inject constructor(
     override suspend fun getCategories() = authService.getCategories()
     override suspend fun getUserById(userId: String) = authService.getUserById(userId = userId)
     override suspend fun addToFavorite(favoriteModel: FavoriteModel) = authService.addToFavorites(favoriteModel = favoriteModel)
-    override suspend fun getFavorites(): BooksModel = authService.getFavorites()
+    override suspend fun getFavorites(userId: String): BooksModel = authService.getFavorites(userId = userId)
     override suspend fun deleteFavorite(favoriteModel: FavoriteModel) = authService.deleteFromFavorite(favoriteModel = favoriteModel)
     override suspend fun clearFavorites(userId: String): CrudResponse {
         TODO("Not yet implemented")

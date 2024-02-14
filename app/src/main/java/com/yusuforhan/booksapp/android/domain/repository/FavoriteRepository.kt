@@ -7,6 +7,6 @@ import com.yusuforhan.booksapp.android.data.model.remote.FavoriteModel
 interface FavoriteRepository {
 
     suspend fun addToFavorites(favoriteModel: FavoriteModel) : CrudResponse
-    suspend fun getFavorites() : BooksModel
+    suspend fun getFavorites(userId : String) : BooksModel
     suspend fun deleteFavorite(favoriteModel: FavoriteModel) : CrudResponse
 }

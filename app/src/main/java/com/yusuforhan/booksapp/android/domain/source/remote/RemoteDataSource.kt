@@ -28,7 +28,7 @@ interface RemoteDataSource {
     suspend fun getCategories() : CategoriesModel
     suspend fun getUserById(userId : String) : UserModel
     suspend fun addToFavorite(favoriteModel : FavoriteModel) : CrudResponse
-    suspend fun getFavorites() : BooksModel
+    suspend fun getFavorites(userId : String) : BooksModel
     suspend fun deleteFavorite(favoriteModel: FavoriteModel) : CrudResponse
     suspend fun clearFavorites(userId : String) : CrudResponse
 }

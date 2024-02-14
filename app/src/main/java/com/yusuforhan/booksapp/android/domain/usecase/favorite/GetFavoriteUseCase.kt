@@ -10,13 +10,16 @@ class GetFavoriteUseCase @Inject constructor(
     private val favoriteRepository: FavoriteRepository
 ) {
 
-    operator fun invoke() = flow<Resource<List<Books>>> {
+    operator fun invoke(userId : String) = flow<Resource<List<Books>>> {
         emit(Resource.Loading)
         runCatching {
-            favoriteRepository.getFavorites()
+            favoriteRepository.getFavorites(userId)
         }.onSuccess {
+            println(it.status)
+            println(it.message)
             emit(Resource.Success(it.books))
         }.onFailure {
+            println(it.message)
             emit(Resource.Error(it.message.orEmpty()))
         }
     }
