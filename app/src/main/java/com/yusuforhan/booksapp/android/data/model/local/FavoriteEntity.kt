@@ -6,10 +6,10 @@ import com.yusuforhan.booksapp.android.data.model.remote.Books
 
 @Entity(tableName = "favorite")
 data class FavoriteEntity(
+    @PrimaryKey(autoGenerate = false) val id: Int,
     val category: String,
     val count: Int,
     val description: String,
-    @PrimaryKey val id: Int,
     val imageOne: String,
     val imageThree: String,
     val imageTwo: String,

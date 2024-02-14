@@ -20,5 +20,4 @@ interface FavoriteDao {
     @Query("SELECT * FROM favorite")
     fun getFavorites() : Flow<List<FavoriteEntity>>
 
-
 }

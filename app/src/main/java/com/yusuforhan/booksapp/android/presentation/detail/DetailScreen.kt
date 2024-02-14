@@ -87,10 +87,10 @@ fun DetailScreen(
                             state.book?.let {
                                 handleEvent(DetailEvent.AddToFavorite(
                                     FavoriteEntity(
+                                        it.id,
                                         it.category,
                                         it.count,
                                         it.description,
-                                        it.id,
                                         it.imageOne,
                                         it.imageThree,
                                         it.imageTwo,
