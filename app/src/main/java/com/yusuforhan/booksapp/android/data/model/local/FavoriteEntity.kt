@@ -7,15 +7,5 @@ import com.yusuforhan.booksapp.android.data.model.remote.Books
 @Entity(tableName = "favorite")
 data class FavoriteEntity(
     @PrimaryKey(autoGenerate = false) val id: Int,
-    val category: String,
-    val count: Int,
-    val description: String,
-    val imageOne: String,
-    val imageThree: String,
-    val imageTwo: String,
-    val price: Double,
-    val rate: Double,
-    val salePrice: Double,
-    val saleState: Boolean,
-    val title: String
+    val books: Books
 )

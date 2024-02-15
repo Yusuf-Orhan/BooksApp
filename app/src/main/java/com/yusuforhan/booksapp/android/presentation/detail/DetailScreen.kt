@@ -86,20 +86,7 @@ fun DetailScreen(
                         modifier = modifier.clickable {
                             state.book?.let {
                                 handleEvent(DetailEvent.AddToFavorite(
-                                    FavoriteEntity(
-                                        it.id,
-                                        it.category,
-                                        it.count,
-                                        it.description,
-                                        it.imageOne,
-                                        it.imageThree,
-                                        it.imageTwo,
-                                        it.price,
-                                        it.rate,
-                                        it.salePrice,
-                                        it.saleState,
-                                        it.title
-                                    )
+                                    FavoriteEntity(it.id, it)
                                 ))
                             }
                         },

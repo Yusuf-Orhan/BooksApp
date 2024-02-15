@@ -22,7 +22,7 @@ class FavoriteViewModel @Inject constructor(
     private fun getFavorite() = viewModelScope.launch {
         getFavoriteUseCase().collect {
             it.forEach { e ->
-                println(e.title)
+                println(e.books.title)
             }
         }
     }
