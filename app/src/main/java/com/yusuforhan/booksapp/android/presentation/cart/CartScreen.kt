@@ -178,5 +178,3 @@ fun CartItem(
         }
     }
 }
-
-

@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yusuforhan.booksapp.android.domain.usecase.favorite.GetFavoriteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -14,6 +14,8 @@ class FavoriteViewModel @Inject constructor(
     private val getFavoriteUseCase: GetFavoriteUseCase
 ) : ViewModel() {
 
+    private val _state = MutableStateFlow(FavoriteState())
+    val state : StateFlow<FavoriteState> = _state
 
     init {
         getFavorite()
@@ -21,10 +23,8 @@ class FavoriteViewModel @Inject constructor(
 
     private fun getFavorite() = viewModelScope.launch {
         getFavoriteUseCase().collect {
-            it.forEach { e ->
-                println(e.books.title)
-            }
+            if (it.isEmpty()) _state.value = state.value.copy(booksEmpty = true)
+            else _state.value = state.value.copy(favoriteBooks = it)
         }
     }
-
 }

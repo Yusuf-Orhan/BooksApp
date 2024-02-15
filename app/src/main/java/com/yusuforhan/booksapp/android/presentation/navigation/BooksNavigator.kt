@@ -95,7 +95,7 @@ fun BooksNavigator() {
                 profileScreen()
                 detailScreen(navController::navigateUp)
                 cartScreen(navController::navigateUp)
-                favoriteScreen(navController::navigateUp)
+                favoriteScreen(navController::navigateUp,navController::navigateToDetail)
             }
         }
     }

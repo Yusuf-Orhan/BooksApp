@@ -7,12 +7,13 @@ import androidx.navigation.compose.composable
 import com.yusuforhan.booksapp.android.presentation.navigation.Screen
 
 fun NavGraphBuilder.favoriteScreen(
-    navigateUp: () -> Unit
+    navigateUp: () -> Unit,
+    navigateToDetail : (Int) -> Unit
 ) {
     composable(
         route = Screen.favoriteRoute
     ) {
-        FavoriteRoute()
+        FavoriteRoute(navigateToDetail)
     }
 }
 
