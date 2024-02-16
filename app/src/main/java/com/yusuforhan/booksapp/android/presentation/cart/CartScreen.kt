@@ -33,22 +33,27 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.yusuforhan.booksapp.android.common.calculateTotalPrice
 import com.yusuforhan.booksapp.android.data.model.remote.Book
 import com.yusuforhan.booksapp.android.presentation.cart.viewmodel.CartUiEvent
 import com.yusuforhan.booksapp.android.presentation.cart.viewmodel.CartUiState
 import com.yusuforhan.booksapp.android.presentation.cart.viewmodel.CartViewModel
+import com.yusuforhan.booksapp.android.presentation.pay.navigateToPayScreen
 
 @Composable
 fun CartRoute(
-    viewModel: CartViewModel = hiltViewModel()
+    viewModel: CartViewModel = hiltViewModel(),
+    navController : NavHostController
 ) {
     val state by viewModel.state.collectAsState()
     LaunchedEffect(Unit) {
         viewModel.getCartBooks(state.userId.orEmpty())
     }
-    CartScreen(state, viewModel::handleEvent)
+    CartScreen(state, viewModel::handleEvent,navController::navigateToPayScreen)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -56,6 +61,7 @@ fun CartRoute(
 fun CartScreen(
     state: CartUiState,
     handleEvent: (CartUiEvent) -> Unit,
+    navigateToPay : () -> Unit,
     modifier: Modifier = Modifier
 ) {
 
@@ -91,7 +97,7 @@ fun CartScreen(
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .padding(20.dp),
-                                    onClick = { /*TODO*/ }
+                                    onClick = navigateToPay
                                 ) {
                                     Text(text = "Goto Pay")
                                 }

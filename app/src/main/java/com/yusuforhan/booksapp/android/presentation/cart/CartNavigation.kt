@@ -12,7 +12,7 @@ fun NavGraphBuilder.cartScreen(
     composable(
         route = Screen.cartRoute
     ) {
-        CartRoute()
+        //CartRoute()
     }
 }
 

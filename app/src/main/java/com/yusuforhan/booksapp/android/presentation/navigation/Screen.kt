@@ -16,7 +16,7 @@ sealed class Screen(
     data object DetailScreen : Screen(route = detailRoute)
     data object CartScreen : Screen(route = cartRoute)
     data object FavoriteScreen : Screen(route = favoriteRoute)
-
+    data object PaymentScreen : Screen(route = paymentRoute)
 
 
 
@@ -30,6 +30,6 @@ sealed class Screen(
         const val detailRoute = "detail_route"
         const val cartRoute = "cart_route"
         const val favoriteRoute = "favorite_route"
-
+        const val paymentRoute = "payment_route"
     }
 }

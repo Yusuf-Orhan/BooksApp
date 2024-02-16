@@ -28,6 +28,7 @@ import com.yusuforhan.booksapp.android.presentation.favorite.favoriteScreen
 import com.yusuforhan.booksapp.android.presentation.home.homeScreen
 import com.yusuforhan.booksapp.android.presentation.navigation.components.BooksBottomNav
 import com.yusuforhan.booksapp.android.presentation.navigation.components.BottomNavigationItem
+import com.yusuforhan.booksapp.android.presentation.pay.paymentScreen
 import com.yusuforhan.booksapp.android.presentation.profile.profileScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -96,6 +97,7 @@ fun BooksNavigator() {
                 detailScreen(navController::navigateUp)
                 cartScreen(navController::navigateUp)
                 favoriteScreen(navController::navigateUp,navController::navigateToDetail)
+                paymentScreen(navigateUp = navController::navigateUp)
             }
         }
     }

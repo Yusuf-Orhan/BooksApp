@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CreditCardForm() {
+fun PayScreen() {
     var cardholderName by mutableStateOf("")
     var cardNumber by mutableStateOf("")
     var expiryMonth by mutableStateOf("")
