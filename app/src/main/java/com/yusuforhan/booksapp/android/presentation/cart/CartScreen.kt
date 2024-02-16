@@ -47,13 +47,13 @@ import com.yusuforhan.booksapp.android.presentation.pay.navigateToPayScreen
 @Composable
 fun CartRoute(
     viewModel: CartViewModel = hiltViewModel(),
-    navController : NavHostController
+    navigateToPay: () -> Unit
 ) {
     val state by viewModel.state.collectAsState()
     LaunchedEffect(Unit) {
         viewModel.getCartBooks(state.userId.orEmpty())
     }
-    CartScreen(state, viewModel::handleEvent,navController::navigateToPayScreen)
+    CartScreen(state, viewModel::handleEvent,navigateToPay)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)

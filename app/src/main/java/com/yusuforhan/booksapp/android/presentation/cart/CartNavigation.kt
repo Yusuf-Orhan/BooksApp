@@ -7,12 +7,13 @@ import androidx.navigation.compose.composable
 import com.yusuforhan.booksapp.android.presentation.navigation.Screen
 
 fun NavGraphBuilder.cartScreen(
-    navigateUp: () -> Unit
+    navigateUp: () -> Unit,
+    navigateToPay : () -> Unit,
 ) {
     composable(
         route = Screen.cartRoute
     ) {
-        //CartRoute()
+        CartRoute(navigateToPay = navigateToPay)
     }
 }
 
