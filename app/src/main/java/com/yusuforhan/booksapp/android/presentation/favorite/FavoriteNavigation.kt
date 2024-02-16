@@ -17,7 +17,7 @@ fun NavGraphBuilder.favoriteScreen(
     }
 }
 
-fun NavHostController.navigateToHome(
+fun NavHostController.navigateToFavorite(
     navOptions: NavOptions? = null
 ) {
     navigate(

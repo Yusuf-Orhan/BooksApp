@@ -9,6 +9,7 @@ import androidx.navigation.navArgument
 import com.yusuforhan.booksapp.android.presentation.navigation.Screen
 import com.yusuforhan.booksapp.android.presentation.navigation.Screen.Companion.bookIdKey
 import com.yusuforhan.booksapp.android.presentation.navigation.Screen.Companion.detailRoute
+import com.yusuforhan.booksapp.android.presentation.navigation.Screen.Companion.favoriteRoute
 
 
 fun NavGraphBuilder.detailScreen(
@@ -30,6 +31,7 @@ fun NavHostController.navigateToDetail(
 ) {
     navigate(
         route = Screen.DetailScreen.route.plus("/$id"),
-        navOptions = navOptions
-    )
+    ) {
+        popUpTo(favoriteRoute) {inclusive = true}
+    }
 }
