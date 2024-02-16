@@ -25,7 +25,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -34,14 +33,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
-import com.yusuforhan.booksapp.android.data.model.remote.Books
-import com.yusuforhan.booksapp.android.data.model.remote.CartModel
+import com.yusuforhan.booksapp.android.common.calculateTotalPrice
+import com.yusuforhan.booksapp.android.data.model.remote.Book
 import com.yusuforhan.booksapp.android.presentation.cart.viewmodel.CartUiEvent
 import com.yusuforhan.booksapp.android.presentation.cart.viewmodel.CartUiState
 import com.yusuforhan.booksapp.android.presentation.cart.viewmodel.CartViewModel
-import com.yusuforhan.booksapp.android.presentation.home.viewmodel.HomeUiState
 
 @Composable
 fun CartRoute(
@@ -62,20 +59,19 @@ fun CartScreen(
     modifier: Modifier = Modifier
 ) {
 
-    val cartList = state.books.toMutableList()
     Scaffold { innerPadding ->
         Box(modifier = modifier.padding(innerPadding), contentAlignment = Alignment.BottomEnd) {
             Column {
                 if (state.loading) {
                     CircularProgressIndicator()
-                } else if (cartList.isNotEmpty()) {
+                } else if (state.books.isNotEmpty()) {
                     Column(
                         modifier = modifier.fillMaxSize()
                     ) {
                         LazyColumn(
                             modifier = Modifier.weight(1f)
                         ) {
-                            items(cartList) {
+                            items(state.books) {
                                 CartItem(book = it,handleEvent)
                             }
                         }
@@ -89,7 +85,7 @@ fun CartScreen(
                                     horizontalArrangement = Arrangement.SpaceBetween
                                 ) {
                                     Text(text = "Total Amount :")
-                                    Text(text = "$500")
+                                    Text(text = "$${state.books.calculateTotalPrice()}")
                                 }
                                 ElevatedButton(
                                     modifier = Modifier
@@ -114,7 +110,7 @@ fun CartScreen(
 
 @Composable
 fun CartItem(
-    book: Books,
+    book: Book,
     handleEvent: (CartUiEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {

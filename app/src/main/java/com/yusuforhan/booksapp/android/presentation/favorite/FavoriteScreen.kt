@@ -33,7 +33,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.yusuforhan.booksapp.android.R
-import com.yusuforhan.booksapp.android.data.model.remote.Books
+import com.yusuforhan.booksapp.android.data.model.remote.Book
 import com.yusuforhan.booksapp.android.presentation.favorite.viewmodel.FavoriteState
 import com.yusuforhan.booksapp.android.presentation.favorite.viewmodel.FavoriteViewModel
 
@@ -64,7 +64,7 @@ fun FavoriteScreen(
             } else {
                 LazyColumn {
                     items(state.favoriteBooks) {
-                        FavoriteItem(book = it.books, onDeleteClick = {}, navigateToDetail = navigateToDetail)
+                        FavoriteItem(book = it.book, onDeleteClick = {}, navigateToDetail = navigateToDetail)
                     }
                 }
             }
@@ -74,7 +74,7 @@ fun FavoriteScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FavoriteItem(
-    book: Books,
+    book: Book,
     onDeleteClick : (Int) -> Unit,
     navigateToDetail : (Int) -> Unit,
     modifier: Modifier = Modifier

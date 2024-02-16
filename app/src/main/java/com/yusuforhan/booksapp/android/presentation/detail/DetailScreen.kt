@@ -1,9 +1,6 @@
 package com.yusuforhan.booksapp.android.presentation.detail
 
-import android.app.usage.UsageEvents.Event
 import android.content.Context
-import android.graphics.fonts.FontStyle
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -26,25 +23,21 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.yusuforhan.booksapp.android.R
 import com.yusuforhan.booksapp.android.data.model.local.FavoriteEntity
-import com.yusuforhan.booksapp.android.data.model.remote.Books
+import com.yusuforhan.booksapp.android.data.model.remote.Book
 import com.yusuforhan.booksapp.android.data.model.remote.CartModel
 import com.yusuforhan.booksapp.android.presentation.detail.viewmodel.DetailEvent
 import com.yusuforhan.booksapp.android.presentation.detail.viewmodel.DetailState
@@ -124,7 +117,7 @@ fun DetailScreen(
 
 @Composable
 fun BookDetailContent(
-    book: Books,
+    book: Book,
     handleEvent: (DetailEvent) -> Unit,
     userId : String,
     modifier: Modifier = Modifier

@@ -5,6 +5,6 @@ import com.google.gson.annotations.SerializedName
 data class BooksModel(
     val message: String,
     @SerializedName("products")
-    val books : List<Books>,
+    val books : List<Book>,
     val status: Int
 )
