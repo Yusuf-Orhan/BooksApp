@@ -19,6 +19,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
+@Composable
+fun PayRoute() {
+    PayScreen()
+}
+
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PayScreen() {

@@ -102,8 +102,6 @@ fun BooksNavigator() {
             }
         }
     }
-
-
 }
 
 private fun navigateToTap(navController: NavController, route: String) {
