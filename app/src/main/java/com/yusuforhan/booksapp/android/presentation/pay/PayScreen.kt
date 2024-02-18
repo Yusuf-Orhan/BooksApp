@@ -23,8 +23,6 @@ import androidx.compose.ui.unit.dp
 fun PayRoute() {
     PayScreen()
 }
-
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PayScreen() {
@@ -51,31 +49,31 @@ fun PayScreen() {
                 value = cardholderName,
                 onValueChange = { cardholderName = it },
                 label = { Text("Card Holder Name") },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth().padding(8.dp)
             )
 
             OutlinedTextField(
                 value = cardNumber,
                 onValueChange = { cardNumber = it },
                 label = { Text("Card Number") },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth().padding(8.dp)
             )
 
             Row(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth().padding(8.dp)
             ) {
                 OutlinedTextField(
                     value = expiryMonth,
                     onValueChange = { expiryMonth = it },
                     label = { Text("Month") },
-                    modifier = Modifier.width(120.dp)
+                    modifier = Modifier.width(120.dp).padding(4.dp)
                 )
 
                 OutlinedTextField(
                     value = expiryYear,
                     onValueChange = { expiryYear = it },
                     label = { Text("Year") },
-                    modifier = Modifier.width(120.dp)
+                    modifier = Modifier.width(120.dp).padding(4.dp)
                 )
             }
 
@@ -83,19 +81,19 @@ fun PayScreen() {
                 value = cvcCode,
                 onValueChange = { cvcCode = it },
                 label = { Text("CVC") },
-                modifier = Modifier.width(120.dp)
+                modifier = Modifier.width(120.dp).padding(8.dp)
             )
 
             OutlinedTextField(
                 value = address,
                 onValueChange = { address = it },
                 label = { Text("Address") },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth().padding(8.dp)
             )
 
             Button(
                 onClick = {},
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth().padding(8.dp)
             ) {
                 Text("Pay")
             }
