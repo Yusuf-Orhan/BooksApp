@@ -33,6 +33,9 @@ class HomeViewModel @Inject constructor(
             is HomeUiEvent.SearchBooks ->  {
                 searchBooks(q = event.query)
             }
+            is HomeUiEvent.GetBooks -> {
+                getAllBooks()
+            }
         }
     }
 

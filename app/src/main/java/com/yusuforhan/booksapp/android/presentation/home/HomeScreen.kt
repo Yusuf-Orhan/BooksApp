@@ -6,11 +6,11 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -38,6 +38,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.yusuforhan.booksapp.android.R
 import com.yusuforhan.booksapp.android.data.model.remote.Book
+import com.yusuforhan.booksapp.android.presentation.components.ECErrorScreen
 import com.yusuforhan.booksapp.android.presentation.components.ECProgressBar
 import com.yusuforhan.booksapp.android.presentation.components.ECSearchBar
 import com.yusuforhan.booksapp.android.presentation.home.viewmodel.HomeUiEvent
@@ -93,56 +94,9 @@ fun HomeScreen(
             if (state.loading) {
                 ECProgressBar()
             } else if (state.error.isNotBlank()) {
-                Text(text = state.error)
+                ECErrorScreen(desc = state.error, buttonText = "Try Again", onButtonClick = {handleEvent(HomeUiEvent.GetBooks)})
             }
         }
-    }
-}
-
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun BooksItem(
-    modifier: Modifier = Modifier,
-    book: Book,
-    navigateToDetail: (Int) -> Unit
-) {
-    Card(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(10.dp),
-        shape = RoundedCornerShape(16.dp),
-        onClick = { navigateToDetail(book.id) }
-    ) {
-        AsyncImage(
-            model = book.imageOne,
-            contentDescription = null,
-            modifier = modifier
-                .fillMaxWidth()
-                .aspectRatio(1f)
-                .height(100.dp)
-                .clipToBounds()
-        )
-        Text(
-            modifier = modifier
-                .padding(5.dp)
-                .height(30.dp),
-            text = book.title,
-            overflow = TextOverflow.Ellipsis,
-            maxLines = 2,
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Black,
-
-            )
-        Text(
-            modifier = modifier.padding(5.dp),
-            text = "$${book.price}",
-            overflow = TextOverflow.Ellipsis,
-            maxLines = 2,
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Medium,
-            color = Color.Red
-        )
     }
 }
 
