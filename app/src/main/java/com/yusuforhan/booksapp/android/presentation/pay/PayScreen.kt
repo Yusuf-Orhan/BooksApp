@@ -1,5 +1,6 @@
 package com.yusuforhan.booksapp.android.presentation.pay
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -30,13 +31,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun PayRoute() {
-    PayScreen()
+fun PayRoute(
+    navigateUp: () -> Unit
+) {
+    PayScreen(
+        navigateUp = navigateUp
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PayScreen(
+    navigateUp: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     var name by remember { mutableStateOf("") }
@@ -60,7 +66,8 @@ fun PayScreen(
                     Icon(
                         modifier = Modifier
                             .padding(start = 18.dp)
-                            .size(24.dp),
+                            .size(24.dp)
+                            .clickable { navigateUp() },
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = "navigate back"
                     )
@@ -98,9 +105,9 @@ fun PayScreen(
                     keyboardType = KeyboardType.Number
                 )
             )
-            Row (
+            Row(
                 horizontalArrangement = Arrangement.Center
-            ){
+            ) {
                 OutlinedTextField(
                     modifier = Modifier
                         .weight(1f)
@@ -148,7 +155,9 @@ fun PayScreen(
                 )
             )
             Button(
-                modifier = Modifier.fillMaxWidth().padding(16.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
                 onClick = {
 
                 }

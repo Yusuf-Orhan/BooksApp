@@ -25,7 +25,7 @@ fun BooksBottomNav(
 ) {
     NavigationBar(
         modifier = Modifier.fillMaxWidth(),
-        containerColor = Color.White,
+        //containerColor = Color.White,
         tonalElevation = 10.dp
     ) {
         items.forEachIndexed { index, item ->
@@ -42,9 +42,7 @@ fun BooksBottomNav(
                         Text(text = item.text, style = MaterialTheme.typography.labelSmall)
                     }
                 },
-                colors = NavigationBarItemDefaults.colors(
-                    indicatorColor = Color.White
-                )
+                colors = NavigationBarItemDefaults.colors()
             )
         }
     }
