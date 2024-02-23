@@ -18,7 +18,9 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -42,7 +44,8 @@ fun ECErrorScreen(
             Image(
                 imageVector = Icons.Default.Warning,
                 contentDescription = null,
-                modifier = Modifier.size(240.dp)
+                modifier = Modifier.size(240.dp),
+                colorFilter = ColorFilter.tint(Red)
             )
 
             Spacer(modifier = Modifier.height(20.dp))

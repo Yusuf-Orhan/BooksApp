@@ -39,6 +39,7 @@ import com.yusuforhan.booksapp.android.data.model.remote.Book
 import com.yusuforhan.booksapp.android.presentation.cart.viewmodel.CartUiEvent
 import com.yusuforhan.booksapp.android.presentation.cart.viewmodel.CartUiState
 import com.yusuforhan.booksapp.android.presentation.cart.viewmodel.CartViewModel
+import com.yusuforhan.booksapp.android.presentation.components.ECErrorScreen
 
 @Composable
 fun CartRoute(
@@ -102,7 +103,7 @@ fun CartScreen(
 
                     }
                 } else if (state.error.isNotBlank()) {
-                    Text(text = state.error)
+                    ECErrorScreen(desc = state.error, buttonText = "Try Again")
                 }
             }
         }
