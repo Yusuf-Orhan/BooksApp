@@ -22,6 +22,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,8 +34,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.yusuforhan.booksapp.android.R
+import com.yusuforhan.booksapp.android.data.model.local.FavoriteEntity
 import com.yusuforhan.booksapp.android.data.model.remote.Book
 import com.yusuforhan.booksapp.android.presentation.favorite.viewmodel.FavoriteState
+import com.yusuforhan.booksapp.android.presentation.favorite.viewmodel.FavoriteUiEvent
 import com.yusuforhan.booksapp.android.presentation.favorite.viewmodel.FavoriteViewModel
 
 @Composable
@@ -43,13 +46,20 @@ fun FavoriteRoute(
     viewModel: FavoriteViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    FavoriteScreen(state = state, navigateToDetail = navigateToDetail)
+    LaunchedEffect(true) {
+        viewModel.getFavorite()
+    }
+    FavoriteScreen(
+        state = state,
+        navigateToDetail = navigateToDetail,
+        onDeleteClick = { viewModel.handleEvent(FavoriteUiEvent.DeleteFromFavorite(it)) })
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FavoriteScreen(
     modifier: Modifier = Modifier,
+    onDeleteClick: (FavoriteEntity) -> Unit,
     navigateToDetail: (Int) -> Unit,
     state: FavoriteState
 ) {
@@ -64,19 +74,24 @@ fun FavoriteScreen(
             } else {
                 LazyColumn {
                     items(state.favoriteBooks) {
-                        FavoriteItem(book = it.book, onDeleteClick = {}, navigateToDetail = navigateToDetail)
+                        FavoriteItem(
+                            book = it.book,
+                            onDeleteClick = onDeleteClick,
+                            navigateToDetail = navigateToDetail
+                        )
                     }
                 }
             }
         }
     }
 }
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FavoriteItem(
     book: Book,
-    onDeleteClick : (Int) -> Unit,
-    navigateToDetail : (Int) -> Unit,
+    onDeleteClick: (FavoriteEntity) -> Unit,
+    navigateToDetail: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -90,7 +105,7 @@ fun FavoriteItem(
             defaultElevation = 4.dp
         ),
         shape = RoundedCornerShape(12.dp),
-        onClick = {navigateToDetail(book.id)}
+        onClick = { navigateToDetail(book.id) }
     ) {
         Row {
             Box(
@@ -121,7 +136,12 @@ fun FavoriteItem(
                 ) {
                     Icon(
                         modifier = modifier.clickable {
-                           onDeleteClick(book.id)
+                            onDeleteClick(
+                                FavoriteEntity(
+                                    book.id,
+                                    book
+                                )
+                            )
                         },
                         imageVector = Icons.Default.Delete,
                         contentDescription = null

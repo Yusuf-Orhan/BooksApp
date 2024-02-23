@@ -26,11 +26,7 @@ class FavoriteViewModel @Inject constructor(
         }
     }
 
-    init {
-        getFavorite()
-    }
-
-    private fun getFavorite() = viewModelScope.launch {
+    fun getFavorite() = viewModelScope.launch {
         getFavoriteUseCase().collect {
             if (it.isEmpty()) _state.value = state.value.copy(booksEmpty = true)
             else _state.value = state.value.copy(favoriteBooks = it)
