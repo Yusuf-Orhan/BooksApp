@@ -47,7 +47,7 @@ fun CartRoute(
     navigateToPay: () -> Unit
 ) {
     val state by viewModel.state.collectAsState()
-    LaunchedEffect(Unit) {
+    LaunchedEffect(key1 = true) {
         viewModel.getCartBooks(state.userId.orEmpty())
     }
     CartScreen(state, viewModel::handleEvent,navigateToPay)
