@@ -14,6 +14,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Button
@@ -25,11 +26,17 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -49,18 +56,19 @@ fun DetailRoute(
     viewModel: DetailViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    DetailScreen(state, LocalContext.current,navigateUp,viewModel::handleEvent)
+    DetailScreen(state, LocalContext.current, navigateUp, viewModel::handleEvent)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreen(
     state: DetailState,
-    context : Context,
+    context: Context,
     navigateUp: () -> Unit,
     handleEvent: (DetailEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    var isFavorite by remember { mutableStateOf(false) }
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -70,7 +78,7 @@ fun DetailScreen(
                         modifier = modifier.clickable {
                             navigateUp()
                         },
-                        imageVector = Icons.Default.ArrowBack,
+                        imageVector = Icons.Filled.ArrowBack,
                         contentDescription = null
                     )
                 },
@@ -78,12 +86,14 @@ fun DetailScreen(
                     Icon(
                         modifier = modifier.clickable {
                             state.book?.let {
-                                handleEvent(DetailEvent.AddToFavorite(
-                                    FavoriteEntity(it.id, it)
-                                ))
+                                handleEvent(
+                                    DetailEvent.AddToFavorite(
+                                        FavoriteEntity(it.id, it)
+                                    )
+                                )
                             }
                         },
-                        imageVector = Icons.Default.FavoriteBorder,
+                        imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Filled.FavoriteBorder,
                         contentDescription = null,
                         tint = if (state.isFavorite == true) Color.Red else Color.Black
                     )
@@ -101,15 +111,22 @@ fun DetailScreen(
                 CircularProgressIndicator()
             } else if (state.isError != null) {
                 Text(text = state.isError)
-            } else if(state.addToCart == true) {
+            } else if (state.addToCart == true) {
                 navigateUp()
-                Toast.makeText(context,"Book Added Cart",Toast.LENGTH_SHORT).show()
-            } else if(state.addToCart == false) {
+                Toast.makeText(context, "Book Added Cart", Toast.LENGTH_SHORT).show()
+            } else if (state.addToCart == false) {
                 navigateUp()
-                Toast.makeText(context,"This book has already been added to the cart.",Toast.LENGTH_SHORT).show()
-            }
-            else {
-                state.book?.let { book -> BookDetailContent(book = book,handleEvent,state.userId!!) }
+                Toast.makeText(
+                    context,
+                    "This book has already been added to the cart.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                state.book?.let { book ->
+                    BookDetailContent(book = book, handleEvent, state.userId!!)
+                    isFavorite = state.isFavorite ?: false
+                }
+
             }
         }
     }
@@ -119,7 +136,7 @@ fun DetailScreen(
 fun BookDetailContent(
     book: Book,
     handleEvent: (DetailEvent) -> Unit,
-    userId : String,
+    userId: String,
     modifier: Modifier = Modifier
 ) {
     AsyncImage(model = book.imageOne, contentDescription = null)
@@ -133,7 +150,7 @@ fun BookDetailContent(
     ) {
         Text(text = book.price.toString())
         Button(onClick = {
-            handleEvent(DetailEvent.AddCart(CartModel(book.id,userId)))
+            handleEvent(DetailEvent.AddCart(CartModel(book.id, userId)))
         }) {
             Text(text = "Add Cart")
         }
