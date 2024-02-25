@@ -36,6 +36,7 @@ class DetailViewModel @Inject constructor(
     val state: StateFlow<DetailState> = _state
 
     private var userId = ""
+    private var isFavorite = false
     private val id = savedStateHandle.get<Int>(bookIdKey) ?: 0
 
     init {
@@ -48,11 +49,14 @@ class DetailViewModel @Inject constructor(
 
     }
 
-    fun existsFavorite(id: Int) = viewModelScope.launch {
+    private fun existsFavorite(id: Int) = viewModelScope.launch {
         getFavoriteUseCase().collect { favoriteList ->
             val exists = favoriteList.find { it.id == id }
             if (exists != null) {
+                isFavorite = true
                 _state.value = state.value.copy(isFavorite = true)
+            }else {
+                isFavorite = false
             }
         }
     }
@@ -100,13 +104,10 @@ class DetailViewModel @Inject constructor(
     }
 
     private fun setFavoriteState(favoriteEntity: FavoriteEntity) = viewModelScope.launch {
-        getFavoriteUseCase().collect { favoriteList ->
-            val exists = favoriteList.find { it.id == favoriteEntity.id }
-            if (exists != null) {
-                deleteFromFavorite(favoriteEntity)
-            } else {
-                addToFavorite(favoriteEntity)
-            }
+        if (isFavorite) {
+            deleteFromFavorite(favoriteEntity)
+        }else {
+            addToFavorite(favoriteEntity)
         }
     }
 }
