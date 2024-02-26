@@ -32,7 +32,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.yusuforhan.booksapp.android.R
 import com.yusuforhan.booksapp.android.data.model.local.FavoriteEntity
@@ -53,7 +52,8 @@ fun FavoriteRoute(
     FavoriteScreen(
         state = state,
         navigateToDetail = navigateToDetail,
-        onDeleteClick = { viewModel.handleEvent(FavoriteUiEvent.DeleteFromFavorite(it)) })
+        onDeleteClick = { viewModel.handleEvent(FavoriteUiEvent.DeleteFromFavorite(it)) }
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -74,9 +74,9 @@ fun FavoriteScreen(
                 Text(text = "Is Not Favorite")
             } else {
                 LazyColumn {
-                    items(state.favoriteBooks) {
+                    items(state.favoriteBooks) { entity ->
                         FavoriteItem(
-                            book = it.book,
+                            book = entity.book,
                             onDeleteClick = onDeleteClick,
                             navigateToDetail = navigateToDetail
                         )
