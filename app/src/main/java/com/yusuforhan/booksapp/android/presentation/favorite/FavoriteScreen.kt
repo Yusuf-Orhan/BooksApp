@@ -54,6 +54,7 @@ fun FavoriteRoute(
         navigateToDetail = navigateToDetail,
         onDeleteClick = { viewModel.handleEvent(FavoriteUiEvent.DeleteFromFavorite(it)) }
     )
+
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
