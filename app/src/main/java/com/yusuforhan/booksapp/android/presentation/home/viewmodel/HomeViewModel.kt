@@ -1,11 +1,11 @@
 package com.yusuforhan.booksapp.android.presentation.home.viewmodel
 
-import androidx.lifecycle.VIEW_MODEL_STORE_OWNER_KEY
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yusuforhan.booksapp.android.common.Resource
 import com.yusuforhan.booksapp.android.domain.usecase.books.GetAllBooksUseCase
-import com.yusuforhan.booksapp.android.domain.usecase.books.GetSaleBookListUseCase
+import com.yusuforhan.booksapp.android.domain.usecase.books.GetBooksByCategory
+import com.yusuforhan.booksapp.android.domain.usecase.books.GetCategoriesUseCase
 import com.yusuforhan.booksapp.android.domain.usecase.books.SearchBooksUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,7 +17,9 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getAllBooksUseCase: GetAllBooksUseCase,
-    private val searchBooksUseCase: SearchBooksUseCase
+    private val searchBooksUseCase: SearchBooksUseCase,
+    private val getBooksByCategory: GetBooksByCategory,
+    private val getCategoriesUseCase : GetCategoriesUseCase
 ) : ViewModel() {
 
     private var _state = MutableStateFlow(HomeUiState())
@@ -35,6 +37,9 @@ class HomeViewModel @Inject constructor(
             }
             is HomeUiEvent.GetBooks -> {
                 getAllBooks()
+            }
+            is HomeUiEvent.GetBooksByCategory -> {
+
             }
         }
     }
@@ -61,6 +66,11 @@ class HomeViewModel @Inject constructor(
                 is Resource.Error -> _state.value =
                     _state.value.copy(loading = false, error = result.message)
             }
+        }.launchIn(viewModelScope)
+    }
+    private fun getCategories() {
+        getCategoriesUseCase().onEach {
+
         }.launchIn(viewModelScope)
     }
 }

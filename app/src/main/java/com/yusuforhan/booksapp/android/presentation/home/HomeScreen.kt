@@ -38,6 +38,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.yusuforhan.booksapp.android.R
 import com.yusuforhan.booksapp.android.data.model.remote.Book
+import com.yusuforhan.booksapp.android.presentation.components.CategoriesChips
 import com.yusuforhan.booksapp.android.presentation.components.ECErrorScreen
 import com.yusuforhan.booksapp.android.presentation.components.ECProgressBar
 import com.yusuforhan.booksapp.android.presentation.components.ECSearchBar
@@ -67,7 +68,14 @@ fun HomeScreen(
     var searchQuery by remember {
         mutableStateOf("")
     }
-
+    val categories = mutableListOf(
+        "Teknoloji",
+        "Yazılım",
+        "Bilim",
+        "Kurgu",
+        "Fizik",
+        "Coğrafya"
+    )
     Scaffold(
         topBar = { TopAppBar(title = { Text(text = stringResource(id = R.string.home)) }) }
     ) {
@@ -84,6 +92,8 @@ fun HomeScreen(
                 onValueChanged = { s -> searchQuery = s },
                 onSearch = {handleEvent(HomeUiEvent.SearchBooks(searchQuery))}
             )
+            CategoriesChips(categories = categories, onItemClick = { handleEvent(HomeUiEvent.GetBooksByCategory(categories[it])) })
+
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
             ) {
