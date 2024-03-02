@@ -5,8 +5,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -77,14 +75,6 @@ fun HomeScreen(
     var selectedCategory by remember {
         mutableStateOf("")
     }
-    val categories = mutableListOf(
-        "Teknoloji",
-        "Yazılım",
-        "Bilim",
-        "Kurgu",
-        "Fizik",
-        "Coğrafya"
-    )
     Scaffold(
         topBar = { TopAppBar(title = { Text(text = stringResource(id = R.string.home)) }) }
     ) {
@@ -101,25 +91,27 @@ fun HomeScreen(
                 onValueChanged = { s -> searchQuery = s },
                 onSearch = { handleEvent(HomeUiEvent.SearchBooks(searchQuery)) }
             )
-            LazyRow {
-                items(categories.size) {
-                    Box(
-                        modifier = Modifier
-                            .padding(4.dp)
-                            .background(
-                                color = Color.DarkGray,
-                                shape = RoundedCornerShape(6.dp)
-                            ),
-                    ) {
-                        Text(
+            if (state.categoryList.isNotEmpty()) {
+                LazyRow {
+                    items(state.categoryList.size) {
+                        Box(
                             modifier = Modifier
-                                .clickable {
-                                    selectedCategory = categories[it]
-                                }
-                                .padding(4.dp),
-                            text = categories[it],
-                            color = if (selectedCategory == categories[it]) Red else White
-                        )
+                                .padding(4.dp)
+                                .background(
+                                    color = Color.DarkGray,
+                                    shape = RoundedCornerShape(6.dp)
+                                ),
+                        ) {
+                            Text(
+                                modifier = Modifier
+                                    .clickable {
+                                        selectedCategory = state.categoryList[it]
+                                    }
+                                    .padding(4.dp),
+                                text = state.categoryList[it],
+                                color = if (selectedCategory == state.categoryList[it]) Red else White
+                            )
+                        }
                     }
                 }
             }

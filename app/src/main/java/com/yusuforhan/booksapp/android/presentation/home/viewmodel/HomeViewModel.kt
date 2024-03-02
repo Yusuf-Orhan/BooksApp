@@ -27,6 +27,7 @@ class HomeViewModel @Inject constructor(
 
     init {
         getAllBooks()
+        getCategories()
     }
 
 
@@ -69,8 +70,19 @@ class HomeViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
     private fun getCategories() {
-        getCategoriesUseCase().onEach {
-
+        getCategoriesUseCase().onEach {result ->
+            when(result) {
+                is Resource.Success -> {
+                    result.data.forEach {
+                        println(it)
+                    }
+                    _state.value = state.value.copy(categoryList = result.data)
+                }
+                is Resource.Loading -> {
+                    _state.value = state.value.copy(loading = true)
+                }
+                else -> {}
+             }
         }.launchIn(viewModelScope)
     }
 }
