@@ -1,16 +1,20 @@
 package com.yusuforhan.booksapp.android.presentation.home
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -24,8 +28,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Black
+import androidx.compose.ui.graphics.Color.Companion.LightGray
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -38,7 +45,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.yusuforhan.booksapp.android.R
 import com.yusuforhan.booksapp.android.data.model.remote.Book
-import com.yusuforhan.booksapp.android.presentation.components.CategoriesChips
 import com.yusuforhan.booksapp.android.presentation.components.ECErrorScreen
 import com.yusuforhan.booksapp.android.presentation.components.ECProgressBar
 import com.yusuforhan.booksapp.android.presentation.components.ECSearchBar
@@ -52,7 +58,7 @@ fun HomeRoute(
     navigateToDetail: (Int) -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    HomeScreen(state = state,viewModel::handleEvent) {
+    HomeScreen(state = state, viewModel::handleEvent) {
         navigateToDetail(it)
     }
 }
@@ -62,10 +68,13 @@ fun HomeRoute(
 @Composable
 fun HomeScreen(
     state: HomeUiState,
-    handleEvent : (HomeUiEvent) -> Unit,
+    handleEvent: (HomeUiEvent) -> Unit,
     navigateToDetail: (Int) -> Unit
 ) {
     var searchQuery by remember {
+        mutableStateOf("")
+    }
+    var selectedCategory by remember {
         mutableStateOf("")
     }
     val categories = mutableListOf(
@@ -90,10 +99,27 @@ fun HomeScreen(
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
                 value = searchQuery,
                 onValueChanged = { s -> searchQuery = s },
-                onSearch = {handleEvent(HomeUiEvent.SearchBooks(searchQuery))}
+                onSearch = { handleEvent(HomeUiEvent.SearchBooks(searchQuery)) }
             )
-            CategoriesChips(categories = categories, onItemClick = { handleEvent(HomeUiEvent.GetBooksByCategory(categories[it])) })
-
+            LazyRow {
+                items(categories.size) {
+                    Box {
+                        Text(
+                            modifier = Modifier
+                                .clickable {
+                                    selectedCategory = categories[it]
+                                }
+                                .padding(8.dp)
+                                .background(
+                                    color = Color.DarkGray,
+                                    shape = RoundedCornerShape(6.dp)
+                                ),
+                            text = categories[it],
+                            color = if (selectedCategory == categories[it]) Color.Red else Black
+                        )
+                    }
+                }
+            }
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
             ) {
@@ -104,7 +130,10 @@ fun HomeScreen(
             if (state.loading) {
                 ECProgressBar()
             } else if (state.error.isNotBlank()) {
-                ECErrorScreen(desc = state.error, buttonText = "Try Again", onButtonClick = {handleEvent(HomeUiEvent.GetBooks)})
+                ECErrorScreen(
+                    desc = state.error,
+                    buttonText = "Try Again",
+                    onButtonClick = { handleEvent(HomeUiEvent.GetBooks) })
             }
         }
     }
