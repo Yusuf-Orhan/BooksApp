@@ -105,11 +105,11 @@ fun HomeScreen(
                             Text(
                                 modifier = Modifier
                                     .clickable {
-                                        selectedCategory = state.categoryList[it]
+                                        selectedCategory = state.categoryList[it].name!!
                                     }
                                     .padding(4.dp),
-                                text = state.categoryList[it],
-                                color = if (selectedCategory == state.categoryList[it]) Red else White
+                                text = state.categoryList[it].name!!,
+                                color = if (selectedCategory == state.categoryList[it].name) Red else White
                             )
                         }
                     }
