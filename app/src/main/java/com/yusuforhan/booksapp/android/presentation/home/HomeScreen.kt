@@ -14,7 +14,6 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -43,6 +42,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.yusuforhan.booksapp.android.R
 import com.yusuforhan.booksapp.android.data.model.remote.Book
+import com.yusuforhan.booksapp.android.data.model.remote.Category
 import com.yusuforhan.booksapp.android.presentation.components.ECErrorScreen
 import com.yusuforhan.booksapp.android.presentation.components.ECProgressBar
 import com.yusuforhan.booksapp.android.presentation.components.ECSearchBar
@@ -62,7 +62,7 @@ fun HomeRoute(
 }
 
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     state: HomeUiState,
@@ -93,6 +93,27 @@ fun HomeScreen(
             )
             if (state.categoryList.isNotEmpty()) {
                 LazyRow {
+                    item {
+                        Box(
+                            modifier = Modifier
+                                .padding(4.dp)
+                                .background(
+                                    color = Color.DarkGray,
+                                    shape = RoundedCornerShape(6.dp)
+                                ),
+                        ) {
+                            Text(
+                                modifier = Modifier
+                                    .clickable {
+                                        selectedCategory = ""
+                                        handleEvent(HomeUiEvent.GetBooks)
+                                    }
+                                    .padding(4.dp),
+                                text = "All",
+                                color = if (selectedCategory.isEmpty()) Red else White
+                            )
+                        }
+                    }
                     items(state.categoryList.size) {
                         Box(
                             modifier = Modifier
@@ -105,14 +126,16 @@ fun HomeScreen(
                             Text(
                                 modifier = Modifier
                                     .clickable {
-                                        selectedCategory = state.categoryList[it].name!!
+                                        selectedCategory = state.categoryList[it].name
+                                        handleEvent(HomeUiEvent.GetBooksByCategory(selectedCategory))
                                     }
                                     .padding(4.dp),
-                                text = state.categoryList[it].name!!,
+                                text = state.categoryList[it].name,
                                 color = if (selectedCategory == state.categoryList[it].name) Red else White
                             )
                         }
                     }
+
                 }
             }
             LazyVerticalGrid(
@@ -148,9 +171,6 @@ fun ProductItem(
         onClick = {
             onProductClick(product.id)
         },
-        colors = CardDefaults.cardColors(
-            containerColor = White
-        ),
         elevation = CardDefaults.elevatedCardElevation(
             defaultElevation = 4.dp
         ),
@@ -162,6 +182,7 @@ fun ProductItem(
             AsyncImage(
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
+                    .padding(top = 10.dp)
                     .fillMaxWidth()
                     .aspectRatio(1f)
                     .height(100.dp)
@@ -193,7 +214,7 @@ fun ProductItem(
                     text = product.salePrice.toString(),
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 14.sp,
-                    color = Color.Red
+                    color = Red
                 )
             }
         }

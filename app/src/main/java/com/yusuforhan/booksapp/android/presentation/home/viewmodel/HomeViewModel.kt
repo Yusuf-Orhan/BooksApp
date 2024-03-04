@@ -18,8 +18,8 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val getAllBooksUseCase: GetAllBooksUseCase,
     private val searchBooksUseCase: SearchBooksUseCase,
-    private val getBooksByCategory: GetBooksByCategory,
-    private val getCategoriesUseCase : GetCategoriesUseCase
+    private val getBooksByCategoryUseCase: GetBooksByCategory,
+    private val getCategoriesUseCase: GetCategoriesUseCase
 ) : ViewModel() {
 
     private var _state = MutableStateFlow(HomeUiState())
@@ -31,16 +31,18 @@ class HomeViewModel @Inject constructor(
     }
 
 
-    fun handleEvent(event : HomeUiEvent) {
-        when(event) {
-            is HomeUiEvent.SearchBooks ->  {
+    fun handleEvent(event: HomeUiEvent) {
+        when (event) {
+            is HomeUiEvent.SearchBooks -> {
                 searchBooks(q = event.query)
             }
+
             is HomeUiEvent.GetBooks -> {
                 getAllBooks()
             }
-            is HomeUiEvent.GetBooksByCategory -> {
 
+            is HomeUiEvent.GetBooksByCategory -> {
+                getBooksByCategory(event.category)
             }
         }
     }
@@ -57,8 +59,9 @@ class HomeViewModel @Inject constructor(
             }
         }.launchIn(viewModelScope)
     }
-    private fun searchBooks(q : String) {
-        searchBooksUseCase(q).onEach {result ->
+
+    private fun searchBooks(q: String) {
+        searchBooksUseCase(q).onEach { result ->
             when (result) {
                 is Resource.Loading -> _state.value = _state.value.copy(loading = true)
                 is Resource.Success -> _state.value =
@@ -69,20 +72,33 @@ class HomeViewModel @Inject constructor(
             }
         }.launchIn(viewModelScope)
     }
+
     private fun getCategories() {
-        getCategoriesUseCase().onEach {result ->
-            when(result) {
+        getCategoriesUseCase().onEach { result ->
+            when (result) {
                 is Resource.Success -> {
                     result.data.forEach {
                         println(it)
                     }
                     _state.value = state.value.copy(categoryList = result.data)
                 }
+
                 is Resource.Loading -> {
                     _state.value = state.value.copy(loading = true)
                 }
+
                 else -> {}
-             }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    private fun getBooksByCategory(category: String) {
+        getBooksByCategoryUseCase(category).onEach { result ->
+            when(result) {
+                is Resource.Success -> _state.value = state.value.copy(books = result.data)
+                is Resource.Error -> _state.value = state.value.copy(error = result.message)
+                is Resource.Loading -> _state.value = state.value.copy(loading = true)
+            }
         }.launchIn(viewModelScope)
     }
 }

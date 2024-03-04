@@ -7,6 +7,6 @@ data class CategoriesModel(
 )
 
 data class Category(
-    val name: String?,
+    val name: String,
     val image: String?
 )
