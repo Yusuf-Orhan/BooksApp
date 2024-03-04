@@ -1,6 +1,7 @@
 package com.yusuforhan.booksapp.android.presentation.favorite
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -69,10 +70,12 @@ fun FavoriteScreen(
         topBar = { CenterAlignedTopAppBar(title = { Text(text = stringResource(R.string.favorite)) }) }
     ) {
         Column(
-            modifier = modifier.padding(it)
+            modifier = modifier.padding(it),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
             if (state.booksEmpty == true) {
-                Text(text = "Is Not Favorite")
+                Text(text = "No books have been added to favorites.")
             } else {
                 LazyColumn {
                     items(state.favoriteBooks) { entity ->

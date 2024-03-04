@@ -50,7 +50,7 @@ fun CartRoute(
     LaunchedEffect(key1 = true) {
         viewModel.getCartBooks(state.userId.orEmpty())
     }
-    CartScreen(state, viewModel::handleEvent,navigateToPay)
+    CartScreen(state, viewModel::handleEvent, navigateToPay)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -58,52 +58,53 @@ fun CartRoute(
 fun CartScreen(
     state: CartUiState,
     handleEvent: (CartUiEvent) -> Unit,
-    navigateToPay : () -> Unit,
+    navigateToPay: () -> Unit,
     modifier: Modifier = Modifier
 ) {
 
     Scaffold { innerPadding ->
         Box(modifier = modifier.padding(innerPadding), contentAlignment = Alignment.BottomEnd) {
-            Column {
+            Column (
+                modifier = Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ){
                 if (state.loading) {
                     CircularProgressIndicator()
-                } else if (state.books.isNotEmpty()) {
-                    Column(
-                        modifier = modifier.fillMaxSize()
-                    ) {
-                        LazyColumn(
-                            modifier = Modifier.weight(1f)
-                        ) {
-                            items(state.books) {
-                                CartItem(book = it,handleEvent)
-                            }
-                        }
-                        Box(
-                            modifier = modifier.fillMaxWidth(),
-                            contentAlignment = Alignment.BottomEnd
-                        ) {
-                            Column {
-                                Row(
-                                    modifier = modifier.fillMaxWidth(),
-                                    horizontalArrangement = Arrangement.SpaceBetween
-                                ) {
-                                    Text(text = "Total Amount :")
-                                    Text(text = "$${state.books.calculateTotalPrice()}")
-                                }
-                                ElevatedButton(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .padding(20.dp),
-                                    onClick = navigateToPay
-                                ) {
-                                    Text(text = "Goto Pay")
-                                }
-                            }
-                        }
-
-                    }
+                } else if (state.books.isEmpty()) {
+                    Text(text = "Cart list is empty.")
                 } else if (state.error.isNotBlank()) {
                     ECErrorScreen(desc = state.error, buttonText = "Try Again")
+                }
+
+                LazyColumn(
+                    modifier = Modifier.weight(1f)
+                ) {
+                    items(state.books) {
+                        CartItem(book = it, handleEvent)
+                    }
+                }
+                Box(
+                    modifier = modifier.fillMaxWidth(),
+                    contentAlignment = Alignment.BottomEnd
+                ) {
+                    Column {
+                        Row(
+                            modifier = modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(text = "Total Amount :")
+                            Text(text = "$${state.books.calculateTotalPrice()}")
+                        }
+                        ElevatedButton(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(20.dp),
+                            onClick = navigateToPay
+                        ) {
+                            Text(text = "Goto Pay")
+                        }
+                    }
                 }
             }
         }
