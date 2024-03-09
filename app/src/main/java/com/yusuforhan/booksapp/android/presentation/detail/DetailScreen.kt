@@ -7,8 +7,10 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -34,6 +36,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -67,6 +70,7 @@ fun DetailScreen(
 ) {
     var isFavorite by remember { mutableStateOf(false) }
     Scaffold(
+        modifier = modifier.padding(8.dp),
         topBar = {
             CenterAlignedTopAppBar(
                 title = { Text(text = stringResource(R.string.book_detail)) },
@@ -135,9 +139,16 @@ fun BookDetailContent(
     userId: String,
     modifier: Modifier = Modifier
 ) {
-    AsyncImage(model = book.imageOne, contentDescription = null)
+    AsyncImage(
+        modifier = modifier.size(300.dp),
+        model = book.imageOne,
+        contentDescription = null
+    )
+    Spacer(modifier = modifier.size(8.dp))
     Text(text = book.title)
+    Spacer(modifier = modifier.size(8.dp))
     RatingView(rate = book.rate)
+    Spacer(modifier = modifier.size(8.dp))
     Text(text = book.description)
     Column(
         modifier = modifier.fillMaxWidth(),
