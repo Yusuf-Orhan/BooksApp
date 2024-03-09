@@ -24,8 +24,7 @@ class ProfileViewModel @Inject constructor(
     val state = MutableStateFlow(ProfileState())
     init {
         readUserIdUseCase().onEach {
-            println(it)
-            getUserById(userId = it.orEmpty())
+            state.value = state.value.copy(userId = it.orEmpty())
         }.launchIn(viewModelScope)
     }
 
@@ -34,15 +33,13 @@ class ProfileViewModel @Inject constructor(
             is ProfileUiEvent.SignOut -> signOut()
         }
     }
-    private fun getUserById(userId : String) {
+    fun getUserById(userId : String) {
         getUserUseCase(userId).onEach {
             when(val response = it) {
                 is Resource.Success -> {
-                    println(response.data.user.name)
                     state.value = state.value.copy(isLoading = false, userModel = response.data)
                 }
                 is Resource.Error -> {
-                    println(response.message)
                     state.value = state.value.copy(isLoading = false, error = response.message)
                 }
                 is Resource.Loading -> {

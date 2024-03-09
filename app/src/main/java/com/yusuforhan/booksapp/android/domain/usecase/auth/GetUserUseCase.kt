@@ -13,11 +13,8 @@ class GetUserUseCase @Inject constructor(
         runCatching {
             authRepository.getUserById(userId)
         }.onSuccess {
-            println("Use Case Name" + it.user.name)
-            println("Response : " + it.status)
             emit(Resource.Success(it))
         }.onFailure {
-            println("Use Case Exception" + it.localizedMessage)
             emit(Resource.Error(it.message.orEmpty()))
         }
     }
