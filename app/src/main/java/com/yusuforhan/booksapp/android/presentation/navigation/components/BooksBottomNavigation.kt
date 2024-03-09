@@ -17,23 +17,18 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun BooksBottomNav(
-    items: List<BottomNavigationItem>,
-    selected: Int,
-    onItemClick: (Int) -> Unit
+    items: List<BottomNavigationItem>, selected: Int, onItemClick: (Int) -> Unit
 ) {
     NavigationBar(
-        modifier = Modifier.fillMaxWidth(),
-        tonalElevation = 10.dp
+        modifier = Modifier.fillMaxWidth(), tonalElevation = 10.dp
     ) {
         items.forEachIndexed { index, item ->
-            NavigationBarItem(
-                selected = index == selected,
+            NavigationBarItem(selected = index == selected,
                 onClick = { onItemClick(index) },
                 icon = {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         Icon(
-                            imageVector = item.icon,
-                            contentDescription = null
+                            imageVector = item.icon, contentDescription = null
                         )
                         Spacer(modifier = Modifier.size(5.dp))
                     }
@@ -46,6 +41,5 @@ fun BooksBottomNav(
 }
 
 data class BottomNavigationItem(
-    val icon: ImageVector,
-    val text: String
+    val icon: ImageVector, val text: String
 )
