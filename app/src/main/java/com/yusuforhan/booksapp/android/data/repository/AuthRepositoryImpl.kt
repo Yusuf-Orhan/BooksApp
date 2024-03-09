@@ -26,4 +26,6 @@ class AuthRepositoryImpl @Inject constructor(
     override  fun getIsLogin(): Flow<String?> {
         return localDataSource.readUserId()
     }
+
+    override suspend fun signOut() = localDataSource.deleteUserId()
 }

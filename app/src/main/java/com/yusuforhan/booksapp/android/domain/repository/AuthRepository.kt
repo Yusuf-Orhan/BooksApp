@@ -12,4 +12,5 @@ interface AuthRepository {
     suspend fun saveIsLogin(userId : String)
     suspend fun getUserById(userId : String) : UserModel
     fun getIsLogin() : Flow<String?>
+    suspend fun signOut()
 }

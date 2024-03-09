@@ -32,6 +32,13 @@ class DataStoreHelperImpl @Inject constructor(
             it[PreferencesKeys.USER_ID]
         }
     }
+
+    override suspend fun deleteUserId() {
+        context.dataStore.edit { preferences ->
+            preferences.clear()
+        }
+    }
+
 }
 private object PreferencesKeys {
     val USER_ID = stringPreferencesKey(name = Constants.USER_ID)

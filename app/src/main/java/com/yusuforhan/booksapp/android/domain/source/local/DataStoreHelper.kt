@@ -6,4 +6,5 @@ interface DataStoreHelper {
 
     suspend fun saveUserId(userId : String)
     fun readUserId() : Flow<String?>
+    suspend fun deleteUserId()
 }
