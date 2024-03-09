@@ -24,7 +24,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.yusuforhan.booksapp.android.data.model.remote.UserModel
 import com.yusuforhan.booksapp.android.presentation.components.ECProgressBar
 import com.yusuforhan.booksapp.android.presentation.profile.viewmodel.ProfileState
 import com.yusuforhan.booksapp.android.presentation.profile.viewmodel.ProfileUiEvent
@@ -63,8 +62,7 @@ fun ProfileScreen(
             } else if (state.error.isNotBlank()) {
                 Text(text = state.error)
             } else if (state.userModel != null){
-                val userModel = state.userModel as UserModel
-                val user = userModel.user
+                val userModel = state.userModel.user
                 Column(
                     modifier = Modifier.fillMaxSize(),
                     horizontalAlignment = Alignment.CenterHorizontally,
@@ -87,7 +85,7 @@ fun ProfileScreen(
                             )
                         )
                         Text(
-                            text = user.email,
+                            text = userModel.email,
                             style = TextStyle(
                                 color = Color.DarkGray,
                                 fontSize = 18.sp
@@ -106,7 +104,7 @@ fun ProfileScreen(
                             )
                         )
                         Text(
-                            text = user.name,
+                            text = userModel.name,
                             style = TextStyle(
                                 color = Color.DarkGray,
                                 fontSize = 18.sp
@@ -125,7 +123,7 @@ fun ProfileScreen(
                             )
                         )
                         Text(
-                            text = user.phone,
+                            text = userModel.phone,
                             style = TextStyle(
                                 color = Color.DarkGray,
                                 fontSize = 18.sp
