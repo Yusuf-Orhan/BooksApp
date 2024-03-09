@@ -24,6 +24,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.yusuforhan.booksapp.android.data.model.remote.UserModel
 import com.yusuforhan.booksapp.android.presentation.components.ECProgressBar
 import com.yusuforhan.booksapp.android.presentation.profile.viewmodel.ProfileState
 import com.yusuforhan.booksapp.android.presentation.profile.viewmodel.ProfileUiEvent
@@ -34,7 +35,7 @@ fun ProfileRoute(
     viewModel: ProfileViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
-    LaunchedEffect(key1 = state.userId != "") {
+    LaunchedEffect(key1 = Unit) {
         viewModel.getUserById(state.userId)
     }
     ProfileScreen(state,viewModel::handleEvent)
@@ -61,8 +62,9 @@ fun ProfileScreen(
                 ECProgressBar()
             } else if (state.error.isNotBlank()) {
                 Text(text = state.error)
-            } else {
-                val userModel = state.userModel?.user!!
+            } else if (state.userModel != null){
+                val userModel = state.userModel as UserModel
+                val user = userModel.user
                 Column(
                     modifier = Modifier.fillMaxSize(),
                     horizontalAlignment = Alignment.CenterHorizontally,
@@ -85,7 +87,7 @@ fun ProfileScreen(
                             )
                         )
                         Text(
-                            text = userModel.email,
+                            text = user.email,
                             style = TextStyle(
                                 color = Color.DarkGray,
                                 fontSize = 18.sp
@@ -104,7 +106,7 @@ fun ProfileScreen(
                             )
                         )
                         Text(
-                            text = userModel.name,
+                            text = user.name,
                             style = TextStyle(
                                 color = Color.DarkGray,
                                 fontSize = 18.sp
@@ -123,7 +125,7 @@ fun ProfileScreen(
                             )
                         )
                         Text(
-                            text = userModel.phone,
+                            text = user.phone,
                             style = TextStyle(
                                 color = Color.DarkGray,
                                 fontSize = 18.sp
