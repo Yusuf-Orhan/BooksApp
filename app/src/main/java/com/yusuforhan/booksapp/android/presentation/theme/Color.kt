@@ -12,3 +12,6 @@ val Pink40 = Color(0xFF7D5260)
 val BorderColor = Color(0xFF695C5C)
 val Blue100 = Color(0XFF0E64D2)
 val Purple_1 = Color(0xFF160062)
+
+val AlphaRed = Color(0xFFEB5757)
+val Grey = Color(0xFF4F4F4F)

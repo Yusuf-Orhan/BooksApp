@@ -3,11 +3,6 @@ package com.yusuforhan.booksapp.android.presentation.navigation
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -21,6 +16,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.yusuforhan.booksapp.android.R
 import com.yusuforhan.booksapp.android.presentation.cart.cartScreen
 import com.yusuforhan.booksapp.android.presentation.detail.detailScreen
 import com.yusuforhan.booksapp.android.presentation.detail.navigateToDetail
@@ -38,10 +34,10 @@ fun BooksNavigator() {
     val navController = rememberNavController()
     val bottomNavigationItems = remember {
         listOf(
-            BottomNavigationItem(icon = Icons.Default.Home, text = "Home"),
-            BottomNavigationItem(icon = Icons.Default.Favorite, text = "Favorite"),
-            BottomNavigationItem(icon = Icons.Default.ShoppingCart, text = "Cart"),
-            BottomNavigationItem(icon = Icons.Default.AccountCircle, text = "Profile")
+            BottomNavigationItem(icon = R.drawable.ic_home, text = "Home"),
+            BottomNavigationItem(icon = R.drawable.ic_favorite_border_24, text = "Favorite"),
+            BottomNavigationItem(icon = R.drawable.baseline_shopping_cart_24, text = "Cart"),
+            BottomNavigationItem(icon = R.drawable.ic_profile, text = "Profile")
         )
     }
     val backstackState = navController.currentBackStackEntryAsState().value
@@ -83,7 +79,8 @@ fun BooksNavigator() {
                             navController = navController, route = Screen.profileRoute
                         )
                     }
-                })
+                }
+            )
         }
     }) { innerPadding ->
         Column(modifier = Modifier.padding(innerPadding)) {
