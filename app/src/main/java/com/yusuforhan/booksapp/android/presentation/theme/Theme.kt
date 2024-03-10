@@ -58,7 +58,6 @@ fun BooksAppTheme(
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = true
         }
     }
-
     MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography,
