@@ -37,7 +37,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.yusuforhan.booksapp.android.R
@@ -48,6 +50,7 @@ import com.yusuforhan.booksapp.android.presentation.components.BAButton
 import com.yusuforhan.booksapp.android.presentation.detail.viewmodel.DetailEvent
 import com.yusuforhan.booksapp.android.presentation.detail.viewmodel.DetailState
 import com.yusuforhan.booksapp.android.presentation.detail.viewmodel.DetailViewModel
+import com.yusuforhan.booksapp.android.presentation.theme.Secondary
 
 @Composable
 fun DetailRoute(
@@ -160,11 +163,12 @@ fun BookDetailContent(
         Text(text = book.description)
         Column(
             modifier = modifier
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .padding(top = 20.dp),
             verticalArrangement = Arrangement.Bottom,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = book.price.toString())
+            Text(text = "${book.price}$", style = TextStyle(fontSize = 18.sp))
             BAButton(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -188,7 +192,7 @@ fun RatingView(
     Row(
         modifier = modifier
             .clip(RoundedCornerShape(6.dp))
-            .background(color = Color.Red)
+            .background(color = Secondary)
     ) {
         Icon(
             modifier = modifier.padding(5.dp),
@@ -196,6 +200,6 @@ fun RatingView(
             contentDescription = null,
             tint = Color.Yellow
         )
-        Text(modifier = modifier.padding(8.dp), text = rate.toString())
+        Text(modifier = modifier.padding(8.dp), text = rate.toString(), color = Color.White)
     }
 }
