@@ -36,7 +36,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -114,7 +113,11 @@ fun DetailScreen(
                 Text(text = state.isError)
             } else if (state.addToCart == true) {
                 navigateUp()
-                Toast.makeText(context, stringResource(R.string.book_added_cart), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    context,
+                    stringResource(R.string.book_added_cart),
+                    Toast.LENGTH_SHORT
+                ).show()
             } else if (state.addToCart == false) {
                 navigateUp()
                 Toast.makeText(
@@ -122,7 +125,7 @@ fun DetailScreen(
                     stringResource(R.string.detail_toast_message),
                     Toast.LENGTH_SHORT
                 ).show()
-            }else {
+            } else {
                 state.book?.let { book ->
                     BookDetailContent(book = book, handleEvent, state.userId!!)
                     isFavorite = state.isFavorite ?: false
@@ -139,6 +142,7 @@ fun BookDetailContent(
     userId: String,
     modifier: Modifier = Modifier
 ) {
+add
     AsyncImage(
         modifier = modifier.size(300.dp),
         model = book.imageOne,
@@ -151,14 +155,17 @@ fun BookDetailContent(
     Spacer(modifier = modifier.size(8.dp))
     Text(text = book.description)
     Column(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth(),
         verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(text = book.price.toString())
-        Button(onClick = {
-            handleEvent(DetailEvent.AddCart(CartModel(book.id, userId)))
-        }) {
+        Button(
+            onClick = {
+                handleEvent(DetailEvent.AddCart(CartModel(book.id, userId)))
+            }
+        ) {
             Text(text = stringResource(R.string.add_cart))
         }
     }
@@ -180,6 +187,6 @@ fun RatingView(
             contentDescription = null,
             tint = Color.Yellow
         )
-        Text(modifier = modifier.padding(5.dp), text = rate.toString())
+        Text(modifier = modifier.padding(8.dp), text = rate.toString())
     }
 }
