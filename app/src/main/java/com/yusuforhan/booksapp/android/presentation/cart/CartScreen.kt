@@ -31,8 +31,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.yusuforhan.booksapp.android.R
@@ -41,7 +44,9 @@ import com.yusuforhan.booksapp.android.data.model.remote.Book
 import com.yusuforhan.booksapp.android.presentation.cart.viewmodel.CartUiEvent
 import com.yusuforhan.booksapp.android.presentation.cart.viewmodel.CartUiState
 import com.yusuforhan.booksapp.android.presentation.cart.viewmodel.CartViewModel
+import com.yusuforhan.booksapp.android.presentation.components.BAButton
 import com.yusuforhan.booksapp.android.presentation.components.ECErrorScreen
+import com.yusuforhan.booksapp.android.presentation.theme.Secondary
 
 @Composable
 fun CartRoute(
@@ -95,20 +100,34 @@ fun CartScreen(
                 ) {
                     Column {
                         Row(
-                            modifier = modifier.fillMaxWidth(),
+                            modifier = modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 16.dp),
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
-                            Text(text = stringResource(R.string.total_amount))
-                            Text(text = "$${state.books.calculateTotalPrice()}")
+                            Text(
+                                text = stringResource(R.string.total_amount), style = TextStyle(
+                                    fontSize = 18.sp,
+                                    fontWeight = FontWeight.Normal,
+                                    color = Secondary
+                                )
+                            )
+                            Text(
+                                text = "${state.books.calculateTotalPrice()}$",
+                                style = TextStyle(
+                                    fontSize = 18.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = Secondary
+                                )
+                            )
                         }
-                        Button(
+                        BAButton(
+                            text = "Goto Pay",
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(20.dp),
+                                .padding(16.dp),
                             onClick = navigateToPay
-                        ) {
-                            Text(text = stringResource(R.string.goto_pay))
-                        }
+                        )
                     }
                 }
             }

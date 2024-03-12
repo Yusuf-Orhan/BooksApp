@@ -26,10 +26,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.yusuforhan.booksapp.android.R
+import com.yusuforhan.booksapp.android.presentation.components.BAButton
 import com.yusuforhan.booksapp.android.presentation.components.ECProgressBar
 import com.yusuforhan.booksapp.android.presentation.profile.viewmodel.ProfileState
 import com.yusuforhan.booksapp.android.presentation.profile.viewmodel.ProfileUiEvent
 import com.yusuforhan.booksapp.android.presentation.profile.viewmodel.ProfileViewModel
+import com.yusuforhan.booksapp.android.presentation.theme.Secondary
 
 @Composable
 fun ProfileRoute(
@@ -132,11 +134,11 @@ fun ProfileScreen(
                             )
                         )
                     }
-                    Button(
-                        onClick = { handleEvent(ProfileUiEvent.SignOut) }) {
-                        Text(text = stringResource(R.string.sign_out))
-
-                    }
+                    BAButton(
+                        onClick = { handleEvent(ProfileUiEvent.SignOut) },
+                        text = "Sign Out",
+                        backgroundColor = Secondary
+                    )
                 }
             }
         }
