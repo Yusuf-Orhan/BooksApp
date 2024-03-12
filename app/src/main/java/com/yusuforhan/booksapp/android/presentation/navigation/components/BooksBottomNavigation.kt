@@ -12,15 +12,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.yusuforhan.booksapp.android.presentation.theme.Primary
 
 @Composable
 fun BooksBottomNav(
     items: List<BottomNavigationItem>, selected: Int, onItemClick: (Int) -> Unit
 ) {
     NavigationBar(
-        modifier = Modifier.fillMaxWidth(), tonalElevation = 10.dp
+        modifier = Modifier.fillMaxWidth(), tonalElevation = 10.dp,
+        containerColor = Color.White,
     ) {
         items.forEachIndexed { index, item ->
             NavigationBarItem(selected = index == selected,
@@ -34,7 +37,11 @@ fun BooksBottomNav(
                      }
                 },
                 label = { Text(text = item.text) },
-                colors = NavigationBarItemDefaults.colors()
+                colors = NavigationBarItemDefaults.colors(
+                    indicatorColor = Color.White,
+                    selectedIconColor = Primary,
+                    selectedTextColor = Primary
+                )
             )
         }
     }

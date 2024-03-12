@@ -13,5 +13,6 @@ val BorderColor = Color(0xFF695C5C)
 val Blue100 = Color(0XFF0E64D2)
 val Purple_1 = Color(0xFF160062)
 
-val AlphaRed = Color(0xFFEB5757)
-val Grey = Color(0xFF4F4F4F)
+val Primary = Color(0XFFDF1B23)
+val Secondary = Color(0XFF121342)
+val Light = Color(0XFFEAECF0)

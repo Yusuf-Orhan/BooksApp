@@ -19,7 +19,6 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Star
-import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -45,6 +44,7 @@ import com.yusuforhan.booksapp.android.R
 import com.yusuforhan.booksapp.android.data.model.local.FavoriteEntity
 import com.yusuforhan.booksapp.android.data.model.remote.Book
 import com.yusuforhan.booksapp.android.data.model.remote.CartModel
+import com.yusuforhan.booksapp.android.presentation.components.BAButton
 import com.yusuforhan.booksapp.android.presentation.detail.viewmodel.DetailEvent
 import com.yusuforhan.booksapp.android.presentation.detail.viewmodel.DetailState
 import com.yusuforhan.booksapp.android.presentation.detail.viewmodel.DetailViewModel
@@ -142,32 +142,41 @@ fun BookDetailContent(
     userId: String,
     modifier: Modifier = Modifier
 ) {
-add
-    AsyncImage(
-        modifier = modifier.size(300.dp),
-        model = book.imageOne,
-        contentDescription = null
-    )
-    Spacer(modifier = modifier.size(8.dp))
-    Text(text = book.title)
-    Spacer(modifier = modifier.size(8.dp))
-    RatingView(rate = book.rate)
-    Spacer(modifier = modifier.size(8.dp))
-    Text(text = book.description)
     Column(
-        modifier = modifier
-            .fillMaxWidth(),
-        verticalArrangement = Arrangement.Bottom,
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier = Modifier.padding(8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceAround
     ) {
-        Text(text = book.price.toString())
-        Button(
-            onClick = {
-                handleEvent(DetailEvent.AddCart(CartModel(book.id, userId)))
-            }
+        AsyncImage(
+            modifier = modifier.size(300.dp),
+            model = book.imageOne,
+            contentDescription = null
+        )
+        Spacer(modifier = modifier.size(8.dp))
+        Text(text = book.title)
+        Spacer(modifier = modifier.size(8.dp))
+        RatingView(rate = book.rate)
+        Spacer(modifier = modifier.size(8.dp))
+        Text(text = book.description)
+        Column(
+            modifier = modifier
+                .fillMaxWidth(),
+            verticalArrangement = Arrangement.Bottom,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = stringResource(R.string.add_cart))
+            Text(text = book.price.toString())
+            BAButton(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 8.dp, vertical = 4.dp)
+                    .size(50.dp),
+                onClick = {
+                    handleEvent(DetailEvent.AddCart(CartModel(book.id, userId)))
+                },
+                text = stringResource(id = R.string.add_cart)
+            )
         }
+
     }
 }
 

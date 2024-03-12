@@ -49,6 +49,7 @@ import com.yusuforhan.booksapp.android.presentation.components.ECSearchBar
 import com.yusuforhan.booksapp.android.presentation.home.viewmodel.HomeUiEvent
 import com.yusuforhan.booksapp.android.presentation.home.viewmodel.HomeUiState
 import com.yusuforhan.booksapp.android.presentation.home.viewmodel.HomeViewModel
+import com.yusuforhan.booksapp.android.presentation.theme.Light
 
 @Composable
 fun HomeRoute(
@@ -174,7 +175,10 @@ fun ProductItem(
         elevation = CardDefaults.elevatedCardElevation(
             defaultElevation = 4.dp
         ),
-        shape = RoundedCornerShape(12.dp)
+        shape = RoundedCornerShape(12.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = White
+        )
     ) {
         Column(
             verticalArrangement = Arrangement.spacedBy(8.dp)
