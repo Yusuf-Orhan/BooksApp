@@ -23,8 +23,8 @@ private val DarkColorScheme = darkColorScheme(
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = AlphaRed,
-    secondary = Grey,
+    primary = Purple40,
+    secondary = PurpleGrey40,
     tertiary = Pink40,
     background = Color(0xFFFFFBFE),
     surface = Color(0xFFFFFBFE),
@@ -41,8 +41,15 @@ fun BooksAppTheme(
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
-    val colorScheme = LightColorScheme
+    val colorScheme = when {
+        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+            val context = LocalContext.current
+            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+        }
 
+        darkTheme -> darkColorScheme()
+        else -> LightColorScheme
+    }
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
