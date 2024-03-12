@@ -36,7 +36,7 @@ fun BooksNavigator() {
         listOf(
             BottomNavigationItem(icon = R.drawable.ic_home, text = "Home"),
             BottomNavigationItem(icon = R.drawable.ic_favorite_border_24, text = "Favorite"),
-            BottomNavigationItem(icon = R.drawable.baseline_shopping_cart_24, text = "Cart"),
+            BottomNavigationItem(icon = R.drawable.ic_shopping_cart, text = "Cart"),
             BottomNavigationItem(icon = R.drawable.ic_profile, text = "Profile")
         )
     }

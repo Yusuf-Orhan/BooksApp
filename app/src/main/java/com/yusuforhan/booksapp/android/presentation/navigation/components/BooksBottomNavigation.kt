@@ -31,7 +31,7 @@ fun BooksBottomNav(
                              painter = painterResource(id = item.icon), contentDescription = null
                         )
                         Spacer(modifier = Modifier.size(5.dp))
-                    }
+                     }
                 },
                 label = { Text(text = item.text) },
                 colors = NavigationBarItemDefaults.colors()
