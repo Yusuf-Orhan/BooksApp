@@ -114,12 +114,12 @@ fun DetailScreen(
                 Text(text = state.isError)
             } else if (state.addToCart == true) {
                 navigateUp()
-                Toast.makeText(context, "Book Added Cart", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, stringResource(R.string.book_added_cart), Toast.LENGTH_SHORT).show()
             } else if (state.addToCart == false) {
                 navigateUp()
                 Toast.makeText(
                     context,
-                    "This book has already been added to the cart.",
+                    stringResource(R.string.detail_toast_message),
                     Toast.LENGTH_SHORT
                 ).show()
             }else {
@@ -159,7 +159,7 @@ fun BookDetailContent(
         Button(onClick = {
             handleEvent(DetailEvent.AddCart(CartModel(book.id, userId)))
         }) {
-            Text(text = "Add Cart")
+            Text(text = stringResource(R.string.add_cart))
         }
     }
 }

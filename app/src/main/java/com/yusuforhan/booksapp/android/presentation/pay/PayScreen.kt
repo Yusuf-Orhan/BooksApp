@@ -26,9 +26,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.yusuforhan.booksapp.android.R
 
 @Composable
 fun PayRoute(
@@ -61,7 +63,7 @@ fun PayScreen(
                     navigationIconContentColor = Color.Black,
                     titleContentColor = Color.Black
                 ),
-                title = { Text(text = "Payment", fontSize = 16.sp) },
+                title = { Text(text = stringResource(R.string.payment), fontSize = 16.sp) },
                 navigationIcon = {
                     Icon(
                         modifier = Modifier
@@ -88,7 +90,7 @@ fun PayScreen(
                 onValueChange = { v -> name = v },
                 placeholder = {
                     Text(
-                        text = "Name on Card",
+                        text = stringResource(R.string.name_on_card),
                         color = Color.Black,
                         fontSize = 16.sp
                     )
@@ -100,7 +102,7 @@ fun PayScreen(
                     .padding(horizontal = 16.dp, vertical = 8.dp),
                 value = cardNumber,
                 onValueChange = { v -> cardNumber = v },
-                placeholder = { Text(text = "Card Number", color = Color.Black, fontSize = 16.sp) },
+                placeholder = { Text(text = stringResource(R.string.card_number), color = Color.Black, fontSize = 16.sp) },
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Number
                 )
@@ -114,7 +116,7 @@ fun PayScreen(
                         .padding(horizontal = 16.dp, vertical = 8.dp),
                     value = month,
                     onValueChange = { v -> month = v },
-                    placeholder = { Text(text = "Month", color = Color.Black, fontSize = 16.sp) },
+                    placeholder = { Text(text = stringResource(R.string.month), color = Color.Black, fontSize = 16.sp) },
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Number
                     )
@@ -125,7 +127,7 @@ fun PayScreen(
                         .padding(horizontal = 16.dp, vertical = 8.dp),
                     value = year,
                     onValueChange = { v -> year = v },
-                    placeholder = { Text(text = "Year", color = Color.Black, fontSize = 16.sp) },
+                    placeholder = { Text(text = stringResource(R.string.year), color = Color.Black, fontSize = 16.sp) },
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Number,
                     )
@@ -136,7 +138,7 @@ fun PayScreen(
                         .padding(horizontal = 16.dp, vertical = 8.dp),
                     value = cvc,
                     onValueChange = { v -> cvc = v },
-                    placeholder = { Text(text = "CVC", color = Color.Black, fontSize = 16.sp) },
+                    placeholder = { Text(text = stringResource(R.string.cvc), color = Color.Black, fontSize = 16.sp) },
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Number,
                     )
@@ -149,7 +151,7 @@ fun PayScreen(
                     .weight(5f),
                 value = address,
                 onValueChange = { v -> address = v },
-                placeholder = { Text(text = "Address", color = Color.Black, fontSize = 16.sp) },
+                placeholder = { Text(text = stringResource(R.string.address), color = Color.Black, fontSize = 16.sp) },
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Number
                 )
@@ -162,7 +164,7 @@ fun PayScreen(
 
                 }
             ) {
-                Text(text = "Pay")
+                Text(text = stringResource(R.string.pay))
             }
         }
     }

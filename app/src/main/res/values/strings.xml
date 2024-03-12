@@ -21,6 +21,26 @@
     <string name="detail">Detail</string>
     <string name="book_detail">Book Detail</string>
     <string name="favorite">Favorite</string>
+    <string name="cart_list_is_empty">Cart list is empty.</string>
+    <string name="try_again">Try Again</string>
+    <string name="total_amount">Total Amount :</string>
+    <string name="goto_pay">Goto Pay</string>
+    <string name="book_added_cart">Book Added Cart</string>
+    <string name="detail_toast_message">This book has already been added to the cart.</string>
+    <string name="add_cart">Add Cart</string>
+    <string name="favorite_toast_message">No books have been added to favorites.</string>
+    <string name="payment">Payment</string>
+    <string name="name_on_card">Name on Card</string>
+    <string name="card_number">Card Number</string>
+    <string name="month">Month</string>
+    <string name="year">Year</string>
+    <string name="cvc">CVC</string>
+    <string name="address">Address</string>
+    <string name="pay">Pay</string>
+    <string name="profile">Profile</string>
+    <string name="nickname">Nickname</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="sign_out">Sign Out</string>
 
     <style name="type_email">Type Email</style>
 </resources>

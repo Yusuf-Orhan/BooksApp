@@ -150,7 +150,7 @@ fun HomeScreen(
             } else if (state.error.isNotBlank()) {
                 ECErrorScreen(
                     desc = state.error,
-                    buttonText = "Try Again",
+                    buttonText = stringResource(id = R.string.try_again),
                     onButtonClick = { handleEvent(HomeUiEvent.GetBooks) })
             }
         }

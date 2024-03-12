@@ -20,10 +20,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.yusuforhan.booksapp.android.R
 import com.yusuforhan.booksapp.android.presentation.components.ECProgressBar
 import com.yusuforhan.booksapp.android.presentation.profile.viewmodel.ProfileState
 import com.yusuforhan.booksapp.android.presentation.profile.viewmodel.ProfileUiEvent
@@ -48,7 +50,7 @@ fun ProfileScreen(
     modifier: Modifier = Modifier
 ) {
     Scaffold(
-        topBar = { TopAppBar(title = { Text(text = "Profile") }) }
+        topBar = { TopAppBar(title = { Text(text = stringResource(R.string.profile)) }) }
     ) {
         Column(
             modifier = modifier
@@ -78,7 +80,7 @@ fun ProfileScreen(
                         verticalArrangement = Arrangement.SpaceEvenly
                     ) {
                         Text(
-                            text = "Email",
+                            text = stringResource(id = R.string.email),
                             style = TextStyle(
                                 color = Color.Black,
                                 fontSize = 24.sp
@@ -97,7 +99,7 @@ fun ProfileScreen(
                         verticalArrangement = Arrangement.SpaceEvenly
                     ) {
                         Text(
-                            text = "Nickname",
+                            text = stringResource(R.string.nickname),
                             style = TextStyle(
                                 color = Color.Black,
                                 fontSize = 24.sp
@@ -116,7 +118,7 @@ fun ProfileScreen(
                         verticalArrangement = Arrangement.SpaceEvenly
                     ) {
                         Text(
-                            text = "Phone Number",
+                            text = stringResource(R.string.phone_number),
                             style = TextStyle(
                                 color = Color.Black,
                                 fontSize = 24.sp
@@ -132,7 +134,7 @@ fun ProfileScreen(
                     }
                     Button(
                         onClick = { handleEvent(ProfileUiEvent.SignOut) }) {
-                        Text(text = "Sign Out")
+                        Text(text = stringResource(R.string.sign_out))
 
                     }
                 }

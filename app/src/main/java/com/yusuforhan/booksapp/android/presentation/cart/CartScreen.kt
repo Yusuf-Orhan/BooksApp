@@ -15,6 +15,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -31,10 +32,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
+import com.yusuforhan.booksapp.android.R
 import com.yusuforhan.booksapp.android.common.calculateTotalPrice
 import com.yusuforhan.booksapp.android.data.model.remote.Book
 import com.yusuforhan.booksapp.android.presentation.cart.viewmodel.CartUiEvent
@@ -65,17 +68,20 @@ fun CartScreen(
 
     Scaffold { innerPadding ->
         Box(modifier = modifier.padding(innerPadding), contentAlignment = Alignment.BottomEnd) {
-            Column (
+            Column(
                 modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
-            ){
+            ) {
                 if (state.loading) {
                     CircularProgressIndicator()
                 } else if (state.books.isEmpty()) {
-                    Text(text = "Cart list is empty.")
+                    Text(text = stringResource(R.string.cart_list_is_empty))
                 } else if (state.error.isNotBlank()) {
-                    ECErrorScreen(desc = state.error, buttonText = "Try Again")
+                    ECErrorScreen(
+                        desc = state.error,
+                        buttonText = stringResource(R.string.try_again)
+                    )
                 }
 
                 LazyColumn(
@@ -94,16 +100,16 @@ fun CartScreen(
                             modifier = modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
-                            Text(text = "Total Amount :")
+                            Text(text = stringResource(R.string.total_amount))
                             Text(text = "$${state.books.calculateTotalPrice()}")
                         }
-                        ElevatedButton(
+                        Button(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(20.dp),
                             onClick = navigateToPay
                         ) {
-                            Text(text = "Goto Pay")
+                            Text(text = stringResource(R.string.goto_pay))
                         }
                     }
                 }

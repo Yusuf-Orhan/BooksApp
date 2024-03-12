@@ -76,7 +76,7 @@ fun FavoriteScreen(
             verticalArrangement = Arrangement.Center
         ) {
             if (state.booksEmpty == true) {
-                Text(text = "No books have been added to favorites.")
+                Text(text = stringResource(R.string.favorite_toast_message))
             } else {
                 LazyColumn {
                     items(state.favoriteBooks) { entity ->
