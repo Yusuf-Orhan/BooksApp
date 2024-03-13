@@ -39,7 +39,6 @@ class CartViewModel @Inject constructor(
         readUserIdUseCase().onEach {userId ->
             this.userId = userId
             _state.value = _state.value.copy(userId = userId)
-            getCartBooks(userId.orEmpty())
         }.launchIn(viewModelScope)
     }
     fun getCartBooks(userId : String) {
@@ -59,8 +58,6 @@ class CartViewModel @Inject constructor(
     }
 
     private fun deleteCart(id : Int) {
-        println("User Id : $userId")
-        println("Book id : $id")
         deleteCartUseCase(DeleteCartModel(userId!!,id)).onEach{result ->
            when(result) {
                is Resource.Success -> {
