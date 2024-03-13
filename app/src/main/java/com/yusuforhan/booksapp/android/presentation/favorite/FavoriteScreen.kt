@@ -56,7 +56,7 @@ fun FavoriteRoute(
     viewModel: FavoriteViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
-    SideEffect {
+    LaunchedEffect(key1 = true) {
         viewModel.getFavorite()
     }
     FavoriteScreen(
