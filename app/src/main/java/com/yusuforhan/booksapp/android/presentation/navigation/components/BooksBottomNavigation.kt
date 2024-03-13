@@ -4,6 +4,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -12,18 +14,20 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.yusuforhan.booksapp.android.presentation.theme.Primary
+import com.yusuforhan.booksapp.android.presentation.theme.Secondary
 
 @Composable
 fun BooksBottomNav(
     items: List<BottomNavigationItem>, selected: Int, onItemClick: (Int) -> Unit
 ) {
     NavigationBar(
-        modifier = Modifier.fillMaxWidth(), tonalElevation = 10.dp,
-        containerColor = Color.White,
+        modifier = Modifier.fillMaxWidth().clip(RoundedCornerShape(topEnd = 20.dp, topStart = 20.dp)), tonalElevation = 10.dp,
+        containerColor = Secondary,
     ) {
         items.forEachIndexed { index, item ->
             NavigationBarItem(selected = index == selected,
@@ -40,7 +44,7 @@ fun BooksBottomNav(
                 colors = NavigationBarItemDefaults.colors(
                     indicatorColor = Color.White,
                     selectedIconColor = Primary,
-                    selectedTextColor = Primary
+                    selectedTextColor = Color.White
                 )
             )
         }

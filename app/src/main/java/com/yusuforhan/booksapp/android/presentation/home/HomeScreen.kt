@@ -1,5 +1,6 @@
 package com.yusuforhan.booksapp.android.presentation.home
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -42,14 +43,13 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.yusuforhan.booksapp.android.R
 import com.yusuforhan.booksapp.android.data.model.remote.Book
-import com.yusuforhan.booksapp.android.data.model.remote.Category
 import com.yusuforhan.booksapp.android.presentation.components.ECErrorScreen
 import com.yusuforhan.booksapp.android.presentation.components.ECProgressBar
 import com.yusuforhan.booksapp.android.presentation.components.ECSearchBar
 import com.yusuforhan.booksapp.android.presentation.home.viewmodel.HomeUiEvent
 import com.yusuforhan.booksapp.android.presentation.home.viewmodel.HomeUiState
 import com.yusuforhan.booksapp.android.presentation.home.viewmodel.HomeViewModel
-import com.yusuforhan.booksapp.android.presentation.theme.Light
+import com.yusuforhan.booksapp.android.presentation.theme.Secondary
 
 @Composable
 fun HomeRoute(
@@ -176,9 +176,10 @@ fun ProductItem(
             defaultElevation = 4.dp
         ),
         shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(
+        colors = CardDefaults.elevatedCardColors(
             containerColor = White
-        )
+        ),
+        border = BorderStroke(width = 1.dp,color = Secondary)
     ) {
         Column(
             verticalArrangement = Arrangement.spacedBy(8.dp)
