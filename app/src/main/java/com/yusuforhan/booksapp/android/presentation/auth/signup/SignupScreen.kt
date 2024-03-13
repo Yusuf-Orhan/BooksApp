@@ -41,6 +41,7 @@ import com.yusuforhan.booksapp.android.presentation.components.rememberPasswordS
 import com.yusuforhan.booksapp.android.presentation.auth.viewmodel.AuthEvent
 import com.yusuforhan.booksapp.android.presentation.auth.viewmodel.AuthState
 import com.yusuforhan.booksapp.android.presentation.auth.viewmodel.AuthViewModel
+import com.yusuforhan.booksapp.android.presentation.components.BAButton
 import com.yusuforhan.booksapp.android.presentation.theme.Blue100
 
 @Composable
@@ -76,9 +77,14 @@ fun SignupScreen(
         navigateToHome()
         showToast(context, stringResource(R.string.user_created_successfully))
     } else if (state.emptyParameter == true) {
-        Toast.makeText(context, stringResource(R.string.please_fill_in_the_blanks), Toast.LENGTH_SHORT).show()
+        Toast.makeText(
+            context,
+            stringResource(R.string.please_fill_in_the_blanks),
+            Toast.LENGTH_SHORT
+        ).show()
     } else if (state.isSuccess == false) {
-        Toast.makeText(context, stringResource(R.string.an_unexpected_error), Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, stringResource(R.string.an_unexpected_error), Toast.LENGTH_SHORT)
+            .show()
     }
     Scaffold(
         containerColor = Color.White
@@ -142,14 +148,11 @@ fun SignupScreen(
                 state = password, hint = stringResource(R.string.enter_your_password)
             )
             Spacer(modifier = modifier.size(24.dp))
-            Button(modifier = modifier
-                .fillMaxWidth()
-                .height(48.dp)
-                .padding(horizontal = 24.dp),
-                shape = RoundedCornerShape(5.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Blue100
-                ),
+            BAButton(
+                modifier = modifier
+                    .fillMaxWidth()
+                    .height(48.dp)
+                    .padding(horizontal = 24.dp),
                 onClick = {
                     val signUpModel = SignUpModel(
                         address = address,
@@ -159,13 +162,9 @@ fun SignupScreen(
                         phone = phoneNumber
                     )
                     onEvent(AuthEvent.SignUp(signUpModel))
-                }) {
-                Text(
-                    text = stringResource(R.string.sign_up),
-                    color = Color.White,
-                    fontSize = 16.sp
-                )
-            }
+                },
+                text = stringResource(id = R.string.sign_up)
+            )
         }
     }
 }

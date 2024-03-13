@@ -39,11 +39,14 @@ import com.yusuforhan.booksapp.android.data.model.remote.SignInModel
 import com.yusuforhan.booksapp.android.presentation.auth.viewmodel.AuthEvent
 import com.yusuforhan.booksapp.android.presentation.auth.viewmodel.AuthState
 import com.yusuforhan.booksapp.android.presentation.auth.viewmodel.AuthViewModel
+import com.yusuforhan.booksapp.android.presentation.components.BAButton
 import com.yusuforhan.booksapp.android.presentation.components.CustomTextField
 import com.yusuforhan.booksapp.android.presentation.components.PasswordOutlinedTextField
 import com.yusuforhan.booksapp.android.presentation.components.rememberPasswordState
 import com.yusuforhan.booksapp.android.presentation.theme.Blue100
+import com.yusuforhan.booksapp.android.presentation.theme.Primary
 import com.yusuforhan.booksapp.android.presentation.theme.Purple_1
+import com.yusuforhan.booksapp.android.presentation.theme.Secondary
 
 @Composable
 fun LoginRoute(
@@ -113,22 +116,18 @@ fun LoginScreen(
                 titleText = stringResource(R.string.password)
             )
             Spacer(modifier = modifier.size(24.dp))
-            Button(
+            BAButton(
                 modifier = modifier
                     .fillMaxWidth()
                     .height(48.dp)
                     .padding(horizontal = 24.dp),
-                shape = RoundedCornerShape(5.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Blue100
-                ),
                 onClick = {
                     val signInModel = SignInModel(email,password.password)
                     onEvent(AuthEvent.SignIn(signInModel = signInModel))
-                }
-            ) {
-                Text(text = stringResource(R.string.login), color = Color.White, fontSize = 16.sp)
-            }
+                },
+                backgroundColor = Primary,
+                text = stringResource(id = R.string.login)
+            )
             Spacer(modifier = modifier.size(34.dp))
             Row(
                 horizontalArrangement = Arrangement.Center,
