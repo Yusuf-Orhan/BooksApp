@@ -6,6 +6,7 @@ import com.yusuforhan.booksapp.android.common.Resource
 import com.yusuforhan.booksapp.android.domain.usecase.books.GetAllBooksUseCase
 import com.yusuforhan.booksapp.android.domain.usecase.books.GetBooksByCategory
 import com.yusuforhan.booksapp.android.domain.usecase.books.GetCategoriesUseCase
+import com.yusuforhan.booksapp.android.domain.usecase.books.GetSaleBookListUseCase
 import com.yusuforhan.booksapp.android.domain.usecase.books.SearchBooksUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,6 +20,7 @@ class HomeViewModel @Inject constructor(
     private val getAllBooksUseCase: GetAllBooksUseCase,
     private val searchBooksUseCase: SearchBooksUseCase,
     private val getBooksByCategoryUseCase: GetBooksByCategory,
+    private val getSaleBookListUseCase: GetSaleBookListUseCase,
     private val getCategoriesUseCase: GetCategoriesUseCase
 ) : ViewModel() {
 
@@ -28,6 +30,7 @@ class HomeViewModel @Inject constructor(
     init {
         getAllBooks()
         getCategories()
+        getSaleBooks()
     }
 
 
@@ -97,6 +100,15 @@ class HomeViewModel @Inject constructor(
             when(result) {
                 is Resource.Success -> _state.value = state.value.copy(books = result.data)
                 is Resource.Error -> _state.value = state.value.copy(error = result.message)
+                is Resource.Loading -> _state.value = state.value.copy(loading = true)
+            }
+        }.launchIn(viewModelScope)
+    }
+    private fun getSaleBooks() {
+        getSaleBookListUseCase().onEach { result ->
+            when(result) {
+                is Resource.Success -> _state.value = state.value.copy(loading = false, saleBooks = result.data)
+                is Resource.Error -> _state.value = state.value.copy(loading = false, error = result.message)
                 is Resource.Loading -> _state.value = state.value.copy(loading = true)
             }
         }.launchIn(viewModelScope)
