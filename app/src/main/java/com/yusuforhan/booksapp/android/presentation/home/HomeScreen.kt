@@ -1,6 +1,7 @@
 package com.yusuforhan.booksapp.android.presentation.home
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -10,17 +11,23 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -33,6 +40,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
@@ -49,6 +59,7 @@ import com.yusuforhan.booksapp.android.presentation.components.ECSearchBar
 import com.yusuforhan.booksapp.android.presentation.home.viewmodel.HomeUiEvent
 import com.yusuforhan.booksapp.android.presentation.home.viewmodel.HomeUiState
 import com.yusuforhan.booksapp.android.presentation.home.viewmodel.HomeViewModel
+import com.yusuforhan.booksapp.android.presentation.theme.Light
 import com.yusuforhan.booksapp.android.presentation.theme.Secondary
 
 @Composable
@@ -77,7 +88,7 @@ fun HomeScreen(
         mutableStateOf("")
     }
     Scaffold(
-        topBar = { TopAppBar(title = { Text(text = stringResource(id = R.string.home)) }) }
+        containerColor = Light
     ) {
         Column(
             modifier = Modifier
@@ -87,7 +98,7 @@ fun HomeScreen(
         ) {
 
             ECSearchBar(
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp),
                 value = searchQuery,
                 onValueChanged = { s -> searchQuery = s },
                 onSearch = { handleEvent(HomeUiEvent.SearchBooks(searchQuery)) }
@@ -138,6 +149,19 @@ fun HomeScreen(
                     }
 
                 }
+                if (state.saleBooks.isNotEmpty()) {
+                    LazyRow(modifier = Modifier.fillMaxWidth()) {
+                        items(state.saleBooks) { book ->
+                            AsyncImage(
+                                modifier = Modifier
+                                    .height(150.dp)
+                                    .padding(horizontal = 16.dp, vertical = 5.dp),
+                                model = book.imageOne,
+                                contentDescription = null
+                            )
+                        }
+                    }
+                }
             }
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
@@ -179,7 +203,7 @@ fun ProductItem(
         colors = CardDefaults.elevatedCardColors(
             containerColor = White
         ),
-        border = BorderStroke(width = 1.dp,color = Secondary)
+        border = BorderStroke(width = 1.dp, color = Secondary)
     ) {
         Column(
             verticalArrangement = Arrangement.spacedBy(8.dp)

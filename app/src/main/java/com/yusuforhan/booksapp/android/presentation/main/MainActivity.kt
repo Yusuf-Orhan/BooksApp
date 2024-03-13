@@ -25,8 +25,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             BooksAppTheme {
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = Color.White
+                    modifier = Modifier.fillMaxSize()
                 ) {
                     installSplashScreen().apply {
                         setKeepOnScreenCondition {
@@ -35,7 +34,6 @@ class MainActivity : ComponentActivity() {
                     }
                     val navHostController = rememberNavController()
                     val startDestination = viewModel.startDestination
-                    Log.e("MainActivity", "Start Destination : $startDestination")
                     BooksNavHost(
                         navHostController = navHostController,
                         startDestination = startDestination

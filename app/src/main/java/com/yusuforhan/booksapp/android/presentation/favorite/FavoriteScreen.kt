@@ -22,6 +22,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
@@ -41,6 +42,7 @@ import com.yusuforhan.booksapp.android.data.model.remote.Book
 import com.yusuforhan.booksapp.android.presentation.favorite.viewmodel.FavoriteState
 import com.yusuforhan.booksapp.android.presentation.favorite.viewmodel.FavoriteUiEvent
 import com.yusuforhan.booksapp.android.presentation.favorite.viewmodel.FavoriteViewModel
+import com.yusuforhan.booksapp.android.presentation.theme.Light
 
 @Composable
 fun FavoriteRoute(
@@ -68,7 +70,15 @@ fun FavoriteScreen(
     state: FavoriteState
 ) {
     Scaffold(
-        topBar = { CenterAlignedTopAppBar(title = { Text(text = stringResource(R.string.favorite)) }) }
+        topBar = {
+            CenterAlignedTopAppBar(
+                title = { Text(text = stringResource(R.string.favorite)) },
+                colors = TopAppBarDefaults.smallTopAppBarColors(
+                    containerColor = Light
+                )
+            )
+        },
+        containerColor = Light
     ) {
         Column(
             modifier = modifier.padding(it),

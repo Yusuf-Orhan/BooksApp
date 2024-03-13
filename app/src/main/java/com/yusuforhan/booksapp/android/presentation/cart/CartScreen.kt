@@ -18,6 +18,7 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -46,6 +47,7 @@ import com.yusuforhan.booksapp.android.presentation.cart.viewmodel.CartUiState
 import com.yusuforhan.booksapp.android.presentation.cart.viewmodel.CartViewModel
 import com.yusuforhan.booksapp.android.presentation.components.BAButton
 import com.yusuforhan.booksapp.android.presentation.components.ECErrorScreen
+import com.yusuforhan.booksapp.android.presentation.theme.Light
 import com.yusuforhan.booksapp.android.presentation.theme.Secondary
 
 @Composable
@@ -69,7 +71,9 @@ fun CartScreen(
     modifier: Modifier = Modifier
 ) {
 
-    Scaffold { innerPadding ->
+    Scaffold (
+        containerColor = Light
+    ) { innerPadding ->
         Box(modifier = modifier.padding(innerPadding), contentAlignment = Alignment.BottomEnd) {
             Column(
                 modifier = Modifier.fillMaxSize(),
