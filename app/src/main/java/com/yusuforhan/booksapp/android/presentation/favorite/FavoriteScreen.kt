@@ -1,5 +1,6 @@
 package com.yusuforhan.booksapp.android.presentation.favorite
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -32,8 +33,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.yusuforhan.booksapp.android.R
@@ -43,6 +47,8 @@ import com.yusuforhan.booksapp.android.presentation.favorite.viewmodel.FavoriteS
 import com.yusuforhan.booksapp.android.presentation.favorite.viewmodel.FavoriteUiEvent
 import com.yusuforhan.booksapp.android.presentation.favorite.viewmodel.FavoriteViewModel
 import com.yusuforhan.booksapp.android.presentation.theme.Light
+import com.yusuforhan.booksapp.android.presentation.theme.Primary
+import com.yusuforhan.booksapp.android.presentation.theme.Secondary
 
 @Composable
 fun FavoriteRoute(
@@ -121,7 +127,8 @@ fun FavoriteItem(
             defaultElevation = 4.dp
         ),
         shape = RoundedCornerShape(12.dp),
-        onClick = { navigateToDetail(book.id) }
+        onClick = { navigateToDetail(book.id) },
+        border = BorderStroke(width = 1.dp, color = Secondary)
     ) {
         Row {
             Box(
@@ -135,7 +142,8 @@ fun FavoriteItem(
                         modifier = modifier
                             .align(alignment = Alignment.CenterVertically)
                             .fillMaxHeight()
-                            .width(100.dp),
+                            .width(100.dp)
+                            .padding(8.dp),
                         model = book.imageOne,
                         contentDescription = "image",
                     )
@@ -167,9 +175,10 @@ fun FavoriteItem(
                     modifier = modifier.align(Alignment.BottomEnd)
                 ) {
                     Text(
-                        modifier = modifier.padding(start = 8.dp, end = 10.dp),
-                        text = "$${book.price}",
-                        color = Color.Red
+                        modifier = modifier.padding(8.dp),
+                        text = "${book.price}$",
+                        color = Primary,
+                        style = TextStyle(fontWeight = FontWeight.Bold, fontSize = 16.sp)
                     )
                 }
             }
