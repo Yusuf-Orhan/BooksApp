@@ -10,7 +10,6 @@ import com.yusuforhan.booksapp.android.presentation.navigation.Screen.Companion.
 
 
 fun NavGraphBuilder.homeScreen(
-    navigateUp : () -> Unit,
     navigateToDetail : (Int) -> Unit
 ) {
     composable(

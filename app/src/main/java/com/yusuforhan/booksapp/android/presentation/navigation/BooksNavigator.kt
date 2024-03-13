@@ -88,12 +88,11 @@ fun BooksNavigator() {
                 navController = navController, startDestination = Screen.HomeScreen.route
             ) {
                 homeScreen(
-                    navigateUp = navController::navigateUp,
                     navigateToDetail = navController::navigateToDetail
                 )
                 profileScreen()
                 detailScreen(navController::navigateUp)
-                cartScreen(navController::navigateUp, navigateToPay = navController::navigateToPayScreen)
+                cartScreen(navigateToPay = navController::navigateToPayScreen)
                 favoriteScreen(navController::navigateUp,navController::navigateToDetail)
                 paymentScreen(navigateUp = navController::navigateUp)
             }

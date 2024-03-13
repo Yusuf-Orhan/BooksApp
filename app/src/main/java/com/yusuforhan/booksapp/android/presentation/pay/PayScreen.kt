@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -31,6 +30,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.yusuforhan.booksapp.android.R
+import com.yusuforhan.booksapp.android.presentation.components.BAButton
+import com.yusuforhan.booksapp.android.presentation.theme.Light
 
 @Composable
 fun PayRoute(
@@ -61,7 +62,8 @@ fun PayScreen(
             CenterAlignedTopAppBar(
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                     navigationIconContentColor = Color.Black,
-                    titleContentColor = Color.Black
+                    titleContentColor = Color.Black,
+                    containerColor = Light
                 ),
                 title = { Text(text = stringResource(R.string.payment), fontSize = 16.sp) },
                 navigationIcon = {
@@ -75,7 +77,8 @@ fun PayScreen(
                     )
                 }
             )
-        }
+        },
+        containerColor = Light
     ) {
         Column(
             modifier = Modifier
@@ -156,16 +159,15 @@ fun PayScreen(
                     keyboardType = KeyboardType.Number
                 )
             )
-            Button(
+            BAButton(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp),
                 onClick = {
 
-                }
-            ) {
-                Text(text = stringResource(R.string.pay))
-            }
+                },
+                text = stringResource(id = R.string.pay)
+            )
         }
     }
 }

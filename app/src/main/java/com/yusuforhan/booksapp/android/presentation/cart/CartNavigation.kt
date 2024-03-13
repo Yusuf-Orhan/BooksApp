@@ -7,7 +7,6 @@ import androidx.navigation.compose.composable
 import com.yusuforhan.booksapp.android.presentation.navigation.Screen
 
 fun NavGraphBuilder.cartScreen(
-    navigateUp: () -> Unit,
     navigateToPay : () -> Unit,
 ) {
     composable(
@@ -15,12 +14,4 @@ fun NavGraphBuilder.cartScreen(
     ) {
         CartRoute(navigateToPay = navigateToPay)
     }
-}
-
-fun NavHostController.navigateToHome(
-    navOptions: NavOptions? = null
-) {
-    navigate(
-        route = Screen.cartRoute
-    )
 }
