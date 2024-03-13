@@ -30,7 +30,6 @@ class HomeViewModel @Inject constructor(
     init {
         getAllBooks()
         getCategories()
-        getSaleBooks()
     }
 
 
@@ -80,10 +79,7 @@ class HomeViewModel @Inject constructor(
         getCategoriesUseCase().onEach { result ->
             when (result) {
                 is Resource.Success -> {
-                    result.data.forEach {
-                        println(it)
-                    }
-                    _state.value = state.value.copy(categoryList = result.data)
+                    _state.value = state.value.copy(loading = false,categoryList = result.data)
                 }
 
                 is Resource.Loading -> {
@@ -98,8 +94,8 @@ class HomeViewModel @Inject constructor(
     private fun getBooksByCategory(category: String) {
         getBooksByCategoryUseCase(category).onEach { result ->
             when(result) {
-                is Resource.Success -> _state.value = state.value.copy(books = result.data)
-                is Resource.Error -> _state.value = state.value.copy(error = result.message)
+                is Resource.Success -> _state.value = state.value.copy(loading = false,books = result.data)
+                is Resource.Error -> _state.value = state.value.copy(loading = false,error = result.message)
                 is Resource.Loading -> _state.value = state.value.copy(loading = true)
             }
         }.launchIn(viewModelScope)
