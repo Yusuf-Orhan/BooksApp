@@ -25,11 +25,9 @@ class AuthViewModel @Inject constructor(
     fun onEvent(event: AuthEvent) {
        when(event) {
            is AuthEvent.SignUp -> {
-               _state.value = state.value.copy(isSuccess = null, emptyParameter = null, message = null, userId = null)
                signUp(event.signUpModel)
            }
            is AuthEvent.SignIn -> {
-               _state.value = state.value.copy(isSuccess = null, emptyParameter = null, message = null, userId = null)
                signIn(event.signInModel)
            }
        }
