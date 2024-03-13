@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -26,7 +25,7 @@ fun BooksBottomNav(
     items: List<BottomNavigationItem>, selected: Int, onItemClick: (Int) -> Unit
 ) {
     NavigationBar(
-        modifier = Modifier.fillMaxWidth().clip(RoundedCornerShape(topEnd = 20.dp, topStart = 20.dp)), tonalElevation = 10.dp,
+        modifier = Modifier.fillMaxWidth().clip(RoundedCornerShape(topEnd = 20.dp, topStart = 20.dp)).size(75.dp), tonalElevation = 10.dp,
         containerColor = Secondary,
     ) {
         items.forEachIndexed { index, item ->
