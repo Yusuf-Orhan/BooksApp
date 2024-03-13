@@ -31,6 +31,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -49,6 +50,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.yusuforhan.booksapp.android.R
 import com.yusuforhan.booksapp.android.common.calculateTotalPrice
@@ -66,10 +69,10 @@ import java.lang.reflect.Type
 @Composable
 fun CartRoute(
     viewModel: CartViewModel = hiltViewModel(),
-    navigateToPay: () -> Unit
+    navigateToPay: () -> Unit,
 ) {
-    val state by viewModel.state.collectAsState()
-    SideEffect {
+    val state by viewModel.state.collectAsStateWithLifecycle()
+    LaunchedEffect(key1 = true) {
         viewModel.getCartBooks(state.userId.orEmpty())
     }
     CartScreen(state, viewModel::handleEvent, navigateToPay)
