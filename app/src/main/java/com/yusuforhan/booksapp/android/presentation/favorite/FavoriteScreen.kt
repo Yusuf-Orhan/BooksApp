@@ -32,6 +32,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -108,7 +109,7 @@ fun FavoriteScreen(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+/*@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FavoriteItem(
     book: Book,
@@ -149,7 +150,7 @@ fun FavoriteItem(
                     )
 
                     Text(
-                        modifier = modifier.padding(8.dp),
+                        modifier = modifier.padding(8.dp).align(Alignment.CenterVertically),
                         text = book.title,
                         maxLines = 2,
                         overflow = TextOverflow.Ellipsis
@@ -186,4 +187,62 @@ fun FavoriteItem(
     }
 }
 
+ */
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun FavoriteItem(
+    book: Book,
+    onDeleteClick: (FavoriteEntity) -> Unit,
+    navigateToDetail: (Int) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp, horizontal = 16.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+        elevation = CardDefaults.elevatedCardElevation(defaultElevation = 4.dp),
+        shape = RoundedCornerShape(12.dp),
+        onClick = { navigateToDetail(book.id) },
+        border = BorderStroke(width = 1.dp, color = Secondary)
+    ) {
+        Row {
+            Box(modifier = modifier.fillMaxSize()) {
+                Row(modifier = modifier.fillMaxWidth()) {
+                    AsyncImage(
+                        modifier = modifier
+                            .align(Alignment.CenterVertically)
+                            .fillMaxHeight()
+                            .width(100.dp)
+                            .padding(8.dp),
+                        model = book.imageOne,
+                        contentDescription = "image"
+                    )
 
+                    Text(
+                        modifier = modifier.padding(8.dp).align(Alignment.CenterVertically).weight(1f),
+                        text = book.title,
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis, // Expand text to fill available space
+                    )
+                }
+
+                Column(modifier = modifier.align(Alignment.CenterEnd)) {
+                    Icon(
+                        modifier = modifier.clickable { onDeleteClick(FavoriteEntity(book.id, book)) },
+                        imageVector = Icons.Default.Delete,
+                        contentDescription = null
+                    )
+                }
+                Column(modifier = modifier.align(Alignment.BottomEnd)) {
+                    Text(
+                        modifier = modifier.padding(8.dp),
+                        text = "${book.price}$",
+                        color = Primary,
+                        style = TextStyle(fontWeight = FontWeight.Bold, fontSize = 16.sp)
+                    )
+                }
+            }
+        }
+    }
+}

@@ -17,6 +17,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.yusuforhan.booksapp.android.presentation.theme.Light
+import com.yusuforhan.booksapp.android.presentation.theme.Light2
 import com.yusuforhan.booksapp.android.presentation.theme.Primary
 import com.yusuforhan.booksapp.android.presentation.theme.Secondary
 
@@ -43,7 +45,9 @@ fun BooksBottomNav(
                 colors = NavigationBarItemDefaults.colors(
                     indicatorColor = Color.White,
                     selectedIconColor = Primary,
-                    selectedTextColor = Color.White
+                    selectedTextColor = Color.White,
+                    unselectedIconColor = Light2,
+                    unselectedTextColor = Light2
                 )
             )
         }
