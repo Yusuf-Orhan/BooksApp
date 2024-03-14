@@ -13,12 +13,23 @@ Technologies used in the project:
 *   Retrofit
 *   Navigation Compose
 
-## Screenshots 
-Login Page | SignUp Page | Home Page | Home Page2 | Shop Page | Shop Page2 | Bag Page | Visual Search Page
---- | --- | --- |--- |--- |--- |--- |---  
-![](https://github.com/JahidHasanCO/BuyNow-App/blob/master/ART/Login_activity.png) | ![](https://github.com/JahidHasanCO/BuyNow-App/blob/master/ART/SignUp_activity.png) | ![](https://github.com/JahidHasanCO/BuyNow-App/blob/master/ART/Home_activity.png) | ![](https://github.com/JahidHasanCO/BuyNow-App/blob/master/ART/Home_activity2.png) | ![](https://github.com/JahidHasanCO/BuyNow-App/blob/master/ART/Shop.png) | ![](https://github.com/JahidHasanCO/BuyNow-App/blob/master/ART/Shop2.png) | ![](https://github.com/JahidHasanCO/BuyNow-App/blob/master/ART/Bag_activity.png) | ![](https://github.com/JahidHasanCO/BuyNow-App/blob/master/ART/Visual_search_activity.png) 
+## Screens
 
-<br />
+| Login | Signup | Home |
+| ------ | ---- | ------ |
+|<img src="https://github.com/Yusuf-Orhan/BooksApp/blob/main/Screenshots/loginscreen.png" height="500"/>|<img src="https://github.com/Yusuf-Orhan/BooksApp/blob/main/Screenshots/signupscreen.png" height="500"/>|<img src="https://github.com/Yusuf-Orhan/BooksApp/blob/main/Screenshots/homescreen.png" height="500"/>|
+
+</br>
+
+| Detail | Cart | Favorites |
+| --- | ------- | ------- |
+|<img src="https://github.com/Yusuf-Orhan/BooksApp/blob/main/Screenshots/detailscreen.png" height="500"/>|<img src="https://github.com/Yusuf-Orhan/BooksApp/blob/main/Screenshots/cartscren.png" height="500"/>|<img src="https://github.com/Yusuf-Orhan/BooksApp/blob/main/Screenshots/favoritescreen.png" height="500"/>|
+
+</br>
+
+| Profile | Payment
+| --------- | ------- |
+|<img src="https://github.com/Yusuf-Orhan/BooksApp/blob/main/Screenshots/profilescreen.png"  height="500"/>|<img src="https://github.com/Yusuf-Orhan/BooksApp/blob/main/Screenshots/payscreen.png" height="500"/>|
 
 ```
 MIT License
