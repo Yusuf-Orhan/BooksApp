@@ -1,3 +1,5 @@
+# Books App - Jetpcak Compose
+
 <h2>💻 Built with</h2>
 
 Technologies used in the project:
@@ -7,6 +9,7 @@ Technologies used in the project:
 *   MVVM & Clean Architecture
 *   Hilt for Dependecy Inejction
 *   Jetpack Room
+*   Coroutines
 *   Retrofit
 *   Navigation Compose
 
